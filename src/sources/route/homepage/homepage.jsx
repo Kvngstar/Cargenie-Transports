@@ -1,9 +1,4 @@
 import React from "react";
-
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./homepage.css";
 import logo from "../../assets/CarGenie-Logo.png";
 import topdesign from "../../assets/topcar1.png";
@@ -18,31 +13,15 @@ export default function Hompage() {
   return (
     <>
       <div className="container-fluid wrapper">
-
-   
-
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home"> <div className="logo">
-              <img src={logo} alt="" />
-            </div></Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav>
-            <Nav.Link href="#features"> <button className="btn btn-dark">Login</button></Nav.Link>
-            <Nav.Link href="#pricing"><button className="btn btn-light mx-2">Sign Up</button></Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
         <div className="first-section">
 
           <div className=" d-flex justify-content-between flex-direction-row py-3 px-2">
-           
+            <div className="logo">
+              <img src={logo} alt="" />
+            </div>
             <div>
-             
-              
+              <button className="btn btn-dark">Login</button>
+              <button className="btn btn-light mx-2">Sign Up</button>
             </div>
           </div>
           <div className="body1 d-flex justify-content-between mt-3 align-items-center">
