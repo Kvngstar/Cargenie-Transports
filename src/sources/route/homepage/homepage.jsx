@@ -1,35 +1,52 @@
 import React from "react";
+import $ from "jquery";
+import { useState, useEffect } from 'react';
+
 import "./homepage.css";
-import logo from "../../assets/CarGenie-Logo.png";
+import Footer from "../../../component/footer";
+import Subscribe from "../../../component/subscribe";
+import Whychoose from "../../../component/whychoose";
+import Travelinput from "../../../component/travelinput";
+
 import topdesign from "../../assets/topcar1.png";
-import location from "../../assets/location.png"
-import speed from "../../assets/icon_speed.png"
-import manylocation from "../../assets/a.png"
-import protection from "../../assets/Vector.png"
-import message from "../../assets/message.png"
+import Logo from "../../../component/logo";
 
 
 export default function Hompage() {
-  return (
-    <>
-      <div className="container-fluid wrapper">
-        <div className="first-section">
+    useEffect(()=>{
 
-          <div className=" d-flex justify-content-between flex-direction-row py-3 px-2">
-            <div className="logo">
-              <img src={logo} alt="" />
-            </div>
-            <div>
-              <button className="btn btn-dark">Login</button>
-              <button className="btn btn-light mx-2">Sign Up</button>
-            </div>
-          </div>
+      $("button.hidd").on("click", function (){
+        console.log("emenado");
+     $("div.aaa").slideToggle(500);
+    })    
+    },[     ])  
+   
+  
+  return ( 
+    <> 
+      <div className="container-fluid wrapper">
+      <div className="aaa">
+     <div className="mx-2">
+      <button className="btn btn-sm btn-primary">Login</button>
+
+     </div>
+     <div className="mx-2">
+              <button className="btn btn-sm btn-light mx-auto">Sign Up</button>
+
+     </div>
+     
+     
+       
+</div>
+        <div className="first-section mb-5">
+
+         
           <div className="body1 d-flex justify-content-between mt-3 align-items-center">
             <div className="mx-auto">
 
             <div className="text-white mx-auto  b p-4">
               <h2>
-                FAST AND EASY WAY TO RENT <br /> YOUR CAR
+                FAST AND EASY WAY TO RENT YOUR CAR
               </h2>
 
               <div className="d-block d-flex justify-content-center mt-4 align-items-center d">
@@ -40,71 +57,10 @@ export default function Hompage() {
                 </span>
               </div>
             </div>
-{/*  */}
 
 <div className="second-section x mt-5">
             <h2 className="mb-3 text-center whitetext">OR <br /> <br /> Book a Ride </h2>
-          <div className="py-3 text-center px-2 second-section-child d-flex flex-wrap rounded mb-5 g">
-            <div>
-              <div>Pickup Location</div>
-              <div>
-                <div class="input-group input1 flex-nowrap">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="addon-wrapping">
-                    <img src={location} /> 
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Ajah, Lagos"
-                    aria-label="Username"
-                    aria-describedby="addon-wrapping"
-                  />
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>Return Location</div>
-              <div>
-                <div className="input-group input1 flex-nowrap">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="addon-wrapping">
-                      <img src={location} />                   </span>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Airport, Ikeja"
-                  />
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>Pickup Date</div>
-              <div>
-                <div className="input-group input1 flex-nowrap">
-                  <input
-                    type="date"
-                    className="form-control"
-                    placeholder="22/9/2022"
-                  />
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>Return Date</div>
-              <div>
-                <div className="input-group input1 flex-nowrap">
-                  <input
-                    type="date"
-                    className="form-control"
-                    placeholder="30/9/2022"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+        <Travelinput />
         </div>
 
             </div>
@@ -116,63 +72,9 @@ export default function Hompage() {
           </div>
         </div>
       
-        <div className="third-section container-fluid d-flex justify-content-center align-items-center my-auto pb-5">
-         <div>
-         <h2 className="text-center whitetext mb-5">Why Choose Cargenie?</h2>
-            <div className="d-flex flex-wrap  justify-content-around e whitetext">
-                <div>
-                    <img src={speed} alt="" />
-                    <div>Fast and Easy a Book</div>
-                </div>
-                <div>
-                    <img src={manylocation} alt="" />
-                    <div>Many Pickup location</div>
-                </div>
-                <div>
-                    <img src={protection} alt="" />
-                    <div> Satisfied Customer</div>
-                </div>
-            </div>
-
-         </div>
-           
-        </div>
-        <div className="fourth-section container">
-            <div className="mt-5 whitetext d-flex justify-content-center align-items-center flex-column text-center">
-
-            <h3>Subscribe to Our NewsLetter</h3>
-            <p>Subcribe to our Newsletter to get the latest update and Promtional offer</p>
-            </div>
-            <div className="p-3 w-100 mx-auto f greenerbackground">
-            <div class="input-group">
-            <div class="input-group-prepend">
-    <span class="input-group-text"><img src={message} alt="" /></span>
-  </div>
-  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" />
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Subscribe</button>
-  </div>
-</div>
-
-            </div>
-
-            <div  className="whitetext mt-5 text-center">
-            <p>Cargenie is popular in Nigeria for their quality service. <br /> We make a great rental experience by providing superior and satisfying services</p>
-
-            </div>
-         
-            
-
-           
-
-
-
-
-
-        </div>
-        <footer  className="container-fluid text-center whitetext py-3 greenerbackground">
-            @ 2022 Cargenie All Right Reserved
-                </footer>
+       <Whychoose />
+        <Subscribe/>
+        <Footer/>
       </div>
     </>
   );

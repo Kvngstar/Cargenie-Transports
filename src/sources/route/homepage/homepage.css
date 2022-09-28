@@ -13,8 +13,19 @@
     background-color: var(--primary-color);
     height: auto;
 }
+.aaa{
+    height: 50px;
+    z-index: 1000; 
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: #89C293;
+
+
+}
 .wrapper{
     background-color: var(--primary-color);
+    position: relative;
 }
 .logo{
     height: 50px;
@@ -51,11 +62,12 @@ margin: 0px 3px;
 .input1 input{
     border-radius: 15px;
 }
+
 .whitetext{
-    color: #f2f2f2;
+    color: #f2f2f2 !important;
 }
 .greenerbackground{
-    background-color: #213F26 
+    background-color: #213F26 !important;
 }
 .lightGreen{
     background-color: #89C293;
@@ -91,21 +103,112 @@ margin: 0px 3px;
 .f{
     max-width: 600px;
 }
+.hidd{
+    display: none !important;
+} 
+.kk{
+    display: none;
+} 
+.notification  img{
+    height: 20px;
+    width: auto;
+    color: white;
+}
+.noticon{
+    position: absolute;
+    top: -8px;
+    right: -6px;
+
+}
+.noticon-wrap{
+    position: relative;
+}
+.notp{
+    padding:  5px ;
+    border-radius: 40%;
+    height: 20px;
+    background-color: rgb(255, 24, 24);
+    font-size: 9px;
+    color: #f2f2f2;
+}
+.secondp{
+    height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    width: 100%;
+}
+.secondp > div:first-of-type{
+    height: 100vh;
+    flex-grow: 1;
+    flex-shrink: 3;
+   
+    
+
+}
+.secondp > div:last-of-type{
+    flex-grow: 6;
+
+}
+.g img{
+    height: 25px;
+    margin-right: 10px;
+}
+.g > div{
+    padding: 15px 13px;
+}
+.h{
+    max-width: 1050px; 
+}
 
 @media screen and (max-width:1100px) {
     .tohideclass{
         display: none;
-    }
+    }  
+        .hidd{
+            display: block !important;
+        }
+        .kk{
+            display: inline-block;
+        }
     .g{
         flex-direction: column;
     }
+    footer{
+    font-size:12px;
+}
+.h{
+     width: 600px; 
+}
+.j{
+    display: none;
+    position: absolute;
+    z-index: 1001;
+}
+}
+.secondp{
+ position: relative;
 }
 @media screen and (max-width: 800px) {
-    h2{
-        font-size: 22px !important;
-    }
-    h3{
+    h2,h3,h4,h5,h6{
         font-size: 20px !important;
+    }
+   
+    
+}
+@media screen and (max-width: 600px) {
+    h2,h3,h4,h5,h6{
+        font-size: 19px !important;
+    }
+    .h{
+        max-width: 300px;
+    }
+    .table-control{
+        overflow-x: scroll;
+    }
+}
+@media screen and (max-width:390px) {
+    .l{
+        min-width: 390px;
     }
     
 }
