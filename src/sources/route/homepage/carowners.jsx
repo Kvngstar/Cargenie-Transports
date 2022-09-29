@@ -8,8 +8,9 @@ import Travelinput from '../../../component/travelinput';
 import Footer from '../../../component/footer';
 import Nav_ from '../../../component/nav1';
 import Menuhalf from '../../../component/menuhalf';
+import AdminMenuhalf from '../../../component/adminsidenav';
 
-const Customers  = () => {
+const CarOwners  = () => {
 
 
  useEffect(() => {
@@ -32,32 +33,49 @@ const Customers  = () => {
         <>
         <div>  
       <Nav_ />
-          <div className="d-flex w-100 secondp h-auto">
+          <div className="d-flex w-100 secondp">
 
-        <Menuhalf/>
+          <AdminMenuhalf />
             <div>
                 <div className='px-2 mt-4'>
-                    <h4 >DashBoard</h4>
+                    <h4 >Admin DashBoard</h4>
                     <h6 className='pl-4 mt-3'>Welcome, Kingsley</h6>
 
-                    <div className='h mx-auto mt-5'>
-                        <h4 className='text-center mb-3'>Book your Ticket Here</h4>
-                        <Travelinput/>
+                  
+                    <div className='my-5'>
+
+
+                    <h6 className='pl-3'>Car owner`s List</h6>
+
+                    <div className='d-flexxx'>
+                    <form action="
+                    " className='d-flexx'>
+                        <label htmlFor="">Filter</label>
+                        <select className="select-group input mt-2 mx-2 p-2"  type="text">
+        <option value="">Car Status</option>
+        <option value="">Active</option>
+        <option value="">Inactive</option>
+        <option value="">workshop</option>
+      </select>
+
+                        
+                    </form>
 
                     </div>
-                    <div className='my-5'>
-                    <h4>Recent Car Bookings</h4>
-                    <div className='table-control '>
+
+
+                    <div className='table-control-1 mt-3 '>
 
                     <table className='table table-sm '>
                        
                        <thead>
                         <tr className='table-success'>
-                        <th>Bookings</th>
-                        <th>Subject</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Amount</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email ID</th>
+                        <th>Created Date</th>
+                        <th>Login Date</th>
+                        <th>Car Status</th>
                         </tr>
                         </thead>
                         
@@ -66,23 +84,26 @@ const Customers  = () => {
                         <tr>
                             <td>3b2345e</td>
                             <td>Bus</td>
-                            <td>Done</td>
+                            <td>king2@gmail.com</td>
                             <td>26/11/22</td>
                             <td>4000</td>
+                            <td>active</td>
                         </tr>
                         <tr>
                             <td>3b2345e</td>
                             <td>Sienna</td>
-                            <td>failed</td>
+                            <td>vline33@outlook.com</td>
                             <td>26/11/22</td>
                             <td>4000</td>
+                            <td>inactive</td>
                         </tr>
                         <tr>
                             <td>3b2345e</td>
                             <td>Bus</td>
-                            <td>progress</td>
+                            <td>Emma11@yahoo.com</td>
                             <td>26/11/22</td>
                             <td>4000</td>
+                            <td>Workshop</td>
                         </tr>
 
 
@@ -107,4 +128,4 @@ const Customers  = () => {
      );
 }
  
-export default Customers;
+export default CarOwners;
