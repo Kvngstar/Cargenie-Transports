@@ -9,27 +9,17 @@ import Menuhalf from "../../../component/menuhalf";
 import AdminMenuhalf from "../../../component/adminsidenav";
 
 const BookingProccessing = () => {
-  useEffect(() => {
-    $("button.kk").on("click", function () {
-      $("div.j").fadeToggle(500);
-    });
 
-    return () => {};
-  }, []);
 
   return (
-    <>
-      <div>
-        <Nav_ />
-        <div className="d-flex w-100 secondp">
-          <AdminMenuhalf />
-          <div>
+  
+      
             <div className="px-2 mt-4">
               <h4>Admin DashBoard</h4>
               <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
 
               <div className="my-5">
-                <h6 className="pl-3">Booking Directory</h6>
+                <h6 className="pl-3">Process Orders</h6>
 
                 <div className="table-control mt-3 ">
                   <table className="table table-sm ">
@@ -42,7 +32,6 @@ const BookingProccessing = () => {
                         <th>fail</th>
                       </tr>
                     </thead>
-
                     <tbody>
                       <tr>
                         <td>Amanda Zara</td>
@@ -82,12 +71,7 @@ const BookingProccessing = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <Footer />
-      </div>
-    </>
+         
   );
 };
 

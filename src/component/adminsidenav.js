@@ -4,12 +4,13 @@ import users from '../sources/assets/Users.png';
 import logout from '../sources/assets/logout.png';
 import settings from '../sources/assets/settings_icon.png';
 import help from '../sources/assets/help_icon.png';
+import { Link } from 'react-router-dom';
 
 const AdminMenuhalf = () => {
     return ( 
         <div className="bg-light j">
         <div className='d-flex whitetext w-100 py-2 greenerbackground justify-content-around align-items-center'>
-          <img src={cloudicon} style={{height: "25px"}} className='mx-2' alt="" />  <h3>DashBoard</h3> <span className='btn btn-sm mx-2' style={{backgroundColor: "#7BB66D", color: "#f2f2f2"}}>New</span>
+          <img src={cloudicon} style={{height: "25px"}} className='mx-2' alt="" />  <h5>DashBoard</h5> <span className='btn btn-sm mx-2' style={{backgroundColor: "#7BB66D", color: "#f2f2f2"}}>New</span>
         </div>
         <div className='g mt-3'>
             <div className="d-flex align-items-center ">
@@ -17,20 +18,23 @@ const AdminMenuhalf = () => {
                 
                  <img   src={calendar} alt="" />
             
-                  <span>Rental transaction</span>
+                  <span><Link to="/admin/carbooking" >Rental transaction</Link></span>
             </div>
             <div className='d-flex  align-items-center'>
-                <img src={calendar} alt="" /> <span>Car Listing</span>
+                <img src={calendar} alt="" /> <span><Link to="/admin/carlisting" >Car Listing</Link></span>
             </div>
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span>Notification</span> 
+                <img src={users} alt="" /> <span><Link to="/admin/notification" >Notification</Link> </span> 
             </div>
 
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span>Car Owners</span> 
+                <img src={users} alt="" /> <span><Link to="/admin/carowner">Car Owners</Link></span> 
             </div>
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span>Users</span> 
+                <img src={users} alt="" /> <span><Link to="/admin/users" >Users</Link></span> 
+            </div>
+            <div className='d-flex align-items-center'>
+                <img src={users} alt="" /> <span><Link to="/admin/processing">Processing Unit</Link></span> 
             </div>
         
        

@@ -13,30 +13,15 @@ import AdminMenuhalf from '../../../component/adminsidenav';
 const CarOwners  = () => {
 
 
- useEffect(() => {
-    $( "button.kk" ).on( "click" , function(){    
-         $("div.j").fadeToggle(500);
-       })
-
-       
  
-   return () => {
-     
-   }
- }, [])
  
     
     
     
     
     return ( 
-        <>
-        <div>  
-      <Nav_ />
-          <div className="d-flex w-100 secondp">
-
-          <AdminMenuhalf />
-            <div>
+    
+        
                 <div className='px-2 mt-4'>
                     <h4 >Admin DashBoard</h4>
                     <h6 className='pl-4 mt-3'>Welcome, Kingsley</h6>
@@ -73,9 +58,9 @@ const CarOwners  = () => {
                         <th>FirstName</th>
                         <th>LastName</th>
                         <th>Email ID</th>
-                        <th>Created Date</th>
-                        <th>Login Date</th>
-                        <th>Car Status</th>
+                        
+                        <th colspan="2" className="bg-secondary">Specification</th>
+                     
                         </tr>
                         </thead>
                         
@@ -85,25 +70,24 @@ const CarOwners  = () => {
                             <td>3b2345e</td>
                             <td>Bus</td>
                             <td>king2@gmail.com</td>
-                            <td>26/11/22</td>
-                            <td>4000</td>
-                            <td>active</td>
+                            <td colspan="2" className="bg-primary" >26/11/22fghjkllkjhgfdfghjpjhgfdfghjkl'vc</td>
+                            
+                           
                         </tr>
                         <tr>
                             <td>3b2345e</td>
                             <td>Sienna</td>
                             <td>vline33@outlook.com</td>
-                            <td>26/11/22</td>
-                            <td>4000</td>
-                            <td>inactive</td>
+                            <td colspan="2" className="bg-success">26/11/22</td>
+                           
+                          
                         </tr>
                         <tr>
                             <td>3b2345e</td>
                             <td>Bus</td>
                             <td>Emma11@yahoo.com</td>
-                            <td>26/11/22</td>
-                            <td>4000</td>
-                            <td>Workshop</td>
+                            <td colspan="2" className="bg-info">26/11/22</td>
+                            
                         </tr>
 
 
@@ -117,14 +101,10 @@ const CarOwners  = () => {
                     
                     </div>
                 </div>
-            </div>
-          </div>
-
         
-        <Footer/>
-        </div> 
+          
          
-        </>
+        
      );
 }
  

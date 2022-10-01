@@ -11,25 +11,15 @@ import bell from '../../assets/notification.png';
 import NotifyBox from "../../../component/notifybox";
 
 const Notification = () => {
-  useEffect(() => {
-    $("button.kk").on("click", function () {
-      $("div.j").fadeToggle(500);
-    });
-
-    return () => {};
-  }, []);
+ 
 
   return (
-    <>
-      <div>
-        <Nav_ />
-        <div className="d-flex w-100 secondp">
-          <AdminMenuhalf />
-          <div>
+
+     
             <div className="px-2 mt-4">
-                <h4>Notification Center</h4>
+                <h4>Notification Center (4)</h4>
                 <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
-                <div className="container bg-primary mt-5 pb-2">
+                <div className="container mt-5 pb-2">
                     
 
                 <div class="input-group ">
@@ -39,7 +29,7 @@ const Notification = () => {
  
   <input type="text" class="form-control" placeholder="Title"/>
   <textarea className="form-control w-50" placeholder="Message" name="" id="" cols="50" rows="1"/>
-  <button type="submit d-inline" className="btn greenerbackground whitetext">Send</button>
+  <button type="submit d-inline" className="btn lightGreen  whitetext">Send</button>
 </div>
 
 <NotifyBox/>
@@ -51,12 +41,7 @@ const Notification = () => {
                 
    
             </div>
-          </div>
-        </div>
-
-        <Footer />
-      </div>
-    </>
+      
   );
 };
 
