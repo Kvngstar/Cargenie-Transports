@@ -12,9 +12,8 @@ a{
   color: black !important;
 }  
 a:hover{
-  /* background-color: #89c293; */
   text-decoration: none !important;
-  /* padding: 2px 4px; */
+  padding: 2px 4px;
 }
 .first-section {
   background-color: var(--primary-color);
@@ -216,7 +215,7 @@ a:hover{
 }
  .form__{
   width: 500px;
-    height: 500px;
+    height: auto;
     background-color:#f2f2f2;
     border-radius: 10px;
     
@@ -229,7 +228,7 @@ a:hover{
     padding: 3px 5px;
 }
 
-.form input[type="text"],input[type="password"]{
+.form input[type="text"],input[type="password"],input[type="email"]{
     margin-top: 30px;
     height: 40px;
     width: 100%;

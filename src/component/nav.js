@@ -12,8 +12,8 @@ const Nav__ = () => {
         <Logo/>
         <div className='tohideclass'>
 
-        <Link to="login"><button className='ml-3  btn btn-sm btn-light'>login</button></Link>
-<button className='ml-3  btn btn-sm btn-success'>Sign up</button>
+        <Link to="login"> <button className='ml-3  btn btn-sm btn-light'>Login</button></Link>
+        <Link to="signup"><button className='ml-3  btn btn-sm btn-success'>Sign up</button></Link>
 
 </div>
           

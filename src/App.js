@@ -13,6 +13,7 @@ import CustomerBook from "./sources/route/homepage/customerBook";
 import Loginform from "./sources/route/homepage/login";
 import HomeComponent from "./sources/route/homepage/HomeComp";
 import CarOwnerRoute from "./sources/route/homepage/ownersRoute";
+import CreateAccount from "./sources/route/homepage/createAccount";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           } />
         
         </Route>
-        <Route path="/carowners" element={<Customers/>}>
+        <Route path="/carowners" element={<Hompage />}>
         <Route index element={<CarOwnerRoute/>} />
         <Route path="*" element={ <Navigate replace to="carowners" />
           } />
@@ -46,6 +47,7 @@ function App() {
         </Route>
         <Route path="/" element={<Hompage />}>
         <Route path="login" element={<Loginform />} />
+        <Route path="signup" element={<CreateAccount />} />
         <Route index element={<HomeComponent />} />
 
         </Route>

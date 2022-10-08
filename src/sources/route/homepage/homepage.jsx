@@ -18,7 +18,7 @@ export default function Hompage() {
     useEffect(()=>{
 
       $("button.hidd").on("click", function (){
-        console.log("emenado");
+       
      $("div.hideclick").slideToggle(500);
     })    
     },[     ])  

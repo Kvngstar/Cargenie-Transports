@@ -4,7 +4,7 @@ const Loginform = () => {
         <div class="form">
         <form className="form__  mx-2" action="
         ">
-            <h1 className="mt-3" >Login</h1>
+            <h1 className="mt-3" >Sign In</h1>
             <div>
                 <input type="text" id="fn" placeholder="Enter your email"/>
             </div>
@@ -18,7 +18,7 @@ const Loginform = () => {
                     </div>
                   
                   <select class="form-control" name="" id="">
-                    <option>User</option>
+                    <option>customer</option>
                     <option>Car Owner</option>
                     <option>Admin</option>
                   </select>

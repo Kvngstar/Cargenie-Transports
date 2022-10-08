@@ -25,7 +25,7 @@ const Travelinput = () => {
           </div>
         </div>
         <div>
-          <div>Return Location</div>
+          <div>to</div>
           <div>
             <div className="input-group input1 flex-nowrap">
               <div className="input-group-prepend ">
@@ -53,7 +53,7 @@ const Travelinput = () => {
           </div>
         </div>
         <div>
-          <div>Return Date</div>
+          <div>Time</div>
           <div>
             <div className="input-group input1 flex-nowrap">
               <input
