@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/customer" element={<Customers />}>
+        <Route path="/customer" element={ (localStorage.getItem("x-auth")) ? <Customers />  : <Navigate replace to="/signup"/>}>
           <Route path="customerbook" element={<CustomerBook />} />
           <Route path="notification" element={<Notification />} />
           <Route path="carlisting" element={<CarListing />} />
