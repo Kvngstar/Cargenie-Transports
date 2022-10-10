@@ -14,12 +14,17 @@ import Loginform from "./sources/route/homepage/login";
 import HomeComponent from "./sources/route/homepage/HomeComp";
 import CarOwnerRoute from "./sources/route/homepage/ownersRoute";
 import CreateAccount from "./sources/route/homepage/createAccount";
+import React, { useState, useEffect } from 'react';
+import {Savejwt} from "./services/userService"
 
 function App() {
+
+  const [user,getvalue,setvalue] = Savejwt()
+
   return (
     <div className="App">
       <Routes>
-        <Route path="/customer" element={ (localStorage.getItem("x-auth")) ? <Customers />  : <Navigate replace to="/signup"/>}>
+        <Route path="/customer" element={ (getvalue()) ? <Customers />  : <Navigate replace to="/signup"/>}>
           <Route path="customerbook" element={<CustomerBook />} />
           <Route path="notification" element={<Notification />} />
           <Route path="carlisting" element={<CarListing />} />

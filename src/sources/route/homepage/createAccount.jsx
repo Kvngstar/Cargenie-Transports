@@ -4,6 +4,7 @@ import $ from 'jquery'
 import axios from 'axios'
 import _ from 'lodash'
 import { useNavigate } from 'react-router-dom'
+import {Savejwt} from "../../../services/userService" 
 
 
 
@@ -44,13 +45,13 @@ function handleState(event){
 
 // })
 
-const [info,setInfo] = useState("");
-// const [userLoggedIn, setUserLoggedIn] = useState("")
+const [userLoggedIn, setUserLoggedIn] = useState("")
 
-//   useEffect(()=>{
-//   return  setUserLoggedIn(localStorage.getItem("x-auth"))
-//   },[userLoggedIn])    
-   function submitButton(event){
+const [info,setInfo] = useState("");
+  useEffect(()=>{
+ setUserLoggedIn(localStorage.getItem("x-auth"))
+  },[userLoggedIn])    
+ async  function submitButton(event){
        
         event.preventDefault();
       
@@ -63,36 +64,44 @@ const [info,setInfo] = useState("");
             return setInfo("password does not match with confirm password")
         }  else{
             setInfo("")
+try{
+    
+    const response = await  axios.post(
+        "http://localhost:3001/gen/createaccount",
+       _.pick(formData,["firstName","lastName","phoneNum","email","password","as"]),
+        {
+            "Content-type": "application/json; charset=UTF-8",
+          }
+        
+      )
+      
+        
 
-
-            axios.post(
-                "http://localhost:3001/gen/createaccount",
-               _.pick(formData,["firstName","lastName","phoneNum","email","password","as"]),
-                {
-                    "Content-type": "application/json; charset=UTF-8",
-                  }
-                
-              ).then((response)=> {
-                
-
-                if(response.status==200){
-                  console.log(response.headers)
-                  localStorage.setItem("x-auth", response.headers["x-auth"])
-                  
-                  if(localStorage.getItem("x-auth")){
-                    console.log(localStorage.getItem("x-auth"))
-                 return navigate("/customer")
-                  
+        if(response.status==200){
+         const [user,getvalue,setvalue] = Savejwt()
+         setvalue(response.headers["x-auth"] )
+         console.log(response.headers["x-auth"]|| "nothing oo")
+         console.log(response)
+         setInfo(response.headers["x-auth"] )
+          if( localStorage.getItem("x-auth")){
+            setInfo("logged In")
+            console.log(userLoggedIn)
+         return navigate("/customer")
+          
 }
 else{
-    setInfo("not getting localStorage")
+setInfo("not getting localStorage")
+}}
+}
+catch(err){
+    console.log(err)
 }
                  
                 
                 
                 
-                }
-                }
+                
+                
                 
                
                 
@@ -100,7 +109,7 @@ else{
                 
                 
                 
-                ).catch(error => setInfo(error.response.data))
+                
             
 
 
@@ -169,4 +178,5 @@ else{
      );
 }
  
+
 export default CreateAccount;

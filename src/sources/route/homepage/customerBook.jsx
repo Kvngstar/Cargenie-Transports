@@ -1,6 +1,8 @@
 import Travelinput from '../../../component/travelinput';
 
-const CustomerBook = () => {
+const CustomerBook = (props) => {
+
+    console.log(props)
     return ( 
         <div className='px-2 mt-4'>
         <h4 >DashBoard</h4>
