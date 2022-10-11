@@ -15,16 +15,17 @@ import HomeComponent from "./sources/route/homepage/HomeComp";
 import CarOwnerRoute from "./sources/route/homepage/ownersRoute";
 import CreateAccount from "./sources/route/homepage/createAccount";
 import React, { useState, useEffect } from 'react';
-import {Savejwt} from "./services/userService"
+import jwt from './services/userService' 
+
 
 function App() {
 
-  const [user,getvalue,setvalue] = Savejwt()
+const {id,as} = jwt.getDetails()
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/customer" element={ (getvalue()) ? <Customers />  : <Navigate replace to="/signup"/>}>
+        <Route path="/customer" element={ (as==="customer" ) ? <Customers />  : <Navigate replace to="/signup"/>}>
           <Route path="customerbook" element={<CustomerBook />} />
           <Route path="notification" element={<Notification />} />
           <Route path="carlisting" element={<CarListing />} />
@@ -33,7 +34,7 @@ function App() {
           } />
         
         </Route>
-        <Route path="/carowners" element={<Hompage />}>
+        <Route path="/carowners" element={ (as==="carowner" ) ? <Customers />  : <Navigate replace to="/signup"/>}>
         <Route index element={<CarOwnerRoute/>} />
         <Route path="*" element={ <Navigate replace to="carowners" />
           } />
@@ -41,8 +42,8 @@ function App() {
 
         </Route>
         <Route path="/Notification" element={<Notification />} />
-        <Route path="/getusers" element={<GetUsers />} />
-        <Route path="/admin" element={<Admin />}>
+      
+        <Route path="/admin" element={  (as==="admin" ) ? <Admin />   : <Navigate replace to="/signup"/>}>
           <Route path="carbooking" element={<CarBooking />} />
           <Route path="carlisting" element={<CarListing />} />
           <Route path="processing" element={<BookingProccessing />} />
@@ -51,7 +52,7 @@ function App() {
           <Route path="users" element={<GetUsers />} />
         </Route>
         <Route path="/" element={<Hompage />}>
-        <Route path="login" element={<Loginform />} />
+        <Route path="login" element={  (localStorage.getItem("x-auth")) ? <Navigate replace to="/customer"/>  :   <Loginform />} />
         <Route path="signup" element={<CreateAccount />} />
         <Route index element={<HomeComponent />} />
 

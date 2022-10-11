@@ -1,14 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import $ from "jquery"
-
-
-
-import "./homepage.css";
-import Travelinput from '../../../component/travelinput';
-import Footer from '../../../component/footer';
-import Nav_ from '../../../component/nav1';
-import Menuhalf from '../../../component/menuhalf';
-import AdminMenuhalf from '../../../component/adminsidenav';
 
 const CarOwners  = () => {
 

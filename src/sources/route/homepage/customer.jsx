@@ -9,8 +9,7 @@ import Nav_ from '../../../component/nav1';
 import Menuhalf from '../../../component/menuhalf';
 import { Outlet } from 'react-router-dom';
 
-const Customers  = (props) => {
-console.log(props)
+const Customers  = () => {
 
  useEffect(() => {
     $( "button.kk" ).on( "click" , function(){    

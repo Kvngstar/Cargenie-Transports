@@ -1,17 +1,10 @@
 import React from 'react'
 import {useEffect,useState} from 'react'
-import $ from 'jquery'
-import axios from 'axios'
 import _ from 'lodash'
-import { useNavigate } from 'react-router-dom'
-import {Savejwt} from "../../../services/userService" 
-
-
-
-const CreateAccount = (props) => {
-
-
-    let navigate = useNavigate()
+import jwt from '../../../services/userService'
+import jwt_decode from 'jwt-decode'
+import auth from '../../../services/authService'
+const CreateAccount = () => {
 var [formData, setFormData] = useState({
     firstName:"",
     lastName: "" ,
@@ -34,39 +27,31 @@ function handleState(event){
  })
 }
 
-// const [Data,setData] = useState({
-//   firstName:"kingsley",
-//      lastName:"nwachukwu",
-//     phoneNum:"08030299983",
-//     email:"kingsley0193999@yahoo.com",
-//    password:"12345678",
-//     as:"carowner"
-
-
-// })
-
-const [userLoggedIn, setUserLoggedIn] = useState("")
-
 const [info,setInfo] = useState("");
-  useEffect(()=>{
- setUserLoggedIn(localStorage.getItem("x-auth"))
-  },[userLoggedIn])    
- async  function submitButton(event){
+const [user,setUser] = useState({})
+ async function submitButton(event){
        
         event.preventDefault();
       
-
+      
         if(!formData.password || !formData.confirmPassword ){
             return setInfo("password does not match with confirm password")
         } 
 
         else if(formData.password !== formData.confirmPassword ){
             return setInfo("password does not match with confirm password")
-        }  else{
+        }
+        else if( !formData.terms){
+            setInfo("")
+         return   setInfo("Accept the terms and condition")
+
+        }
+        
+        else{
             setInfo("")
 try{
     
-    const response = await  axios.post(
+    const response = await  auth.post(
         "http://localhost:3001/gen/createaccount",
        _.pick(formData,["firstName","lastName","phoneNum","email","password","as"]),
         {
@@ -78,49 +63,49 @@ try{
         
 
         if(response.status==200){
-         const [user,getvalue,setvalue] = Savejwt()
-         setvalue(response.headers["x-auth"] )
-         console.log(response.headers["x-auth"]|| "nothing oo")
-         console.log(response)
-         setInfo(response.headers["x-auth"] )
-          if( localStorage.getItem("x-auth")){
-            setInfo("logged In")
-            console.log(userLoggedIn)
-         return navigate("/customer")
+         
+         jwt.savejwt(response.headers['x-auth'])
+         const {as} =  jwt_decode(response.headers['x-auth'])
+
+         
+         setInfo("Successful")
+         
+
+       switch (as) {
+        case "customer":
+
+        window.location.replace("/customer")
+            
+            break;
+        case "carowner":
+            window.location.replace("/carowner")
+            break;
+        case "admin":
+            window.location.replace("/admin")
+            break;
+       
+        default:
+            window.location.replace("/")
+            break;
+       }
           
 }
-else{
-setInfo("not getting localStorage")
-}}
+
 }
-catch(err){
-    console.log(err)
+catch(error){
+
+    if(error.response && error.response.status >=400 && error.response.status < 500){
+console.log(error)
+      return  setInfo(error.response.data)
+
+    }
+    console.log(error,"outside")
+ return   setInfo(error.message)
 }
                  
-                
-                
-                
-                
-                
-                
-               
-                
-                
-                
-                
-                
-                
-            
-
-
         }
        
     }
-    
-
-
-
-// alert(firstName)
     return ( 
         
                 

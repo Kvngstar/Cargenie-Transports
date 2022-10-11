@@ -1,4 +1,17 @@
+
+
+
+
+
+
 const Loginform = () => {
+
+
+
+
+
+
+
     return ( 
         
         <div class="form">
