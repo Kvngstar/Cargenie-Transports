@@ -1,6 +1,53 @@
 import location from "../sources/assets/location.png"
-
+import React, { useState, useEffect } from 'react';
+import auth from '../services/authService'
+import jwt from '../services/userService'
 const Travelinput = () => {
+
+
+
+  const [data,setData] = useState({
+    pickupLocation: "",
+    to:"",
+    pickupDate: "",
+    time: "",
+    price: "4000",
+    cartype:"",
+  })
+  const [message,setMessage] = useState("")
+
+
+async function handleButton(event){
+
+  event.preventDefault()
+
+ if(!jwt.getjwt()){return setMessage("User must be logged in")}
+
+  try{
+   const response = await auth.post("http://localhost:3001/customer/travels",data, {
+    "Content-type": "application/json; charset=UTF-8",
+  });
+  setMessage(response.data)
+  
+  const url = window.location.href
+  window.location.reload(url)
+
+
+ }
+ catch(err){
+  setMessage(err.response.data)
+ }
+
+}
+
+
+  function HandleInput(event){
+  const {name,value} = event.target
+
+    setData((values)=> {return {...values,[name]: value }})
+
+  }
+  
     return ( 
 
       <form>
@@ -20,6 +67,9 @@ const Travelinput = () => {
                 placeholder="Ajah, Lagos"
                 aria-label="Username"
                 aria-describedby="addon-wrapping"
+                name="pickupLocation"
+                value={data.pickupLocation}
+                onChange={HandleInput}
               />
             </div>
           </div>
@@ -36,6 +86,9 @@ const Travelinput = () => {
                 type="text"
                 className="form-control"
                 placeholder="Airport, Ikeja"
+                name="to"
+                value={data.to}
+                onChange={HandleInput}
               />
             </div>
           </div>
@@ -48,6 +101,9 @@ const Travelinput = () => {
                 type="date"
                 className="form-control"
                 placeholder="22/9/2022"
+                name="pickupDate"
+                onChange={HandleInput}
+                value={data.pickupDate}
               />
             </div>
           </div>
@@ -57,9 +113,12 @@ const Travelinput = () => {
           <div>
             <div className="input-group input1 flex-nowrap">
               <input
-                type="date"
+                type="time"
                 className="form-control"
                 placeholder="30/9/2022"
+                name="time"
+                onChange={HandleInput}
+                value={data.time}
               />
             </div>
           </div>
@@ -68,20 +127,21 @@ const Travelinput = () => {
       <div className="input-group d-flex flex-wrap justify-content-center align-items-center">
        <div className="input-group-prepend w-50">
 
-      <input className="mt-2 p-2 form-control bg-transparent "  type="text"  placeholder=" Price: N4000" disabled/>
+      <input className="mt-2 p-2 form-control bg-transparent " name=""  value={data.price} onChange={HandleInput} type="text"  placeholder=" Price: N4000" disabled/>
        </div>
-      <select className="custom-select mt-2 p-2"  type="text" placeholder="Car type">
+      <select className="custom-select mt-2 p-2" name="cartype" value={data.cartype} onChange={HandleInput}  type="text" placeholder="Car type">
         <option value="">Choose a car</option>
-        <option value="">Exquisite</option>
-        <option value="">Sienna</option>
-        <option value="">18 Seaters Bus</option>
+        <option value="exquisite">Exquisite</option>
+        <option value="sienna">Sienna</option>
+        <option value="bus">18 Seaters Bus</option>
       </select>
       <div className="input-group-append">
 
-      <input type="submit" className="btn btn-success mt-2" value="Book"/>
+      <input type="submit" onClick={handleButton} className="btn btn-success mt-2" value="Book"/>
 
       </div>
       </div>
+      { (jwt.getjwt()) ? <div className="mt-3 text-center">{message}</div> : <div className="mt-3 text-danger text-center">{message}</div> }
       
       </form>
      );

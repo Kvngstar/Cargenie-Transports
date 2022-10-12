@@ -41,7 +41,7 @@ const {id,as} = jwt.getDetails()
           
 
         </Route>
-        <Route path="/Notification" element={<Notification />} />
+       
       
         <Route path="/admin" element={  (as==="admin" ) ? <Admin />   : <Navigate replace to="/signup"/>}>
           <Route path="carbooking" element={<CarBooking />} />
@@ -52,9 +52,10 @@ const {id,as} = jwt.getDetails()
           <Route path="users" element={<GetUsers />} />
         </Route>
         <Route path="/" element={<Hompage />}>
+        <Route index element={<HomeComponent />} />
+        <Route path="Notification" element={<Notification />} />
         <Route path="login" element={  (localStorage.getItem("x-auth")) ? <Navigate replace to="/customer"/>  :   <Loginform />} />
         <Route path="signup" element={<CreateAccount />} />
-        <Route index element={<HomeComponent />} />
 
         </Route>
       </Routes>

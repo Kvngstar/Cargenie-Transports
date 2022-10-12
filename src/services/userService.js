@@ -4,7 +4,8 @@ const savejwt = (jwt)=>{
 return localStorage.setItem("x-auth",jwt)
 }
 const getjwt = ()=>{
- return localStorage.getItem("x-auth")
+ const jwt = localStorage.getItem("x-auth")
+ return jwt
 }
 
 const getDetails =()=>{
