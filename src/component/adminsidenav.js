@@ -5,6 +5,7 @@ import logout from '../sources/assets/logout.png';
 import settings from '../sources/assets/settings_icon.png';
 import help from '../sources/assets/help_icon.png';
 import { Link } from 'react-router-dom';
+import Logout from "../sources/route/homepage/logout"
 
 const AdminMenuhalf = () => {
     return ( 
@@ -45,7 +46,7 @@ const AdminMenuhalf = () => {
                 <img src={help} alt="" /> <span>Help</span>
             </div>
         <div className='d-flex align-items-center align-items-center'>
-                <img src={logout} alt="" /> <span>Logout</span>
+                <img src={logout} alt="" /><Link onClick={Logout}><span>Logout</span></Link>  
             </div>
 
         </div>

@@ -141,7 +141,7 @@ async function handleButton(event){
 
       </div>
       </div>
-      { (jwt.getjwt()) ? <div className="mt-3 text-center">{message}</div> : <div className="mt-3 text-danger text-center">{message}</div> }
+      { (jwt.getjwt()) ? <div className="mt-3 text-center">{message}</div> : <div className="mt-3  alert alert-danger text-center">{message}</div> }
       
       </form>
      );

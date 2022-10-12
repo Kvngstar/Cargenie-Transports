@@ -15,7 +15,9 @@ import HomeComponent from "./sources/route/homepage/HomeComp";
 import CarOwnerRoute from "./sources/route/homepage/ownersRoute";
 import CreateAccount from "./sources/route/homepage/createAccount";
 import React, { useState, useEffect } from 'react';
-import jwt from './services/userService' 
+import jwt from './services/userService' ;
+import Logout from "./sources/route/homepage/logout";
+
 
 
 function App() {
@@ -25,6 +27,7 @@ const {id,as} = jwt.getDetails()
   return (
     <div className="App">
       <Routes>
+   
         <Route path="/customer" element={ (as==="customer" ) ? <Customers />  : <Navigate replace to="/signup"/>}>
           <Route path="customerbook" element={<CustomerBook />} />
           <Route path="notification" element={<Notification />} />
@@ -56,6 +59,7 @@ const {id,as} = jwt.getDetails()
         <Route path="Notification" element={<Notification />} />
         <Route path="login" element={  (localStorage.getItem("x-auth")) ? <Navigate replace to="/customer"/>  :   <Loginform />} />
         <Route path="signup" element={<CreateAccount />} />
+
 
         </Route>
       </Routes>
