@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
-
-import "./homepage.css";
-import Travelinput from "../../../component/travelinput";
 import Footer from "../../../component/footer";
 import Nav_ from "../../../component/nav1";
-
+import "./homepage.css";
 
 import AdminMenuhalf from "../../../component/adminsidenav";
 import { Route, Routes, Outlet } from "react-router-dom";
@@ -25,19 +22,7 @@ const Admin = () => {
         <div className="d-flex w-100 secondp">
           <AdminMenuhalf />
           <div>
-
-            <Outlet/>
-            
-                
-
-                
-              
-
-               
-
-                
-        
-           
+            <Outlet />
           </div>
         </div>
 

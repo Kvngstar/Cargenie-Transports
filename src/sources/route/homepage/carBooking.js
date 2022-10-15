@@ -1,13 +1,53 @@
 import React, { useState, useEffect } from "react";
-import $ from "jquery";
-
+import auth from "../../../services/authService"
+import jwt from "../../../services/userService"
 import "./homepage.css";
-import Travelinput from "../../../component/travelinput";
-import Footer from "../../../component/footer";
-import Nav_ from "../../../component/nav1";
-import Menuhalf from "../../../component/menuhalf";
+
 
 const CarBooking = () => {
+
+
+
+  const [user,setUser] = useState(jwt.getDetails())
+    const [error,setError] = useState("")
+    const [userArray,setUserObject] = useState([])
+    const [name,setName] = useState("")
+
+    useEffect(()=>{
+   async function GetUserDetail(){
+
+
+    try{
+
+      const   response = await auth.get("http://localhost:3001/admin/booking", {
+            "Content-type": "application/json; charset=UTF-8"
+          })  
+         
+         if(response.status == 200){
+            setUserObject(response.data.Travel)
+            setName(response.data.firstName)
+           return
+
+         }
+         else{
+             console.log(response)
+         }
+       
+        
+    }
+    
+    catch(err){
+        console.log(err)
+        setError(err.response.data)
+      
+    }
+    
+    
+     
+    }
+    GetUserDetail()
+
+    },[])
   return (
     <>
       <div className="px-2 mt-4">

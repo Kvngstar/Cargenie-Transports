@@ -2,15 +2,47 @@ import React, { useState, useEffect } from "react";
 import $ from "jquery";
 
 import "./homepage.css";
-import Travelinput from "../../../component/travelinput";
-import Footer from "../../../component/footer";
-import Nav_ from "../../../component/nav1";
-import Menuhalf from "../../../component/menuhalf";
-import AdminMenuhalf from "../../../component/adminsidenav";
+import auth from '../../../services/authService'
 import bell from '../../assets/notification.png';
 import NotifyBox from "../../../component/notifybox";
 
 const Notification = () => {
+
+  const [error,setError] = useState('')
+const [info,setInfo] = useState([])
+var [calcateTotal,setCalculateTotal] = useState("")
+useEffect(()=>{
+
+async function getNotification(){
+    try{
+
+        const   response = await auth.get("http://localhost:3001/notification", {
+              "Content-type": "application/json; charset=UTF-8"
+            })  
+           
+           if(response.status == 200){
+            setInfo(response.data)
+           console.log(response.data)
+            return
+  
+           }
+           else{
+               console.log(response)
+           }
+         
+          
+      }
+      
+      catch(err){
+          console.log(err)
+          setError(err.response.data)
+        
+      }
+}
+getNotification()
+},[])
+console.log(info)
+
  
 
   return (
@@ -31,10 +63,13 @@ const Notification = () => {
   <textarea className="form-control w-50" placeholder="Message" name="" id="" cols="50" rows="1"/>
   <button type="submit d-inline" className="btn lightGreen  whitetext">Send</button>
 </div>
+{
+  info.map((v)=>{ return  <NotifyBox title={v.title}  date={v.Date} desc={v.description}  /> })
+}
 
-<NotifyBox/>
-<NotifyBox/>
-<NotifyBox/>
+
+{/* <NotifyBox      />
+<NotifyBox     /> */}
 
                     </div>
 

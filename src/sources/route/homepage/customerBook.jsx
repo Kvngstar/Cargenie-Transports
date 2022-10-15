@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Travelinput from '../../../component/travelinput';
 import jwt from "../../../services/userService"
 import auth from "../../../services/authService"
-
+import $ from 'jquery'
 
 const CustomerBook = () => {
 
-
+    
     
     const [user,setUser] = useState(jwt.getDetails())
-    const [errr,seterrr] = useState("")
-    const [userdata,setUserData] = useState({})
+    const [error,setError] = useState("")
     const [userArray,setUserArray] = useState([])
-    
+    const [name,setName] = useState("")
 
     useEffect(()=>{
    async function GetUserDetail(){
+
 
     try{
 
@@ -25,7 +25,7 @@ const CustomerBook = () => {
          
          if(response.status == 200){
             setUserArray(response.data.Travel)
-           setUserData(response.data)
+            setName(response.data.firstName)
            return
 
          }
@@ -38,7 +38,7 @@ const CustomerBook = () => {
     
     catch(err){
         console.log(err)
-        seterrr(err.response.data)
+        setError(err.response.data)
       
     }
     
@@ -52,7 +52,7 @@ const CustomerBook = () => {
 
         <div className='px-2 mt-4'>
         <h4 >DashBoard </h4>
-        <h6 className='pl-4 mt-3'>Welcome, {user.firstName} </h6>
+        <h6 className='pl-4 mt-3'>Welcome, {name} </h6>
 
         <div className='h mx-auto mt-5'> 
             <h4 className='text-center mb-3'>Book your Ticket Here</h4>
@@ -79,13 +79,13 @@ const CustomerBook = () => {
             
             
             <tbody>
-           {userArray.map((v)=> { return  <tr>
+           { (error) ? <div className='mt-4 alert mx-auto alert-warning text-center'>{error}</div> :  userArray.map((v)=> { return  <tr>
                <td> { v.bookDate}</td>
                <td>{ v.bookingId}</td>
                <td> {v.carType}</td>
                <td>{ v.pickupDate}</td>
                <td>{ v.to}</td>  
-               <td>{ v.status}</td></tr>  })}
+               <td>{ v.status}</td></tr>  } ) }
 
 
             </tbody>

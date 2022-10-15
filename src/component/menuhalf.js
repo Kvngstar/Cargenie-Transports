@@ -6,6 +6,8 @@ import settings from '../sources/assets/settings_icon.png';
 import help from '../sources/assets/help_icon.png';
 import { Link, NavLink } from 'react-router-dom';
 import Logout from "../sources/route/homepage/logout"
+import jwt from '../services/userService'
+import auth from '../services/authService'
 
 
 const Menuhalf = () => {
@@ -19,17 +21,25 @@ const Menuhalf = () => {
               
                 
                  <img   src={calendar} alt="" />
-            <NavLink to="customerbook">
-                  <span>Booking Directory</span>
+          { ((jwt.getDetails()).as == "customer")  && <NavLink to="customerbook">
+                   <span>My Directory</span>
             
-            </NavLink>
+            </NavLink>}
+          { ((jwt.getDetails()).as == "carowner")  && <NavLink to="/carowners/carown">
+                   <span>Car-Owner Directory</span>
+            
+            </NavLink>}
+          { ((jwt.getDetails()).as == "admin")  && <NavLink to="/admin/">
+                   <span>Booking Directory</span>
+            
+            </NavLink>}
             </div>
             <div className='d-flex  align-items-center'>
                 <img src={calendar} alt="" /> <NavLink to="carlisting"> <span>Car Listing</span></NavLink>
             </div>
             <div className='d-flex align-items-center'>
                 <img src={users} alt="" /> <span>
-                    <NavLink to="notification">
+                    <NavLink to="/carowners/notification">
                     Notification </NavLink> </span>
             </div>
         

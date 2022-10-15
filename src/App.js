@@ -1,4 +1,3 @@
-import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CarBooking from "./sources/route/homepage/carBooking";
 import CarListing from "./sources/route/homepage/carlist";
@@ -14,9 +13,8 @@ import Loginform from "./sources/route/homepage/login";
 import HomeComponent from "./sources/route/homepage/HomeComp";
 import CarOwnerRoute from "./sources/route/homepage/ownersRoute";
 import CreateAccount from "./sources/route/homepage/createAccount";
-import React, { useState, useEffect } from 'react';
 import jwt from './services/userService' ;
-import Logout from "./sources/route/homepage/logout";
+import "./App.css";
 
 
 
@@ -38,27 +36,31 @@ const {id,as} = jwt.getDetails()
         
         </Route>
         <Route path="/carowners" element={ (as==="carowner" ) ? <Customers />  : <Navigate replace to="/signup"/>}>
-        <Route index element={<CarOwnerRoute/>} />
+          <Route index element={<CarOwnerRoute/>} />
+        <Route path="notification" element={<Notification />} />
+          <Route path="carlisting" element={<CarListing />} />
         <Route path="*" element={ <Navigate replace to="carowners" />
+        
           } />
-          
+          <Route path="/owner" element={<CarOwnerRoute/>} />
 
         </Route>
        
       
         <Route path="/admin" element={  (as==="admin" ) ? <Admin />   : <Navigate replace to="/signup"/>}>
-          <Route path="carbooking" element={<CarBooking />} />
+          <Route index element={<CarBooking />} />
           <Route path="carlisting" element={<CarListing />} />
           <Route path="processing" element={<BookingProccessing />} />
           <Route path="carowner" element={<CarOwners />} />
           <Route path="notification" element={<Notification />} />
           <Route path="users" element={<GetUsers />} />
+          <Route path="carbooking" element={<CarBooking />} />
         </Route>
         <Route path="/" element={<Hompage />}>
         <Route index element={<HomeComponent />} />
         <Route path="Notification" element={<Notification />} />
-        <Route path="login" element={  (localStorage.getItem("x-auth")) ? <Navigate replace to="/customer"/>  :   <Loginform />} />
-        <Route path="signup" element={<CreateAccount />} />
+        <Route path="login" element={((jwt.getDetails()).as == "customer") ? <Navigate replace to="/customer"/>  : ((jwt.getDetails()).as == "carowner") ? <Navigate replace to="/carowners"/> : ((jwt.getDetails()).as == "admin") ? <Navigate replace to="/carowners"/> : <Loginform />  }/>
+        <Route path="signup" element={((jwt.getDetails()).as == "customer") ? <Navigate replace to="/customer"/>  : ((jwt.getDetails()).as == "carowner") ? <Navigate replace to="/carowners"/> : ((jwt.getDetails()).as == "admin") ? <Navigate replace to="/carowners"/> : <CreateAccount />} />
 
 
         </Route>
@@ -68,3 +70,4 @@ const {id,as} = jwt.getDetails()
 }
 
 export default App;
+ 

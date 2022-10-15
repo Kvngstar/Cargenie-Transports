@@ -1,64 +1,63 @@
-import location from "../sources/assets/location.png"
-import React, { useState, useEffect } from 'react';
-import auth from '../services/authService'
-import jwt from '../services/userService'
+import React, { useState, useEffect } from "react";
+import location from "../sources/assets/location.png";
+import auth from "../services/authService";
+import jwt from "../services/userService";
 const Travelinput = () => {
-
-
-
-  const [data,setData] = useState({
+  const [data, setData] = useState({
     pickupLocation: "",
-    to:"",
+    to: "",
     pickupDate: "",
     time: "",
     price: "4000",
-    cartype:"",
-  })
-  const [message,setMessage] = useState("")
-
-
-async function handleButton(event){
-
-  event.preventDefault()
-
- if(!jwt.getjwt()){return setMessage("User must be logged in")}
-
-  try{
-   const response = await auth.post("http://localhost:3001/customer/travels",data, {
-    "Content-type": "application/json; charset=UTF-8",
+    cartype: "",
   });
-  setMessage(response.data)
-  
-  const url = window.location.href
-  window.location.reload(url)
+  const [message, setMessage] = useState("");
 
+  async function handleButton(event) {
+    event.preventDefault();
 
- }
- catch(err){
-  setMessage(err.response.data)
- }
+    if (!jwt.getjwt()) {
+      return setMessage("User must be logged in");
+    }
 
-}
+    try {
+      const response = await auth.post(
+        "http://localhost:3001/customer/travels",
+        data,
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+      setMessage(response.data);
 
-
-  function HandleInput(event){
-  const {name,value} = event.target
-
-    setData((values)=> {return {...values,[name]: value }})
-
+      const url = window.location.href;
+      window.location.reload(url);
+    } catch (err) {
+      setMessage(err.response.data);
+    }
   }
-  
-    return ( 
 
-      <form>
-        <div className="py-3 text-center px-2 second-section-child d-flex flex-wrap rounded mb-5 g">
+  function HandleInput(event) {
+    const { name, value } = event.target;
+
+    setData((values) => {
+      return { ...values, [name]: value };
+    });
+  }
+
+  return (
+    <form>
+      <div className="py-3 text-center px-2 second-section-child d-flex flex-wrap rounded mb-5 g">
         <div>
           <div>Pickup Location</div>
           <div>
             <div className="input-group input1 flex-nowrap">
               <div className="input-group-prepend">
-                <span className="input-group-text bg-transparent" id="addon-wrapping">
-                <img src={location} /> 
+                <span
+                  className="input-group-text bg-transparent"
+                  id="addon-wrapping"
+                >
+                  <img src={location} />
                 </span>
               </div>
               <input
@@ -79,8 +78,12 @@ async function handleButton(event){
           <div>
             <div className="input-group input1 flex-nowrap">
               <div className="input-group-prepend ">
-                <span className="input-group-text bg-transparent" id="addon-wrapping">
-                  <img src={location} />                   </span>
+                <span
+                  className="input-group-text bg-transparent"
+                  id="addon-wrapping"
+                >
+                  <img src={location} />{" "}
+                </span>
               </div>
               <input
                 type="text"
@@ -125,26 +128,48 @@ async function handleButton(event){
         </div>
       </div>
       <div className="input-group d-flex flex-wrap justify-content-center align-items-center">
-       <div className="input-group-prepend w-50">
-
-      <input className="mt-2 p-2 form-control bg-transparent " name=""  value={data.price} onChange={HandleInput} type="text"  placeholder=" Price: N4000" disabled/>
-       </div>
-      <select className="custom-select mt-2 p-2" name="cartype" value={data.cartype} onChange={HandleInput}  type="text" placeholder="Car type">
-        <option value="">Choose a car</option>
-        <option value="exquisite">Exquisite</option>
-        <option value="sienna">Sienna</option>
-        <option value="bus">18 Seaters Bus</option>
-      </select>
-      <div className="input-group-append">
-
-      <input type="submit" onClick={handleButton} className="btn btn-success mt-2" value="Book"/>
-
+        <div className="input-group-prepend w-50">
+          <input
+            className="mt-2 p-2 form-control bg-transparent "
+            name=""
+            value={data.price}
+            onChange={HandleInput}
+            type="text"
+            placeholder=" Price: N4000"
+            disabled
+          />
+        </div>
+        <select
+          className="custom-select mt-2 p-2"
+          name="cartype"
+          value={data.cartype}
+          onChange={HandleInput}
+          type="text"
+          placeholder="Car type"
+        >
+          <option value="">Choose a car</option>
+          <option value="exquisite">Exquisite</option>
+          <option value="sienna">Sienna</option>
+          <option value="bus">18 Seaters Bus</option>
+        </select>
+        <div className="input-group-append">
+          <input
+            type="submit"
+            onClick={handleButton}
+            className="btn btn-success mt-2"
+            value="Book"
+          />
+        </div>
       </div>
-      </div>
-      { (jwt.getjwt()) ? <div className="mt-3 text-center">{message}</div> : <div className="mt-3  alert alert-danger text-center">{message}</div> }
-      
-      </form>
-     );
-}
- 
+      {jwt.getjwt()
+        ? message && <div className="mt-3 text-center">{message}</div>
+        : message && (
+            <div className="mt-3  alert alert-danger text-center">
+              {message}
+            </div>
+          )}
+    </form>
+  );
+};
+
 export default Travelinput;

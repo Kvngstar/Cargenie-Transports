@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import jwt from '../../../services/userService'
+import auth from '../../../services/authService'
 import $ from "jquery";
 
 import "./homepage.css";
@@ -6,12 +8,54 @@ import "./homepage.css";
 const CarOwnerRoute = () => {
 
 
+  const [user,setUser] = useState(jwt.getDetails())
+  const [error,setError] = useState("")
+  const [userObject,setUserObject] = useState({})
+  const [userArray,setUserArray] = useState([ ])
+  const [name,setName] = useState("")
+
+  useEffect( ()=>{
+  async function GetCarOwnerDetail(){
+    try{
+
+      const   response = await auth.get("http://localhost:3001/carowner", {
+            "Content-type": "application/json; charset=UTF-8"
+          })  
+         
+         if(response.status >= 200 && response.status < 3000){
+            setUserObject(response.data)
+            console.log(response.data.car)
+            setUserArray(response.data.car)
+           return
+
+         }
+         else{
+             console.log(response)
+         }
+       
+        
+    }
+    
+    catch(err){
+        console.log(err)
+        setError(err.response.data)
+      
+    }
+    
+    
+     
+    }
+    GetCarOwnerDetail()
+
+    },[])
+
+
   return (
 
    
             <div className="px-2 mt-4">
               <h4>Admin Carowners</h4>
-              <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
+              <h6 className="pl-4 mt-3">Welcome, {userObject.email}</h6>
 
               <div className="my-5">
                 <h6 className="pl-3">Date:</h6>
@@ -23,16 +67,26 @@ const CarOwnerRoute = () => {
                         
                         <th>Email</th>
                         <th>Registered Date</th>
+                        <th>phone Number</th>
                         <th>Cars Info</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         
-                        <td>Kingsley019@yahoo.com</td>
-                        <td>33/4/22</td>
+                        <td>{userObject.email}</td>
+                        <td>{userObject.date}</td>
 
-                        <td>09030299983</td>
+                        <td>{userObject.phoneNum}</td>
+                        <td>
+                          <ol>
+
+                           {userArray.map((v)=>{
+                             return  <li>{v}</li>
+                            }) }
+                            
+                            </ol>
+                             </td>
                        
                       </tr>
                      
