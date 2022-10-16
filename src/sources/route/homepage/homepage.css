@@ -8,12 +8,13 @@
   padding: 0;
   margin: 0;
 }
+
 a{
   color: black !important;
 }  
+
 a:hover{
   text-decoration: none !important;
-  padding: 2px 4px;
 }
 .first-section {
   background-color: var(--primary-color);

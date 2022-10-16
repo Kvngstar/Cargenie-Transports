@@ -1,7 +1,4 @@
 import Logo from './logo';
-import bell from '../sources/assets/notificationbell.png';
-import message from '../sources/assets/messageicon.png';
-import list from '../sources/assets/Vector-1.png';
 import { Link } from 'react-router-dom';
 
 

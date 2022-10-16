@@ -6,12 +6,10 @@ import "./homepage.css";
 
 const CarBooking = () => {
 
-
-
   const [user,setUser] = useState(jwt.getDetails())
     const [error,setError] = useState("")
-    const [userArray,setUserObject] = useState([])
-    const [name,setName] = useState("")
+    const [array,setArray] = useState([])
+    const [count,setCount] = useState("")
 
     useEffect(()=>{
    async function GetUserDetail(){
@@ -19,13 +17,14 @@ const CarBooking = () => {
 
     try{
 
-      const   response = await auth.get("http://localhost:3001/admin/booking", {
+      const   response = await auth.get("http://localhost:3001/admin/travelview", {
             "Content-type": "application/json; charset=UTF-8"
           })  
          
-         if(response.status == 200){
-            setUserObject(response.data.Travel)
-            setName(response.data.firstName)
+         if(response.status >= 200 && response.status < 400){
+           setArray(response.data)
+           console.log(document.getElementById("count").children.length)
+           setCount(document.getElementById("count").children.length)
            return
 
          }
@@ -41,7 +40,9 @@ const CarBooking = () => {
         setError(err.response.data)
       
     }
-    
+   
+    setCount(document.getElementById("count").children.length)
+           
     
      
     }
@@ -55,7 +56,7 @@ const CarBooking = () => {
         <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
 
         <div className="my-5">
-          <h6 className="pl-3">Booking Directory (55)</h6>
+          <h6 className="pl-3">Booking Directory {count}</h6>
           <div className="pl-3">
             <div>Completed - 3</div>
             <div>failed - 5</div>
@@ -81,48 +82,24 @@ const CarBooking = () => {
             <table className="table table-sm ">
               <thead>
                 <tr className="table-success">
-                  <th>Name</th>
-                  <th>Subject</th>
-                  <th>State</th>
-                  <th>Date</th>
-                  <th>Time</th>
+                  <th>BookDate</th>
+                  <th>Booking Id</th>
+                  <th>status</th>
+                 
                 </tr>
               </thead>
 
-              <tbody>
-                <tr>
-                  <td>Amanda Zara</td>
-                  <td>Bus</td>
-                  <td>
-                    <span className="btn btn-sm btn-success rounded">
-                      Completed
-                    </span>
-                  </td>
-                  <td>26/11/22</td>
-                  <td>4:16pm</td>
-                </tr>
-                <tr>
-                  <td>Olomo Jacob</td>
-                  <td>Sienna</td>
-                  <td>
-                    <span className="btn btn-sm btn-danger rounded">
-                      failed
-                    </span>
-                  </td>
-                  <td>26/11/22</td>
-                  <td>3:00am</td>
-                </tr>
-                <tr>
-                  <td>Favour Ikedi</td>
-                  <td>Bus</td>
-                  <td>
-                    <span className="btn btn-sm btn-warning rounded">
-                      Processing
-                    </span>
-                  </td>
-                  <td>26/11/22</td>
-                  <td>10:00am</td>
-                </tr>
+              <tbody id="count">
+           { array.map((v)=>{
+            return  v.Travel.map((w)=>{ 
+              return <tr> <td>{w.bookDate}</td> <td>{w.bookingId}</td> <td>
+   <span className="btn btn-sm btn-success rounded">
+   {w.status}
+   </span>
+ </td>
+
+</tr>})
+           })   } 
               </tbody>
             </table>
           </div>

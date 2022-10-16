@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import $ from "jquery";
+import jwt from '../../../services/userService'
 
 import "./homepage.css";
 import auth from '../../../services/authService'
@@ -10,7 +10,7 @@ const Notification = () => {
 
   const [error,setError] = useState('')
 const [info,setInfo] = useState([])
-var [calcateTotal,setCalculateTotal] = useState("")
+var [length,setLenth] = useState("")
 useEffect(()=>{
 
 async function getNotification(){
@@ -22,7 +22,7 @@ async function getNotification(){
            
            if(response.status == 200){
             setInfo(response.data)
-           console.log(response.data)
+         
             return
   
            }
@@ -41,7 +41,6 @@ async function getNotification(){
 }
 getNotification()
 },[])
-console.log(info)
 
  
 
@@ -54,7 +53,7 @@ console.log(info)
                 <div className="container mt-5 pb-2">
                     
 
-                <div class="input-group ">
+              { ((jwt.getDetails()).as == "admin") && <div class="input-group ">
                 <div class="input-group-prepend">
     <span class="input-group-text" id=""><img src={bell} alt="" /></span>
   </div>
@@ -62,7 +61,7 @@ console.log(info)
   <input type="text" class="form-control" placeholder="Title"/>
   <textarea className="form-control w-50" placeholder="Message" name="" id="" cols="50" rows="1"/>
   <button type="submit d-inline" className="btn lightGreen  whitetext">Send</button>
-</div>
+</div>}
 {
   info.map((v)=>{ return  <NotifyBox title={v.title}  date={v.Date} desc={v.description}  /> })
 }

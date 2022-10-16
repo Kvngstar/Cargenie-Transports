@@ -25,7 +25,7 @@ const Menuhalf = () => {
                    <span>My Directory</span>
             
             </NavLink>}
-          { ((jwt.getDetails()).as == "carowner")  && <NavLink to="/carowners/carown">
+          { ((jwt.getDetails()).as == "carowner")  && <NavLink to="owner">
                    <span>Car-Owner Directory</span>
             
             </NavLink>}
@@ -39,7 +39,7 @@ const Menuhalf = () => {
             </div>
             <div className='d-flex align-items-center'>
                 <img src={users} alt="" /> <span>
-                    <NavLink to="/carowners/notification">
+                    <NavLink to="notification">
                     Notification </NavLink> </span>
             </div>
         
