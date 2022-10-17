@@ -69,12 +69,18 @@ const CarBooking = () => {
                     "
               className="d-flexx"
             >
-              <label htmlFor="">Sort By Date</label>
-              <select className="select-group input mt-2 mx-2 p-2" type="text">
+               <div class="input-group mt-4">
+          <div className="input-group-prepend">
+            <div className="input-group-text bg-transparent">Sort By Date</div>
+          </div>
+
+              
+              <select className="custom-select input mt-2 mx-2 p-2" type="text">
                 <option value="">Date</option>
                 <option value="">Name</option>
                 <option value="">Subject</option>
               </select>
+              </div>
             </form>
           </div>
 

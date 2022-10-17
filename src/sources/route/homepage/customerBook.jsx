@@ -2,12 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Travelinput from '../../../component/travelinput';
 import jwt from "../../../services/userService"
 import auth from "../../../services/authService"
-import $ from 'jquery'
 
 const CustomerBook = () => {
 
-    
-    
     const [user,setUser] = useState(jwt.getDetails())
     const [error,setError] = useState("")
     const [userArray,setUserArray] = useState([])
@@ -49,12 +46,10 @@ const CustomerBook = () => {
 
     },[])
     return ( 
-
-        <div className='px-2 mt-4'>
-        <h4 >DashBoard </h4>
-        <h6 className='pl-4 mt-3'>Welcome, {name} </h6>
-
-        <div className='h mx-auto mt-5'> 
+      <div className='px-2 mt-4'>
+      <h4 >DashBoard </h4>
+      <h6 className='pl-4 mt-3'>Welcome, {name} </h6>
+      <div className='h mx-auto mt-5'> 
             <h4 className='text-center mb-3'>Book your Ticket Here</h4>
             <Travelinput/>
 

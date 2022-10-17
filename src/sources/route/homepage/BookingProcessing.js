@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import "./homepage.css";
 const BookingProccessing = () => {
-  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
   const [array, setArray] = useState([]);
+  const [length, setLength] = useState("");
+  const [i,setI]= useState([1,2,3,4,5])
+  const [slicedArray,setSlicedArray]= useState([])
   useEffect(() => {
     async function getNotification() {
       try {
-        const response = await auth.get(
+        const response = await auth.get( 
           "http://localhost:3001/admin/processingunit",
           {
             "Content-type": "application/json; charset=UTF-8",
@@ -18,27 +22,91 @@ const BookingProccessing = () => {
 
         if (response.status >= 200 && response.status < 400) {
           setArray(response.data);
-          console.log(response.data);
+         
 
-          return;
+        
         } else {
           console.log(response);
         }
       } catch (err) {
         console.log(err);
-        setError(err.response.data);
+        setInfo(err.response.data);
       }
+      setLength(document.getElementById("tb").children.length)
     }
+     
 
     getNotification();
-
-   
   }, []);
-  function processState(event){
-    console.log(event.target.parentElement.parentElement.children)
-    
+  async function processState(event) {
+    const _id = event.target.parentElement.parentElement.children[0].innerHTML;
+    const bookingId =
+      event.target.parentElement.parentElement.children[2].innerHTML;
+  const data = { _id: _id, bookingId: bookingId };
 
-   }
+    try {
+      const response = await auth.post(
+        "http://localhost:3001/admin/process",
+        data,
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        setInfo(response.data);
+
+        return;
+      } else {
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+      setInfo(err.response.data);
+    }
+
+  
+  }
+  function Paginate(event){
+    const pageNum = event.target.innerHTML || 0;
+        
+
+    var startNum = (pageNum - 1) * 1
+
+   var sliced = array.slice(startNum,length);
+   var spliced = sliced.splice(0, 1)
+   setSlicedArray(spliced)
+   console.log(slicedArray)
+      }
+
+  async function failState(event) {
+    const _id = event.target.parentElement.parentElement.children[0].innerHTML;
+    const bookingId =
+      event.target.parentElement.parentElement.children[2].innerHTML;
+    const data ={ _id: _id, bookingId: bookingId };
+
+    try {
+      const response = await auth.post(
+        "http://localhost:3001/admin/fail",
+        data,
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        setInfo(response.data);
+
+        return;
+      } else {
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+      setInfo(err.response.data);
+    }
+  }
+
 
   return (
     <div className="px-2 mt-4">
@@ -46,34 +114,14 @@ const BookingProccessing = () => {
       <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
 
       <div className="my-5">
-        <h6 className="pl-3">Process Orders</h6>
+        <h6 className="pl-3">Process Orders ({length})</h6>
 
         <div className="table-control mt-3 ">
+          {info && <div>{info}</div>}
           <table className="table table-sm ">
             <thead>
               <tr className="table-success">
-                {/* bookDate
-: 
-"10/6/2022, 12:03:04 AM"
-bookingId
-: 
-"fw5oe"
-carType
-: 
-"bus"
-pickupDate
-: 
-"20/22/22"
-pickupLocation
-: 
-"onitsha"
-price    
-:      
-
-"4000"
-status
-: 
-"completed" */}
+                <th>ID</th>
                 <th>Time</th>
                 <th>Booking Id</th>
                 <th>car Type</th>
@@ -84,11 +132,12 @@ status
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="tb">
               {array.map((v) => {
                 return v.Travel.map((w) => {
-                  return (
+                  return ( 
                     <tr>
+                      <td>{v._id}</td>
                       <td>{w.bookDate}</td> <td>{w.bookingId}</td>{" "}
                       <td>{w.carType}</td> <td>{w.pickupDate}</td>
                       <td>{w.pickupLocation}</td>
@@ -96,10 +145,17 @@ status
                         <span className="btn btn-sm rounded">{w.status}</span>
                       </td>{" "}
                       <td>
-                        <span onClick={processState} className="btn-success btn-sm">process</span>
+                        <span
+                          onClick={processState}
+                          className="btn-success btn-sm"
+                        >
+                          process
+                        </span>
                       </td>
                       <td>
-                        <span onClick={processState} className="btn-danger btn-sm">cancel</span>
+                        <span onClick={failState} className="btn-danger btn-sm">
+                          cancel
+                        </span>
                       </td>
                     </tr>
                   );
@@ -108,6 +164,16 @@ status
             </tbody>
           </table>
         </div>
+        <nav aria-label="...">
+  <ul class="pagination pagination-sm">{
+    i.map((v)=>{
+    return  <li class="page-item" onClick={Paginate}><NavLink >{v}</NavLink></li>
+    })
+  }
+   
+    
+  </ul>
+</nav>
       </div>
     </div>
   );
