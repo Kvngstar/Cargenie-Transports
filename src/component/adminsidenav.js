@@ -22,20 +22,20 @@ const AdminMenuhalf = () => {
                   <span><Link to="/admin/carbooking" >Rental transaction</Link></span>
             </div>
             <div className='d-flex  align-items-center'>
-                <img src={calendar} alt="" /> <span><Link to="/admin/carlisting" >Car Listing</Link></span>
+                <img src={calendar} alt="" /> <span><Link to="carlisting" >Car Listing</Link></span>
             </div>
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span><Link to="/admin/notification" >Notification</Link> </span> 
+                <img src={users} alt="" /> <span><Link to="notification" >Notification</Link> </span> 
             </div>
 
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span><Link to="/admin/carowner">Car Owners</Link></span> 
+                <img src={users} alt="" /> <span><Link to="carowner">Car Owners</Link></span> 
             </div>
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span><Link to="/admin/users" >Users</Link></span> 
+                <img src={users} alt="" /> <span><Link to="users" >Users</Link></span> 
             </div>
             <div className='d-flex align-items-center'>
-                <img src={users} alt="" /> <span><Link to="/admin/processing">Processing Unit</Link></span> 
+                <img src={users} alt="" /> <span><Link to="processing">Processing Unit</Link></span> 
             </div>
         
        

@@ -1,114 +1,165 @@
 import React, { useState, useEffect } from "react";
-import auth from "../../../services/authService"
-import jwt from "../../../services/userService"
+import auth from "../../../services/authService";
+import jwt from "../../../services/userService";
 import "./homepage.css";
 
-
 const CarBooking = () => {
+  const [user, setUser] = useState(jwt.getDetails());
+  const [error, setError] = useState("");
+  const [newArray, setArray] = useState([]);
+  const [count, setCount] = useState("");
 
-  const [user,setUser] = useState(jwt.getDetails())
-    const [error,setError] = useState("")
-    const [array,setArray] = useState([])
-    const [count,setCount] = useState("")
+  const [length, setLength] = useState([]);
+  const [slicedArray, setSlicedArray] = useState([]);
+  const [activePage,setActivePage]= useState(1)
+  const [OrderState,setOrderState] = useState({
+    processing: 0,
+    completed: 0,
+    failed: 0,
+  })
+  function Paginate(event) {
+    const pageNum = event.target.innerHTML;
 
-    useEffect(()=>{
-   async function GetUserDetail(){
-
-
-    try{
-
-      const   response = await auth.get("http://localhost:3001/admin/travelview", {
-            "Content-type": "application/json; charset=UTF-8"
-          })  
-         
-         if(response.status >= 200 && response.status < 400){
-           setArray(response.data)
-           console.log(document.getElementById("count").children.length)
-           setCount(document.getElementById("count").children.length)
-           return
-
-         }
-         else{
-             console.log(response)
-         }
-       
-        
-    }
-    
-    catch(err){
-        console.log(err)
-        setError(err.response.data)
+    length.forEach((v)=>{ if(v == pageNum){
       
-    }
-   
-    setCount(document.getElementById("count").children.length)
-           
-    
-     
-    }
-    GetUserDetail()
+      setActivePage(v)
+ 
+ } 
+ } )
+    let startNum = (pageNum - 1) * 10;
 
-    },[])
+    setSlicedArray(newArray.slice(startNum, newArray.length).splice(0, 10));
+  }
+  useEffect(() => {
+
+    async function GetUserDetail() {
+      try {
+        const response = await auth.get(
+          "http://localhost:3001/admin/travelview",
+          {
+            "Content-type": "application/json; charset=UTF-8",
+          }
+        );
+
+        if (response.status >= 200 && response.status < 400) {
+          setArray(response.data[0]);
+          setCount(response.data[1]);
+          setSlicedArray(() => {
+            return response.data[0].slice(0, response.data[0].length).splice(0, 10);
+          });
+         
+
+          setLength(() => {
+            return [
+              ...Array(Math.ceil(response.data[0].length / 10) + 1).keys(),
+            ].slice(1);
+          });
+          let completed = 0
+          let failed = 0
+          let processing = 0
+          for( let i = 0; i < response.data[0].length; i++){
+          const readData = ((response.data[0])[i])[2]
+         
+          switch (readData) {
+            case "processing":
+              processing++
+                
+              break;
+          
+            case "completed":
+              completed++
+
+              break;
+          
+            case "failed":
+              failed++
+
+              break;
+          
+            default:
+              break;
+          }
+          }  
+          console.log(processing,completed,failed)
+          setOrderState(()=>{ return { processing: processing,failed:failed,completed:completed}})
+
+          return;
+        } else {
+          console.log(response);
+        }
+      } catch (err) {
+        console.log(err); 
+        setError(err.response.data);
+      }
+    }
+    GetUserDetail();
+      }
+  , []); 
+  function handleOnclick(event){
+Paginate(event)
+
+  }
   return (
     <>
       <div className="px-2 mt-4">
-        <h4>Admin DashBoard</h4>
-        <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
+        <h4>Admin</h4>
+        <h6 className="pl-4 mt-3">Welcome, {jwt.getDetails().firstName}</h6>
 
         <div className="my-5">
           <h6 className="pl-3">Booking Directory {count}</h6>
           <div className="pl-3">
-            <div>Completed - 3</div>
-            <div>failed - 5</div>
-            <div>Processing - 1</div>
+            <div>Completed - {OrderState.completed}</div>
+            <div>failed - {OrderState.failed}</div>
+            <div>Processing - {OrderState.processing}</div>
           </div>
 
-          <div className="d-flexxx">
-            <form
-              action="
-                    "
-              className="d-flexx"
-            >
-               <div class="input-group mt-4">
-          <div className="input-group-prepend">
-            <div className="input-group-text bg-transparent">Sort By Date</div>
-          </div>
+          
 
-              
-              <select className="custom-select input mt-2 mx-2 p-2" type="text">
-                <option value="">Date</option>
-                <option value="">Name</option>
-                <option value="">Subject</option>
-              </select>
-              </div>
-            </form>
-          </div>
-
-          <div className="table-control mt-3 ">
-            <table className="table table-sm ">
+          <div className="table-control mt-5 ">
+            <table className="table  table-hover table-bordered">
               <thead>
-                <tr className="table-success">
+                <tr className="">
                   <th>BookDate</th>
                   <th>Booking Id</th>
                   <th>status</th>
-                 
                 </tr>
               </thead>
 
-              <tbody id="count">
-           { array.map((v)=>{
-            return  v.Travel.map((w)=>{ 
-              return <tr> <td>{w.bookDate}</td> <td>{w.bookingId}</td> <td>
-   <span className="btn btn-sm btn-success rounded">
-   {w.status}
-   </span>
- </td>
-
-</tr>})
-           })   } 
+              <tbody>
+                {slicedArray.map((w) => {
+                  return (
+                    <tr>
+                      {" "}
+                      <td>{w[0]}</td> <td>{w[1]}</td>{" "}
+                      <td >
+                      { w[2] == "failed" &&  <span className="btn-sm btn-danger">
+                          {w[2]}
+                        </span>}
+                      { w[2] == "processing" &&  <span className="btn-sm btn-warning">
+                          {w[2]}
+                        </span>}
+                      { w[2] == "completed" &&  <span className="btn-sm btn-success">
+                          {w[2]}
+                        </span>}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
+          <nav aria-label="...">
+            <ul class="pagination pagination-sm mt-3">
+              {length.map((v) => {
+                return (
+                  <li class="page-item"  onClick={handleOnclick}>
+                    <a class="page-link">{v}</a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          <div className="text-center bg-light">{activePage}</div>
         </div>
       </div>
     </>

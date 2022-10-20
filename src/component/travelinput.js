@@ -54,7 +54,7 @@ const Travelinput = () => {
             <div className="input-group input1 flex-nowrap">
               <div className="input-group-prepend">
                 <span
-                  className="input-group-text bg-transparent"
+                  className="input-group-text bg-light"
                   id="addon-wrapping"
                 >
                   <img src={location} />
@@ -77,9 +77,9 @@ const Travelinput = () => {
           <div>to</div>
           <div>
             <div className="input-group input1 flex-nowrap">
-              <div className="input-group-prepend ">
+              <div className="input-group-prepend bg-transparent ">
                 <span
-                  className="input-group-text bg-transparent"
+                  className="input-group-text bg-light "
                   id="addon-wrapping"
                 >
                   <img src={location} />{" "}
@@ -128,12 +128,10 @@ const Travelinput = () => {
         </div>
       </div>
       <div className="input-group d-flex flex-wrap justify-content-center align-items-center">
-        <div className="input-group-prepend w-50">
+        <div className="input-group-prepend w-50 bg-transparent">
           <input
-            className="mt-2 p-2 form-control bg-transparent "
+            className="mt-2 p-2 form-control"
             name=""
-            value={data.price}
-            onChange={HandleInput}
             type="text"
             placeholder=" Price: N4000"
             disabled

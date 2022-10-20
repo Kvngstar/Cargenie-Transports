@@ -8,7 +8,10 @@
   padding: 0;
   margin: 0;
 }
-
+ 
+/* body {
+    overflow-x :hidden;
+} */
 a{
   color: black !important;
 }  
@@ -26,7 +29,8 @@ a:hover{
   display: flex !important;
   justify-content: end;
   align-items: center;
-  background-color: #89c293;
+  background-color: #213f26;
+  border: none;
 }
 .wrapper {
   background-color: var(--primary-color);
@@ -53,7 +57,28 @@ a:hover{
   width: auto;
   background-color: transparent;
 }
+.hamburgerdiv1{ 
+  transform: rotate( 40deg) translate(8.5px,0px) ;
+  opacity: 1;
 
+  
+}
+.hamburgerdiv2{ 
+  opacity: 0;
+}
+.hamburgerdiv3{ 
+  transform: rotate(-40deg) translate(8.5px,0px);
+  opacity: 1;
+  
+
+}
+.div1,.div2,.div3{
+  border: 1px solid rgb(255, 254, 254);
+  width: 32px;
+  margin-bottom: 4px;
+  background-color: rgb(255, 255, 255);
+  transition: all 0.5s;
+}
 .second-section-child {
   background-color: #f2f2f2;
 }
@@ -152,6 +177,11 @@ a:hover{
   background-color: #ffffff;
   display: flex;
   width: 100%;
+  /* height: 100vh; */
+}
+table{
+  height: 500px;
+
 }
 .secondp > div:first-of-type {
   flex-grow: 1;
@@ -199,10 +229,23 @@ a:hover{
     
   }
   .notifybox::-webkit-scrollbar-thumb{
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     height: 4px;
   }
-
+  .table-control-1::-webkit-scrollbar{
+    width: 1px;
+    background-color:transparent;
+  }
+  /*   
+  .table-control-1::-webkit-scrollbar-thumb{
+    
+    width: 2px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px  3px 5px #f8f6f689;
+  }
+  .table-control-1::-webkit-scrollbar-track{
+background-color: rgb(214, 214, 214);
+  } */
 
   .form{
     height: 100vh;
@@ -245,8 +288,16 @@ a:hover{
     /* color:#f2f2f2; */
     font-family:cursive;
 } 
+li{
+  list-style:none;
+}
+
 
 @media screen and (max-width: 1100px) {
+  .hideclick{
+    display: none;
+  
+  }
   .tohideclass {
     display: none !important;
   }
@@ -261,6 +312,7 @@ a:hover{
   }
   .footerr {
     font: size 12px !important;
+    
   }
   .h {
     width: 600px;
@@ -275,6 +327,9 @@ a:hover{
 }
 .secondp {
   position: relative;
+}
+.fit-size{
+  height: 500px
 }
 @media screen and (max-width: 800px) {
   h2,
@@ -298,6 +353,9 @@ a:hover{
     width: 700px !important;
   }
 }
+.fit-size{
+  height: auto;
+}
 @media screen and (max-width: 600px) {
   h2,
   h3,
@@ -317,6 +375,7 @@ a:hover{
     overflow-x: scroll;
     margin: auto;
   }
+  
   .table-control-1 table {
     width: 700px !important;
   }
@@ -328,7 +387,7 @@ a:hover{
 
 @media screen and (max-width: 390px) {
   .l {
-    min-width: 200px;
+    min-width: 300px;
   }
   .table-control-1 {
     width: 300px !important;

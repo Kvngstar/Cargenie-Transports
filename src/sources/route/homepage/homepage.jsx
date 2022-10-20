@@ -4,23 +4,23 @@ import { useState, useEffect } from 'react';
 
 import "./homepage.css";
 import Footer from "../../../component/footer";
-import Subscribe from "../../../component/subscribe";
-import Whychoose from "../../../component/whychoose";
-import Travelinput from "../../../component/travelinput";
 import Nav__ from "../../../component/nav";
-
-
-import Logo from "../../../component/logo";
 import { Link, Outlet } from "react-router-dom";
 
 
 export default function Hompage() {
     useEffect(()=>{
-
-      $("button.hidd").on("click", function (){
-       
-     $("div.hideclick").slideToggle(500);
-    })    
+ $(
+  function(){
+    
+    $("div.hidd").on("click", function (){
+     $("div.div1").toggleClass("hamburgerdiv1")
+     $("div.div2").toggleClass("hamburgerdiv2")
+     $("div.div3").toggleClass("hamburgerdiv3")
+   $("div.hideclick").slideToggle(500);
+  })    
+  }
+ )
     },[     ])  
    
   

@@ -47,8 +47,8 @@ const CustomerBook = () => {
     },[])
     return ( 
       <div className='px-2 mt-4'>
-      <h4 >DashBoard </h4>
-      <h6 className='pl-4 mt-3'>Welcome, {name} </h6>
+      <h4 >Admin</h4>
+      <h6 className='pl-4 mt-3'>Welcome,  {jwt.getDetails().firstName}</h6>
       <div className='h mx-auto mt-5'> 
             <h4 className='text-center mb-3'>Book your Ticket Here</h4>
             <Travelinput/>
@@ -59,7 +59,7 @@ const CustomerBook = () => {
         <h4>Recent Car Bookings</h4>
         <div className='table-control '>
 
-        <table className='table table-sm '>
+        <table className='table table-hover table-bordered'>
            
            <thead>
             <tr className='table-success'>
@@ -80,7 +80,7 @@ const CustomerBook = () => {
                <td> {v.carType}</td>
                <td>{ v.pickupDate}</td>
                <td>{ v.to}</td>  
-               <td>{ v.status}</td></tr>  } ) }
+               <td>{ v.status}</td></tr>  }  ) }
 
 
             </tbody>

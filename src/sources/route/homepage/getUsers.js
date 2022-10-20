@@ -1,3 +1,4 @@
+import { event } from "jquery";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import auth from "../../../services/authService"
@@ -8,11 +9,22 @@ const GetUsers = () => {
 
   const [user,setUser] = useState(jwt.getDetails())
   const [error,setError] = useState("")
-  const [array,setArray] = useState([])
-  const [count,setCount] = useState("")
-  const [length, setLength] = useState("");
-  const [i,setI]= useState([1,2,3,4,5,6,7,8])
+  const [newArray,setArray] = useState([])
+  const [count,setCount] = useState([])
+  const [length, setLength] = useState([]);
   const [slicedArray,setSlicedArray]= useState([])
+
+
+
+
+  function Paginate(event){
+    const pageNum = event.target.innerHTML
+     let startNum = (pageNum - 1) * 10
+
+    setSlicedArray((newArray.slice(startNum, newArray.length)).splice(0,10));
+      }
+      
+
   useEffect(()=>{
     async function GetUserDetail(){
  
@@ -23,10 +35,13 @@ const GetUsers = () => {
              "Content-type": "application/json; charset=UTF-8"
            })  
           
-          if(response.status >= 200 && response.status < 400){
-            setArray(response.data)
-            console.log(response.data)
-            
+           if(response.status >= 200 && response.status < 400){
+             setArray(response.data)
+             setSlicedArray( () => {return (response.data.slice(0, response.data.length)).splice(0,10) }) 
+           
+
+             setLength(()=>{ return [...Array( Math.ceil(response.data.length / 10) + 1).keys()].slice(1)})
+            return
            
  
           }
@@ -45,41 +60,37 @@ const GetUsers = () => {
     
 
             
-     Paginate()
-      
-     }
-     GetUserDetail()
- 
-     },[])
-     function Paginate(event){
-      let pageNum 
-       (!event || event == undefined) ? pageNum = 1 : pageNum =  event.target.innerHTML;
-          
+     
    
-      var startNum = (pageNum - 1) * 10
-  
-     var sliced = array.slice(startNum,array.length);
-     var spliced = sliced.splice(0, 10)
-     setSlicedArray(spliced)
-     console.log(slicedArray)
-        }
-       
+    }
 
+    GetUserDetail()
+     },[])
+
+
+
+
+   
+   
+
+       
+       
+ 
 
   return (
 
-   
+    
             <div className="px-2 mt-4">
-              <h4>Admin DashBoard</h4>
-              <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
-
+              <h4>Admin</h4>
+              <h6 className="pl-4 mt-3">Welcome,  {jwt.getDetails().firstName}</h6> 
+ 
               <div className="my-5">
-                <h6 className="pl-3">Users in DataBase ({array.length})</h6>
+                <h6 className="pl-3">Users in DataBase ({newArray.length})</h6>
 
-                <div className="table-control mt-3 ">
-                  <table className="table table-sm ">
+                <div className="table-control-1 mt-5 ">
+                  <table className="table table-hover table-bordered ">
                     <thead>
-                      <tr className="table-success">
+                      <tr className="">
                         <th>Fullname</th>
                         <th>Email</th>
                         <th>contact</th>
@@ -90,7 +101,7 @@ const GetUsers = () => {
                      { slicedArray.map((v
                      )=>{
                         return <tr>
-                        <td>{v.firstName} {v.lastName}</td>
+                        <td>{v.firstName}</td>
                         <td>{v.email}</td>
                         <td>{v.phoneNum}</td>
                         <td>{v.date}</td>
@@ -102,8 +113,8 @@ const GetUsers = () => {
                   </table>
                 </div>
                 <nav aria-label="...">
-  <ul class="pagination pagination-sm">{
-    i.map((v)=>{
+  <ul class="pagination pagination-sm mt-3">{
+    length.map((v)=>{
     return  <li class="page-item" onClick={Paginate}><a class="page-link">{v}</a></li>
     })
   }

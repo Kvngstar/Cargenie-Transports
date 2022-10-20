@@ -10,7 +10,12 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const CarListing = () => {
-  const [carCal, setCarCal] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    newitem: "",
+  });
+
+  const [info, setInfo] = useState("");
   const [error, setError] = useState("");
   const [car, setCar] = useState({});
   var [calcateTotal, setCalculateTotal] = useState("");
@@ -48,6 +53,43 @@ const CarListing = () => {
     getCarData();
   }, []);
 
+  function handleState(event) {
+    const { name, value } = event.target;
+
+    setFormData((v) => {
+      return { ...v, [name]: value };
+    });
+  }
+  async function SendData(event) {
+    event.preventDefault();
+    try {
+      const response = await auth.post(
+        "http://localhost:3001/admin/updatecar",
+        formData,
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        setInfo(response.data);
+        window.location.reload()
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        console.log(error);
+        return setInfo(error.response.data);
+      }
+      console.log(error, "outside");
+      return setInfo(error.message);
+    }
+  }
+
+
   const options = {
     animationEnabled: true,
     title: {
@@ -68,40 +110,51 @@ const CarListing = () => {
 
   return (
     <div className="px-2 mt-4">
-      <h4>Admin DashBoard</h4>
-      <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
+      <h4>Admin</h4>
+      <h6 className="pl-4 mt-3">Welcome, {jwt.getDetails().firstName}</h6>
 
       <div className="mt-5">
         <h4 className="pl-3">Cars Available ({calcateTotal})</h4>
-        <div style={{ height: "auto", width: "100%" }} className="d-flexx">
+        <div style={{  width: "100%" }} className="d-flexx fit-size">
           <div style={{ width: "100%" }} className="d-flexxx py-2">
             <div
               style={{ width: "300px" }}
               className=" m d-flex mx-2 flex-column mt-5"
             >
+        {  info &&    <div className="my-2 py-2">{info}</div>}
               {jwt.getDetails().as === "admin" && (
                 <div className="my-3 py-2">
                   <form>
                     <div class="input-group ">
                       <div className="input-group-prepend w-25 px-1">
                         <input
-                          type="number"
+                          type=""
                           className="form-control"
-                          name=""
+                          name="newitem"
+                          value={formData.newitem}
+                          onChange={handleState}
                           id=""
                           min="0"
                           placeholder="0"
                         />
                       </div>
-                      <select className="custom-select" name="" id="">
-                        <option selected>choose</option>
-                        <option value="Bus">Bus</option>
-                        <option value="Sienna">Sienna</option>
-                        <option value="Exquisite">Exquisite</option>
+                      <select
+                        className="custom-select"
+                        onChange={handleState}
+                        name="name"
+                        value={formData.name}
+                        id=""
+                      >
+                        <option>choose</option>
+                        <option value="bus">Bus</option>
+                        <option value="sienna">Sienna</option>
+                        <option value="exquisite">Exquisite</option>
                         <option value="truck">Truck</option>
                       </select>
                       <div className="input-group-append">
-                        <button className="btn btn-success">Update</button>
+                        <button onClick={SendData} className="btn btn-success">
+                          update
+                        </button>
                       </div>
                     </div>
                   </form>
@@ -131,6 +184,7 @@ const CarListing = () => {
             {!car && <div>{error}</div>}
           </div>
         </div>
+           
       </div>
     </div>
   );

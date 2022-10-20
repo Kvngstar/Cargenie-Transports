@@ -1,7 +1,7 @@
 import Logo from './logo';
 import { Link } from 'react-router-dom';
 
-
+import jwt from '../services/userService'
 const Nav__ = () => {
     return ( 
         <div className="l greenerbackground d-flex justify-content-between align-items-center flex-direction-row py-3 mb-3 px-2">
@@ -9,16 +9,17 @@ const Nav__ = () => {
         <Logo/>
         <div className='tohideclass'>
 
-        <Link to="login"> <button className='ml-3  btn btn-sm btn-light'>Login</button></Link>
-        <Link to="signup"><button className='ml-3  btn btn-sm btn-success'>Sign up</button></Link>
+        <Link to="login"> <span className='ml-3 whitetext '>Login</span></Link>
+        <Link to="signup"><span className='ml-3 whitetext '>Sign up</span></Link>
 
 </div>
           
           
          
             
-            <button className='ml-3 hidd btn btn-sm btn-info'>Menu</button>
-
+          
+          <div className="hamburger ml-3 hidd"><div className="div1"></div><div className="div2"></div><div className="div3"></div></div>
+    
            
            </div>
         

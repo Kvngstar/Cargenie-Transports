@@ -6,11 +6,29 @@ import jwt from "../../../services/userService";
 import "./homepage.css";
 const BookingProccessing = () => {
   const [info, setInfo] = useState("");
-  const [array, setArray] = useState([]);
-  const [length, setLength] = useState("");
-  const [i,setI]= useState([1,2,3,4,5])
+  const [newArray, setArray] = useState([]);
+  const [length, setLength] = useState([]);
+  const [count, setCount] = useState(0);
+  const  [read,setRead] = useState([])
   const [slicedArray,setSlicedArray]= useState([])
+  const [activePage,setActivePage]= useState(1)
+
+
+  function Paginate(event){
+    const pageNum = event.target.innerHTML
+     length.forEach((v)=>{ if(v == pageNum){
+      
+       setActivePage(v)
+  
+  } 
+  } )
+  let startNum = (pageNum - 1) * 10
+
+    setSlicedArray((newArray.slice(startNum, count)).splice(0,10));
+      }
+
   useEffect(() => {
+
     async function getNotification() {
       try {
         const response = await auth.get( 
@@ -21,7 +39,16 @@ const BookingProccessing = () => {
         );
 
         if (response.status >= 200 && response.status < 400) {
-          setArray(response.data);
+        
+          setArray(response.data[0]);
+          
+          setCount(response.data[1]);
+         
+          setSlicedArray( () => {return ( response.data[0].slice(0, response.data[0].length)).splice(0,10) }) 
+              
+           
+
+          setLength(()=>{ return [...Array( Math.ceil(response.data[0].length / 10) + 1).keys()].slice(1)})
          
 
         
@@ -32,12 +59,13 @@ const BookingProccessing = () => {
         console.log(err);
         setInfo(err.response.data);
       }
-      setLength(document.getElementById("tb").children.length)
+   
     }
      
 
     getNotification();
   }, []);
+
   async function processState(event) {
     const _id = event.target.parentElement.parentElement.children[0].innerHTML;
     const bookingId =
@@ -61,23 +89,12 @@ const BookingProccessing = () => {
         console.log(response);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err); 
       setInfo(err.response.data);
     }
 
   
   }
-  function Paginate(event){
-    const pageNum = event.target.innerHTML || 0;
-        
-
-    var startNum = (pageNum - 1) * 1
-
-   var sliced = array.slice(startNum,length);
-   var spliced = sliced.splice(0, 1)
-   setSlicedArray(spliced)
-   console.log(slicedArray)
-      }
 
   async function failState(event) {
     const _id = event.target.parentElement.parentElement.children[0].innerHTML;
@@ -97,6 +114,7 @@ const BookingProccessing = () => {
       if (response.status >= 200 && response.status < 400) {
         setInfo(response.data);
 
+
         return;
       } else {
         console.log(response);
@@ -108,20 +126,20 @@ const BookingProccessing = () => {
   }
 
 
-  return (
+  return ( 
     <div className="px-2 mt-4">
-      <h4>Admin DashBoard</h4>
+      <h4>Admin</h4>
       <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
 
       <div className="my-5">
-        <h6 className="pl-3">Process Orders ({length})</h6>
+        <h6 className="pl-3">Process Orders ({count})</h6>
 
-        <div className="table-control mt-3 ">
+        <div className="table-control-1 mt-3 ">
           {info && <div>{info}</div>}
-          <table className="table table-sm ">
+          <table className="table table-hover table-bordered">
             <thead>
-              <tr className="table-success">
-                <th>ID</th>
+              <tr className="">
+               
                 <th>Time</th>
                 <th>Booking Id</th>
                 <th>car Type</th>
@@ -133,16 +151,16 @@ const BookingProccessing = () => {
               </tr>
             </thead>
             <tbody id="tb">
-              {array.map((v) => {
-                return v.Travel.map((w) => {
+              {
+                 slicedArray.map((w) => {
                   return ( 
                     <tr>
-                      <td>{v._id}</td>
-                      <td>{w.bookDate}</td> <td>{w.bookingId}</td>{" "}
-                      <td>{w.carType}</td> <td>{w.pickupDate}</td>
-                      <td>{w.pickupLocation}</td>
-                      <td>
-                        <span className="btn btn-sm rounded">{w.status}</span>
+                      <td className="d-none">{w[0]}</td>
+                      <td>{w[1]}</td> <td>{w[2]}</td>{" "}
+                      <td>{w[3]}</td> <td>{w[4]}</td>
+                      <td>{w[5]}</td>
+                      <td> 
+                        <span className="btn btn-sm rounded">{w[6]}</span>
                       </td>{" "}
                       <td>
                         <span
@@ -158,22 +176,22 @@ const BookingProccessing = () => {
                         </span>
                       </td>
                     </tr>
-                  );
-                });
-              })}
+                  ); 
+                })}
             </tbody>
           </table>
         </div>
-        <nav aria-label="...">
+        <nav aria-label="..." className="mt-3">
   <ul class="pagination pagination-sm">{
-    i.map((v)=>{
-    return  <li class="page-item" onClick={Paginate}><NavLink >{v}</NavLink></li>
+    length.map((v)=>{
+    return  <li class="page-item" onClick={Paginate}><a class="page-link">{v}</a></li>
     })
   }
    
     
   </ul>
 </nav>
+<div className="text-center bg-light">{activePage}</div>
       </div>
     </div>
   );

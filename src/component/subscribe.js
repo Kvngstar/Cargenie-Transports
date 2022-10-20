@@ -13,14 +13,14 @@ const Subscribe = () => {
       <div className="p-3 w-100 mx-auto f greenerbackground">
         <div className="input-group">
           <div className="input-group-prepend">
-            <span className="input-group-text">
+            <span className="input-group-text bg-transparent">
               <img src={message} alt="" />
             </span>
           </div>
           <input
             type="text"
             className="form-control"
-            placeholder=""
+            placeholder=""  
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
           />
