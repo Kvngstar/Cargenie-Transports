@@ -47,25 +47,25 @@ const CustomerBook = () => {
     },[])
     return ( 
       <div className='px-2 mt-4'>
-      <h4 >Admin</h4>
-      <h6 className='pl-4 mt-3'>Welcome,  {jwt.getDetails().firstName}</h6>
+      <h5 className="poppinsmeduim" >Admin</h5>
+      <p className='pl-4 mt-3 ralewaysemibold'>Welcome,  {jwt.getDetails().firstName}</p>
       <div className='h mx-auto mt-5'> 
-            <h4 className='text-center mb-3'>Book your Ticket Here</h4>
+            <h6 className='text-center mb-3'>Book your Ticket Here</h6>
             <Travelinput/>
 
         </div>
 
-    <div className='my-5'>
-        <h4>Recent Car Bookings</h4>
-        <div className='table-control '>
+    <div className='my-5 ralewaymeduim'>
+        <h6 className="pl-3 poppinsmeduim">Recent Car Bookings</h6>
+        <div className='table-control-1 '>
 
         <table className='table table-hover table-bordered'>
            
            <thead>
-            <tr className='table-success'>
+            <tr >
             <th>Booking Date</th>
             <th>BookingId</th>
-            <th>cartype</th>
+            <th>cartype</th> 
             <th>Pickup Date</th>
             <th>to</th>
             <th>status</th>
@@ -92,7 +92,7 @@ const CustomerBook = () => {
 
         
         </div>
-        </div>
+         </div>
         
         
        

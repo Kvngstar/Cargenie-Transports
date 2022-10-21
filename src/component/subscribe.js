@@ -3,16 +3,16 @@ import message from "../sources/assets/message.png"
 const Subscribe = () => {
   return (
     <div className="fourth-section container mb-5">
-      <div className="mt-5 whitetext d-flex justify-content-center align-items-center flex-column text-center">
-        <h3>Subscribe to Our NewsLetter</h3>
+      <div className="mt-5 whitetext d-flex justify-content-center align-items-center flex-column text-center ralewaymeduim">
+        <h4 className="poppinsmeduim">Subscribe to Our NewsLetter</h4>
         <p>
           Subcribe to our Newsletter to get the latest update and Promtional
           offer
         </p>
       </div>
       <div className="p-3 w-100 mx-auto f greenerbackground">
-        <div className="input-group">
-          <div className="input-group-prepend">
+        <div className="input-group ">
+          <div className="input-group-prepend outline-light">
             <span className="input-group-text bg-transparent">
               <img src={message} alt="" />
             </span>
@@ -26,7 +26,7 @@ const Subscribe = () => {
           />
           <div className="input-group-append">
             <button
-              className="btn btn-outline-secondary"
+              className="btn btn-outline-light"
               type="button"
               id="button-addon2"
             >
@@ -36,7 +36,8 @@ const Subscribe = () => {
         </div>
       </div>
 
-      <div className="whitetext mt-5 text-center">
+      <div className="whitetext mt-5 text-center ralewaymeduim">
+        <div className="mb-3">Follow Us On:</div>
         <p style={{marginBottom:"0"}}>
           Cargenie is popular in Nigeria for their quality service. <br /> We
           make a great rental experience by providing superior and satisfying

@@ -102,11 +102,11 @@ Paginate(event)
   return (
     <>
       <div className="px-2 mt-4">
-        <h4>Admin</h4>
-        <h6 className="pl-4 mt-3">Welcome, {jwt.getDetails().firstName}</h6>
+        <h5 className="poppinsmeduim ">Admin</h5>
+        <p className="pl-4 mt-3 ralewaysemibold greentext">Welcome, {jwt.getDetails().firstName}</p>
 
-        <div className="my-5">
-          <h6 className="pl-3">Booking Directory {count}</h6>
+        <div className="my-5 ralewaymeduim">
+          <h6 className="pl-3 poppinsmeduim">Booking Directory ( {count} )</h6>
           <div className="pl-3">
             <div>Completed - {OrderState.completed}</div>
             <div>failed - {OrderState.failed}</div>

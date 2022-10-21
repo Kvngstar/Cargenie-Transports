@@ -10,16 +10,16 @@ const HomeComponent = () => {
 
          
 <div className="body1 d-flex justify-content-between mt-3 align-items-center">
-  <div className="mx-auto">
+  <div className="mx-auto mt-5">
 
-  <div className="text-white mx-auto  b p-4">
-    <h2>
+  <div className="text-white mx-auto  b p-4 poppinsemibold">
+    <h2 className="text-center">
       FAST AND EASY WAY TO RENT YOUR CAR
     </h2>
 
     <div className="d-block d-flex justify-content-center mt-4 align-items-center d">
       <span className="lightGreen rounded  w-75">
-      <button className="btn btn-light w-100">
+      <button className="btn btn-light robotoregular  w-100">
         Rent Your Car
       </button>
       </span>
@@ -27,7 +27,7 @@ const HomeComponent = () => {
   </div>
 
 <div className="second-section x mt-5">
-  <h2 className="mb-3 text-center whitetext">OR <br /> <br /> Book a Ride </h2>
+  <h3 className="mb-3 poppinsemibold text-center whitetext">OR <br /> <br /> Book a Ride </h3>
 <Travelinput />
 </div>
 

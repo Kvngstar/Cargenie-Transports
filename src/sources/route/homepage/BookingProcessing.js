@@ -128,11 +128,11 @@ const BookingProccessing = () => {
 
   return ( 
     <div className="px-2 mt-4">
-      <h4>Admin</h4>
-      <h6 className="pl-4 mt-3">Welcome, Kingsley</h6>
+      <h5 className="poppinsmeduim">Admin</h5>
+      <p className="pl-4 mt-3 ralewaysemibold">Welcome, {jwt.getDetails().firstName}</p>
 
-      <div className="my-5">
-        <h6 className="pl-3">Process Orders ({count})</h6>
+      <div className="my-5 ralewaymeduim">
+        <h6 className="pl-3 poppinsmeduim">Process Orders ({count})</h6>
 
         <div className="table-control-1 mt-3 ">
           {info && <div>{info}</div>}

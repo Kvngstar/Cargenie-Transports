@@ -8,10 +8,6 @@
   padding: 0;
   margin: 0;
 }
- 
-/* body {
-    overflow-x :hidden;
-} */
 a{
   color: black !important;
 }  
@@ -79,8 +75,15 @@ a:hover{
   background-color: rgb(255, 255, 255);
   transition: all 0.5s;
 }
+
+.second-section{
+  max-width: 900px;
+}
 .second-section-child {
   background-color: #f2f2f2;
+  box-shadow: 0px 0px 3px 2px #f2f2f2ab;
+
+  
 }
 .lightback{
   background-color: #f2f2f2;
@@ -97,6 +100,9 @@ a:hover{
 }
 .greenerbackground {
   background-color: #213f26 !important;
+}
+.greentext{
+  color:  #213f26 !important;
 }
 .lightGreen {
   background-color: #89c293 !important;
@@ -139,7 +145,12 @@ a:hover{
 }
 .kk {
   display: none;
+  font-size: 14px; 
+ 
+
+  border-radius: 3px;
 }
+
 .notification img {
   height: 20px;
   width: auto;
@@ -194,6 +205,10 @@ table{
   height: 25px;
   margin-right: 10px;
 }
+.g{
+  font-size: 14px;
+  font-weight: 300;
+}
 .g > div {
   padding: 15px 13px;
 }
@@ -205,12 +220,7 @@ table{
   margin-bottom: px;
   padding: 0px 18px;
 }
-.j {
-}
-/* .footerr {
-  position: fixed;
-  bottom: 0px;
-} */
+  
 .notifybox{
   background-color: #f2f2f2;
    overflow-y: scroll;
@@ -291,7 +301,57 @@ background-color: rgb(214, 214, 214);
 li{
   list-style:none;
 }
+/* FONTSTYLES */
+.poppinsmeduim{
 
+font-family: 'poppins', sans-serif;
+font-weight: 500;
+}
+.poppinsemibold{
+
+font-family: 'poppins', sans-serif;
+font-weight: 600;
+}
+.ralewaymeduim{
+
+  font-family: 'raleway', sans-serif;
+  font-weight: 500;
+  }
+.ralewaysemibold{
+
+  font-family: 'raleway', sans-serif;
+  font-weight: 600;
+  }
+.robotobold{
+
+  font-family: 'roboto', sans-serif;
+  font-weight: 700;
+  }
+  .robotoregular{
+    font-family: 'roboto', sans-serif;
+    font-weight: 400;
+  }
+  @media screen and (max-width: 1300px) {
+
+  
+    .tohideclass {
+      display: none !important;
+    }
+  
+    .second-section{
+      max-width: 900px;
+    }
+  }
+  /* FONTSIZE */
+  .fontsize14{
+    font-size: 14px;
+  }
+  .fontsize12{
+    font-size: 12px;
+  }
+  .fontsize10{
+    font-size: 10px;
+  }
 
 @media screen and (max-width: 1100px) {
   .hideclick{
@@ -310,10 +370,6 @@ li{
   .g {
     flex-direction: column;
   }
-  .footerr {
-    font: size 12px !important;
-    
-  }
   .h {
     width: 600px;
   }
@@ -324,10 +380,9 @@ li{
     z-index: 1001;
     height: 100vh;
   }
+
 }
-.secondp {
-  position: relative;
-}
+
 .fit-size{
   height: 500px
 }
@@ -338,6 +393,7 @@ li{
   h5,
   h6 {
     font-size: 20px !important;
+    
   }
 
   .q {
@@ -352,6 +408,8 @@ li{
   .table-control-1 table {
     width: 700px !important;
   }
+ 
+ 
 }
 .fit-size{
   height: auto;

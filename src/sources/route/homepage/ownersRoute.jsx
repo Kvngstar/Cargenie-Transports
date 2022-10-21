@@ -54,10 +54,10 @@ const CarOwnerRoute = () => {
 
    
             <div className="px-2 mt-4">
-              <h4>Carowners</h4>
-              <h6 className="pl-4 mt-3">Welcome,  {jwt.getDetails().firstName}</h6>
+              <h5 className="poppinsmeduim">Carowners</h5>
+              <h6 className="pl-4 mt-3 ralewaysemibold">Welcome,  {jwt.getDetails().firstName}</h6>
 
-              <div className="my-5">
+              <div className="my-5 ralewaymeduim">
                 <h6 className="pl-3">Date:</h6>
 
                 <div className="table-control mt-3 ">

@@ -67,11 +67,11 @@ const CarOwners = () => {
 
   return (
     <div className="px-2 mt-4">
-      <h4>Admin</h4>
-      <h6 className="pl-4 mt-3">Welcome,  {jwt.getDetails().firstName}</h6>
+      <h5  className="poppinsmeduim">Admin</h5>
+      <h6 className="pl-4 mt-3 ralewaysemibold">Welcome,  {jwt.getDetails().firstName}</h6>
 
-      <div className="my-5">
-        <h6 className="pl-3 mb-5">Car owner`s List</h6>
+      <div className="my-5 ralewaymeduim">
+        <h6 className="pl-3 mb-5 poppinsmeduim">Car owner`s List</h6>
 {/* 
         <div className="d-flexxx">
           <form
@@ -98,10 +98,10 @@ const CarOwners = () => {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Fullnmae</th>
+                <th>Fullname</th>
                 <th>email</th>
-                <th>phone Number</th>
-                <th>car</th>
+                <th>phone no.</th>
+          
 
                 <th>Specification</th>
               </tr>
@@ -116,10 +116,10 @@ const CarOwners = () => {
                       {v.firstName} {v.lastName}
                     </td>
                     <td>{v.email}</td>
-                    <td colspan="2" className="">
+                    <td className="">
                       {v.phoneNum}
                     </td>
-                    <td>
+                    <td> 
                       {v.car.map((w) => {
                         return (
                           <ul>

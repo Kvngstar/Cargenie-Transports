@@ -17,15 +17,15 @@ import jwt from "./services/userService";
 import "./App.css";
 
 function App() {
-  const { id, as } = jwt.getDetails();
-console.log(as)
+   
+
   return (
     <div className="App">
       <Routes>
         <Route
           path="/customer"
           element={
-            as === "customer" ? (
+            jwt.getDetails().as === "customer" ? (
               <Customers />
             ) : (
               <Navigate replace to="/signup" />
@@ -41,7 +41,7 @@ console.log(as)
         <Route
           path="/carowners"
           element={
-            as === "carowner" ? (
+            jwt.getDetails().as === "carowner" ? (
               <Customers />
             ) : (
               <Navigate replace to="/signup" />
@@ -58,7 +58,7 @@ console.log(as)
         <Route
           path="/admin"
           element={
-             as === "admin" ? <Admin /> : <Navigate replace to="/signup" />
+            jwt.getDetails().as === "admin" ? <Admin /> : <Navigate replace to="/signup" />
           }
         >
           <Route index element={<CarBooking />} />
@@ -75,7 +75,7 @@ console.log(as)
           <Route
             path="login"
             element={
-              as == "customer" ? (
+              jwt.getDetails().as == "customer" ? (
                 <Navigate replace to="/customer" />
               ) : jwt.getDetails().as == "carowner" ? (
                 <Navigate replace to="/carowners" />

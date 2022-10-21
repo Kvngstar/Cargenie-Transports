@@ -67,7 +67,7 @@ const CreateAccount = () => {
 
               break;
             case "carowner":
-              window.location.replace("/carowner");
+              window.location.replace("/carowners");
               break;
             case "admin":
               window.location.replace("/admin");

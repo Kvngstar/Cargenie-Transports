@@ -117,9 +117,9 @@ async function SendData(event) {
 
      
             <div className="px-2 mt-4">
-                <h4>Notification Center (4)</h4>
-                <h6 className="pl-4 mt-3">Welcome,  {jwt.getDetails().firstName}</h6>
-                <div className="container mt-5 pb-2">
+                <h4 className="poppinsmeduim fontsize14">Notification Center ({count})</h4>
+                <h6 className="pl-4 mt-3 ralewaysemibold">Welcome,  {jwt.getDetails().firstName}</h6>
+                <div className="container mt-5 pb-2 ralewaymeduim">
                     <div>{info}</div>
 
               { ((jwt.getDetails()).as == "admin") && <div class="input-group ">
@@ -130,7 +130,7 @@ async function SendData(event) {
   <input type="text" name="title"  value={formData.title} onChange={handleState} class="form-control" placeholder="Title"/>
   <textarea className="form-control w-50"  value={formData.description}
                           onChange={handleState} placeholder="Message" name="description" id="" cols="50" rows="1"/>
-  <button type="submit d-inline" onClick={SendData} className="btn lightGreen ">Send</button>
+  <button type="submit d-inline" onClick={SendData} className="btn btn-success">Send</button>
 </div>}
 {
   slicedArray.map((v)=>{ return  <NotifyBox title={v.title}  date={v.Date} desc={v.description}  /> })

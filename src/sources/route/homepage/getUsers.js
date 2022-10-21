@@ -81,11 +81,11 @@ const GetUsers = () => {
 
     
             <div className="px-2 mt-4">
-              <h4>Admin</h4>
-              <h6 className="pl-4 mt-3">Welcome,  {jwt.getDetails().firstName}</h6> 
+              <h4  className="poppinsmeduim">Admin</h4>
+              <p className="pl-4 mt-3  ralewaysemibold">Welcome,  {jwt.getDetails().firstName}</p> 
  
-              <div className="my-5">
-                <h6 className="pl-3">Users in DataBase ({newArray.length})</h6>
+              <div className="my-5 ralewaymeduim">
+                <h6 className="pl-3 poppinsmeduim">Users in DataBase ({newArray.length})</h6>
 
                 <div className="table-control-1 mt-5 ">
                   <table className="table table-hover table-bordered ">
@@ -93,8 +93,8 @@ const GetUsers = () => {
                       <tr className="">
                         <th>Fullname</th>
                         <th>Email</th>
-                        <th>contact</th>
-                        <th>date</th>
+                        <th>Contact</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody>

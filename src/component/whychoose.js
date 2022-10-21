@@ -6,11 +6,11 @@ const Whychoose = () => {
     return ( 
         <div className="third-section container-fluid d-flex justify-content-center align-items-center my-auto pt-4 pb-5">
         <div>
-        <h2 className="text-center whitetext mb-5">Why Choose Cargenie?</h2>
-           <div className="d-flex flex-wrap  justify-content-around e whitetext">
+        <h2 className="text-center whitetext poppinsmeduim mb-5">Why Choose Cargenie?</h2>
+           <div className="d-flex flex-wrap  justify-content-around e whitetext ralewaymeduim">
                <div>
                    <img src={speed} alt="" />
-                   <div>Fast and Easy a Book</div>
+                   <div>Fast and Easy to Book</div>
                </div>
                <div>
                    <img src={manylocation} alt="" />

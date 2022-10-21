@@ -45,14 +45,14 @@ const Travelinput = () => {
     });
   }
 
-  return (
-    <form>
-      <div className="py-3 text-center px-2 second-section-child d-flex flex-wrap rounded mb-5 g">
+  return ( 
+    <form className="mt-5  form-guide ">
+      <div className="py-1 mx-1 text-center px-2 second-section-child d-flex flex-wrap  rounded mb-5 g ralewaysemibold"> 
         <div>
           <div>Pickup Location</div>
           <div>
             <div className="input-group input1 flex-nowrap">
-              <div className="input-group-prepend">
+              <div className="input-group-prepend"> 
                 <span
                   className="input-group-text bg-light"
                   id="addon-wrapping"
@@ -125,23 +125,27 @@ const Travelinput = () => {
               />
             </div>
           </div>
-        </div>
-      </div>
-      <div className="input-group d-flex flex-wrap justify-content-center align-items-center">
-        <div className="input-group-prepend w-50 bg-transparent">
+          </div>
+
+          
+        <div className="input-group-prepend  bg-transparent">
           <input
             className="mt-2 p-2 form-control"
             name=""
+            
             type="text"
+           
             placeholder=" Price: N4000"
             disabled
           />
         </div>
+        <div>
         <select
-          className="custom-select mt-2 p-2"
+          className="custom-select mt-2 p-2 form-control"
           name="cartype"
           value={data.cartype}
           onChange={HandleInput}
+        
           type="text"
           placeholder="Car type"
         >
@@ -150,15 +154,24 @@ const Travelinput = () => {
           <option value="sienna">Sienna</option>
           <option value="bus">18 Seaters Bus</option>
         </select>
-        <div className="input-group-append">
+
+        </div>
+       
+        <div className="">
           <input
             type="submit"
             onClick={handleButton}
-            className="btn btn-success mt-2"
+            className="btn btn-success mt-2 form-control"
             value="Book"
+           
           />
         </div>
+      
+       
+
+        
       </div>
+    
       {jwt.getjwt()
         ? message && <div className="mt-3 text-center">{message}</div>
         : message && (

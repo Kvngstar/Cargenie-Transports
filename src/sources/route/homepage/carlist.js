@@ -110,11 +110,11 @@ const CarListing = () => {
 
   return (
     <div className="px-2 mt-4">
-      <h4>Admin</h4>
-      <h6 className="pl-4 mt-3">Welcome, {jwt.getDetails().firstName}</h6>
+      <h5 className="poppinsmeduim">Admin</h5>
+      <h6 className="pl-4 mt-3 ralewaysemibold">Welcome, {jwt.getDetails().firstName}</h6>
 
-      <div className="mt-5">
-        <h4 className="pl-3">Cars Available ({calcateTotal})</h4>
+      <div className="mt-5 ralewaymeduim">
+        <h6 className="pl-3 poppinsmeduim">Cars Available ({calcateTotal})</h6>
         <div style={{  width: "100%" }} className="d-flexx fit-size">
           <div style={{ width: "100%" }} className="d-flexxx py-2">
             <div
@@ -162,19 +162,19 @@ const CarListing = () => {
               )}
               <div>
                 <img src={calendar} className="py-2 mr-2" alt="" />
-                <span>Bus ({car.bus})</span>
+                <span>Bus ( {car.bus} )</span>
               </div>
               <div>
                 <img src={calendar} className="py-2 mr-2" alt="" />
-                <span>Sienna ({car.sienna})</span>
+                <span>Sienna ( {car.sienna} )</span>
               </div>
               <div>
                 <img src={calendar} className="py-2 mr-2" alt="" />
-                <span>Exquisite ({car.exquisite})</span>
+                <span>Exquisite ( {car.exquisite} )</span>
               </div>
               <div>
                 <img src={calendar} className="py-2 mr-2" alt="" />
-                <span>Truck ({car.truck})</span>
+                <span>Truck ( {car.truck} )</span>
               </div>
             </div>
             <div style={{ width: "300px" }} className="d-flexx mt-5">

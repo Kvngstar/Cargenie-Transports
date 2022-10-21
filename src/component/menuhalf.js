@@ -16,7 +16,7 @@ const Menuhalf = () => {
         <div className='d-flex whitetext w-100 py-2 greenerbackground justify-content-around align-items-center'>
           <img src={cloudicon} style={{height: "25px"}} className='mx-2' alt="" />  <h5>DashBoard</h5> <span className='btn btn-sm mx-2' style={{backgroundColor: "#7BB66D", color: "#f2f2f2"}}>New</span>
         </div>
-        <div className='g mt-3'>
+        <div className='g mt-3 poppinsmeduim fontsize14'>
             <div className="d-flex align-items-center ">
               
                 
