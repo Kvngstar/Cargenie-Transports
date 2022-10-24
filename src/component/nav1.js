@@ -69,7 +69,7 @@ const Nav_ = () => {
             </span>
          
             
-            <button className='ml-4 btn btn-outline-light kk robotoregular whitetext'>Menu</button>
+            <button className='ml-4 btn btn-outline-light kk robotoregular '>Menu</button>
 
            
            </div>

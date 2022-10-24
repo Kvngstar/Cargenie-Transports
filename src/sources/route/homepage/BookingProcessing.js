@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import "./homepage.css";
+import "react-toastify/dist/ReactToastify.css";
+
+
 const BookingProccessing = () => {
   const [info, setInfo] = useState("");
   const [newArray, setArray] = useState([]);
   const [length, setLength] = useState([]);
   const [count, setCount] = useState(0);
-  const  [read,setRead] = useState([])
   const [slicedArray,setSlicedArray]= useState([])
   const [activePage,setActivePage]= useState(1)
-
-
-  function Paginate(event){
+function Paginate(event){
     const pageNum = event.target.innerHTML
      length.forEach((v)=>{ if(v == pageNum){
       
@@ -52,14 +51,15 @@ const BookingProccessing = () => {
          
 
         
-        } else {
-          console.log(response);
-        }
-      } catch (err) {
-        console.log(err);
-        setInfo(err.response.data);
+        } 
       }
-   
+      catch (err) {
+        if (err.response.status >= 400 && err.response.status < 500) {
+          return toast.error(err.response.data);
+        }
+
+        return toast.error(err.message);
+      }
     }
      
 
@@ -82,18 +82,21 @@ const BookingProccessing = () => {
       );
 
       if (response.status >= 200 && response.status < 400) {
-        setInfo(response.data);
+        toast.success(response.data);
 
         return;
-      } else {
-        console.log(response);
+      } 
+    }catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
       }
-    } catch (err) {
-      console.log(err); 
-      setInfo(err.response.data);
-    }
 
-  
+      return toast.error(error.message);
+    }
   }
 
   async function failState(event) {
@@ -112,22 +115,28 @@ const BookingProccessing = () => {
       );
 
       if (response.status >= 200 && response.status < 400) {
-        setInfo(response.data);
+          toast.success(response.data);
 
 
         return;
-      } else {
-        console.log(response);
+      } 
+    }catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
       }
-    } catch (err) {
-      console.log(err);
-      setInfo(err.response.data);
+
+      return toast.error(error.message);
     }
   }
 
 
   return ( 
     <div className="px-2 mt-4">
+      <ToastContainer/>
       <h5 className="poppinsmeduim">Admin</h5>
       <p className="pl-4 mt-3 ralewaysemibold">Welcome, {jwt.getDetails().firstName}</p>
 
@@ -135,7 +144,7 @@ const BookingProccessing = () => {
         <h6 className="pl-3 poppinsmeduim">Process Orders ({count})</h6>
 
         <div className="table-control-1 mt-3 ">
-          {info && <div>{info}</div>}
+        
           <table className="table table-hover table-bordered">
             <thead>
               <tr className="">
@@ -191,7 +200,7 @@ const BookingProccessing = () => {
     
   </ul>
 </nav>
-<div className="text-center bg-light">{activePage}</div>
+<div className="text-center bg-light my-2">{activePage}</div>
       </div>
     </div>
   );

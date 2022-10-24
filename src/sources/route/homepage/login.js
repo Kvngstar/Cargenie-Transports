@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import jwt_decode from "jwt-decode";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
-
+import 'react-toastify/dist/ReactToastify.css';
 const Loginform = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     as: "",
   });
-  const [info, setInfo] = useState("");
-
+  
   function handleState(event) {
     const { name, value } = event.target;
 
@@ -36,7 +36,7 @@ const Loginform = () => {
 
         const { as } = jwt_decode(response.headers["x-auth"]);
 
-        setInfo("Successful");
+        toast.success("Successful");
 
         switch (as) {
           case "customer":
@@ -61,21 +61,22 @@ const Loginform = () => {
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
-        console.log(error);
-        return setInfo(error.response.data);
+       
+        return toast.error(error.response.data);
       }
-      console.log(error, "outside");
-      return setInfo(error.message);
+      
+      return toast.error(error.message);
     }
   }
   return (
-    <div class="form">
+    <div class="form ralewaymeduim">
+      <ToastContainer/>
       <form
         className="form__  mx-2"
         action="
         "
       >
-        <h1 className="mt-3">Sign In</h1>
+        <h1 className="mt-3">Login</h1>
         <div>
           <input
             type="text"
@@ -111,8 +112,8 @@ const Loginform = () => {
           >
             <option value=""></option>
             <option value="customer">customer</option>
-            <option value="carowner">Car Owner</option>
-            <option value="admin">Admin</option>
+            <option value="carowner">car-owner</option>
+            <option value="admin">admin</option>
           </select>
         </div>
         {/* <div class="form-check mt-2">
@@ -120,19 +121,15 @@ const Loginform = () => {
                     <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked/>
                     keep me signed-in</label>
                 </div> */}
-        <div className="mx-auto w-100 bg-success mt-4">
+        <div className="mx-auto w-100 mt-4 mb-4 rounded">
           <input
             type="submit"
-            className="btn btn-primary mx-auto w-100"
-            value="login"
+            className="btn btn-success mx-auto w-100"
+            value="sign in"
             onClick={submitButton}
             autoComplete
           />
         </div>
-
-        <h6 id="output3" className="my-3 text-center">
-          {info}
-        </h6>
       </form>
     </div>
   );

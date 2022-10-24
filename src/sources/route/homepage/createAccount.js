@@ -1,7 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import _ from "lodash";
 import jwt_decode from "jwt-decode";
+import 'react-toastify/dist/ReactToastify.css';
 import jwt from "../../../services/userService";
 import auth from "../../../services/authService";
 const CreateAccount = () => {
@@ -26,19 +28,18 @@ const CreateAccount = () => {
   }
 
   const [info, setInfo] = useState("");
-  const [user, setUser] = useState({});
+
   async function submitButton(event) {
     event.preventDefault();
 
     if (!formData.password || !formData.confirmPassword) {
-      return setInfo("password does not match with confirm password");
+      return toast.error("password does not match with confirm password");
     } else if (formData.password !== formData.confirmPassword) {
-      return setInfo("password does not match with confirm password");
+      return toast.error("password does not match with confirm password");
     } else if (!formData.terms) {
-      setInfo("");
-      return setInfo("Accept the terms and condition");
-    } else {
-      setInfo("");
+   
+      return toast.error("Accept the terms and condition");
+    } else 
       try {
         const response = await auth.post(
           "http://localhost:3001/gen/createaccount",
@@ -59,7 +60,7 @@ const CreateAccount = () => {
           jwt.savejwt(response.headers["x-auth"]);
           const { as } = jwt_decode(response.headers["x-auth"]);
 
-          setInfo("Successful");
+          toast.error("Successful");
 
           switch (as) {
             case "customer":
@@ -84,22 +85,22 @@ const CreateAccount = () => {
           error.response.status >= 400 &&
           error.response.status < 500
         ) {
-          console.log(error);
-          return setInfo(error.response.data);
+      
+          return toast.error(error.response.data);
         }
-        console.log(error, "outside");
-        return setInfo(error.message);
+        return toast.error(error.message);
       }
     }
-  }
+  
   return (
-    <div className="form">
+    <div className="form ralewaymeduim">
+      <ToastContainer/>
       <form
-        className="form__  mx-2"
+        className="form__  mx-2 pb-3"
         action="
                 "
       >
-        <h1 className="mt-3">Sign Up</h1>
+        <h3 className="mt-3">Create Account</h3>
         <div>
           <input
             type="text"
@@ -107,7 +108,7 @@ const CreateAccount = () => {
             value={formData.firstName}
             onChange={handleState}
             id="fn"
-            placeholder="Enter your firstname"
+            placeholder="firstname"
           />
         </div>
         <div>
@@ -117,7 +118,7 @@ const CreateAccount = () => {
             value={formData.lastName}
             onChange={handleState}
             id="ln"
-            placeholder="Enter your lastname"
+            placeholder="lastname"
           />
         </div>
         <div>
@@ -127,7 +128,7 @@ const CreateAccount = () => {
             value={formData.phoneNum}
             onChange={handleState}
             id="phonenum"
-            placeholder="Enter your phone number e.g 08152984105"
+            placeholder="phone number"
           />
         </div>
         <div>
@@ -137,7 +138,7 @@ const CreateAccount = () => {
             name="email"
             value={formData.email}
             onChange={handleState}
-            placeholder="Enter your email"
+            placeholder=" email"
           />
         </div>
         <div>
@@ -147,7 +148,7 @@ const CreateAccount = () => {
             name="password"
             value={formData.password}
             onChange={handleState}
-            placeholder="Enter Your password"
+            placeholder=" password"
           />
         </div>
         <div>
@@ -157,7 +158,7 @@ const CreateAccount = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleState}
-            placeholder="Confirm Your password"
+            placeholder="Confirm password"
           />
         </div>
 
@@ -175,8 +176,8 @@ const CreateAccount = () => {
           >
             <option value=""></option>
             <option value="customer">customer</option>
-            <option value="carowner">Car Owner</option>
-            <option value="admin">Admin</option>
+            <option value="carowner" >car-owner</option>
+            <option value="admin" disabled>admin</option>
           </select>
         </div>
         <div class="form-check mt-2">
@@ -192,20 +193,16 @@ const CreateAccount = () => {
             Agree to terms and condition
           </label>
         </div>
-        <div className="mx-auto w-100 bg-success mt-4">
+        <div className="mx-auto w-100 mt-4">
           <input
             type="submit"
             id=""
             onClick={submitButton}
-            className="btn btn-primary mx-auto w-100"
+            className="btn btn-success mx-auto w-100"
             value="Create Account"
             onclick="calculate(event)"
           />
         </div>
-
-        <h6 id="output3" className="text-center my-3">
-          {info}
-        </h6>
       </form>
     </div>
   );

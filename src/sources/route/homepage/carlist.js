@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import calendar from "../../assets/Calendar_Days.png";
 import CanvasJSReact from "../../../component/canvasjs.react";
+import "react-toastify/dist/ReactToastify.css";
 import "./homepage.css";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -15,8 +16,6 @@ const CarListing = () => {
     newitem: "",
   });
 
-  const [info, setInfo] = useState("");
-  const [error, setError] = useState("");
   const [car, setCar] = useState({});
   var [calcateTotal, setCalculateTotal] = useState("");
   useEffect(() => {
@@ -29,9 +28,9 @@ const CarListing = () => {
           }
         );
 
-        if (response.status == 200) {
+        if (response.status >= 200 && response.status < 400) {
           setCar(response.data);
-          console.log(response.data);
+
           setCalculateTotal(
             parseInt(response.data.bus) +
               parseInt(response.data.sienna) +
@@ -39,15 +38,13 @@ const CarListing = () => {
               parseInt(response.data.exquisite)
           );
           return;
-        } else {
-          console.log(response);
         }
       } catch (err) {
         if (err.response.status >= 400 && err.response.status < 500) {
-          return setError(err.response.data);
+          return toast.error(err.response.data);
         }
 
-        return setError(err.message);
+        return toast.error(err.message);
       }
     }
     getCarData();
@@ -59,6 +56,31 @@ const CarListing = () => {
     setFormData((v) => {
       return { ...v, [name]: value };
     });
+  }
+  async function CreateDB(event) {
+    event.preventDefault();
+    try {
+      const response = await auth.post(
+        "http://localhost:3001/admin/availablecar",
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        toast.success("Successful");
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
+    }
   }
   async function SendData(event) {
     event.preventDefault();
@@ -72,8 +94,8 @@ const CarListing = () => {
       );
 
       if (response.status >= 200 && response.status < 400) {
-        setInfo(response.data);
-        window.location.reload()
+        toast.success(response.data);
+        window.location.reload();
       }
     } catch (error) {
       if (
@@ -81,14 +103,12 @@ const CarListing = () => {
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
-        console.log(error);
-        return setInfo(error.response.data);
+        return toast.error(error.response.data);
       }
-      console.log(error, "outside");
-      return setInfo(error.message);
+
+      return toast.error(error.message);
     }
   }
-
 
   const options = {
     animationEnabled: true,
@@ -111,24 +131,27 @@ const CarListing = () => {
   return (
     <div className="px-2 mt-4">
       <h5 className="poppinsmeduim">Admin</h5>
-      <h6 className="pl-4 mt-3 ralewaysemibold">Welcome, {jwt.getDetails().firstName}</h6>
+      <h6 className="pl-4 mt-3 ralewaysemibold">
+        Welcome, {jwt.getDetails().firstName}
+      </h6>
 
       <div className="mt-5 ralewaymeduim">
         <h6 className="pl-3 poppinsmeduim">Cars Available ({calcateTotal})</h6>
-        <div style={{  width: "100%" }} className="d-flexx fit-size">
-          <div style={{ width: "100%" }} className="d-flexxx py-2">
+        <div style={{ width: "100%" }} className="d-flexx fit-size">
+          <div style={{ width: "100%" }} className="d-flexxx py-2 ">
             <div
               style={{ width: "300px" }}
-              className=" m d-flex mx-2 flex-column mt-5"
+              className=" m d-flex mx-2 flex-column mt-5 rounded  lightback"
             >
-        {  info &&    <div className="my-2 py-2">{info}</div>}
+              <ToastContainer />
+
               {jwt.getDetails().as === "admin" && (
-                <div className="my-3 py-2">
+                <div className="my-3 py-2 ">
                   <form>
                     <div class="input-group ">
                       <div className="input-group-prepend w-25 px-1">
                         <input
-                          type=""
+                          type="Number"
                           className="form-control"
                           name="newitem"
                           value={formData.newitem}
@@ -177,17 +200,38 @@ const CarListing = () => {
                 <span>Truck ( {car.truck} )</span>
               </div>
             </div>
-            <div style={{ width: "300px" }} className="d-flexx mt-5">
+            <div
+              style={{ width: "300px", borderRadius: "20%" }}
+              className="d-flexx mx-2 mt-5 lightback"
+            >
               <CanvasJSChart options={options} />
             </div>
-
-            {!car && <div>{error}</div>}
           </div>
         </div>
-           
       </div>
+      {jwt.getDetails().as === "admin" && (
+        <div className="pl-3 mt-5 mb-2">
+          No Car Management Database?{" "}
+          <button
+            onClick={CreateDB}
+            className=" ml-1 btn btn-sm btn-outline-primary"
+          >
+            Create{" "}
+          </button>
+        </div>
+      )}
     </div>
   );
 };
+// {
+//   position: "top-left",
+//   autoClose: 3000,
+//   hideProgressBar: true,
+//   closeOnClick: true,
+//   pauseOnHover: true,
+//   draggable: false,
+//   progress: 0.3,
+//   theme: "colored",
+//   }
 
 export default CarListing;

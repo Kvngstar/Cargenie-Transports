@@ -36,9 +36,9 @@ export default function Hompage() {
 
      </div>
      <div className="mx-2">
-              <button className="btn btn-sm btn-light mx-auto">Sign Up</button>
+     <Link to="signup"><button className="btn btn-sm btn-light mx-auto">Sign Up</button></Link>
 
-     </div>
+     </div> 
         </div>
      
      

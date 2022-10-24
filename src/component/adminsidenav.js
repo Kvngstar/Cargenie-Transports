@@ -1,15 +1,16 @@
+import { Link } from 'react-router-dom';
 import cloudicon from '../sources/assets/Cloud_Download.png';
 import calendar from '../sources/assets/Calendar_Days.png';
 import users from '../sources/assets/Users.png';
+import user from '../sources/assets/User1.png';
 import logout from '../sources/assets/logout.png';
 import settings from '../sources/assets/settings_icon.png';
 import help from '../sources/assets/help_icon.png';
-import { Link } from 'react-router-dom';
 import Logout from "../sources/route/homepage/logout"
 
 const AdminMenuhalf = () => {
     return ( 
-        <div className="bg-light j">
+        <div className="j lightback">
         <div className='d-flex whitetext w-100 py-2 greenerbackground justify-content-around align-items-center'>
           <img src={cloudicon} style={{height: "25px"}} className='mx-2' alt="" />  <h5>DashBoard</h5>  <span className='btn btn-sm mx-2' style={{backgroundColor: "#7BB66D", color: "#f2f2f2"}}>New</span>
         </div>
@@ -17,7 +18,7 @@ const AdminMenuhalf = () => {
             <div className="d-flex align-items-center ">
               
                 
-                 <img   src={calendar} alt="" />
+                 <img   src={user} alt="" />
             
                   <span><Link to="/admin/carbooking" >Rental transaction</Link></span>
             </div>

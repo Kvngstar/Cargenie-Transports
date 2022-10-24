@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
+
+import { ToastContainer, toast } from "react-toastify";
 import location from "../sources/assets/location.png";
 import auth from "../services/authService";
 import jwt from "../services/userService";
+import "react-toastify/dist/ReactToastify.css";
 const Travelinput = () => {
   const [data, setData] = useState({
     pickupLocation: "",
@@ -17,7 +20,7 @@ const Travelinput = () => {
     event.preventDefault();
 
     if (!jwt.getjwt()) {
-      return setMessage("User must be logged in");
+      return toast.error("User must be logged in");
     }
 
     try {
@@ -28,13 +31,18 @@ const Travelinput = () => {
           "Content-type": "application/json; charset=UTF-8",
         }
       );
-      setMessage(response.data);
+      toast.success(response.data);
 
       const url = window.location.href;
       window.location.reload(url);
     } catch (err) {
-      setMessage(err.response.data);
+      if (err.response.status >= 400 && err.response.status < 500) {
+        return toast.error(err.response.data);
+      }
+
+      return toast.error(err.message);
     }
+    
   }
 
   function HandleInput(event) {
@@ -47,6 +55,7 @@ const Travelinput = () => {
 
   return ( 
     <form className="mt-5  form-guide ">
+      <ToastContainer/>
       <div className="py-1 mx-1 text-center px-2 second-section-child d-flex flex-wrap  rounded mb-5 g ralewaysemibold"> 
         <div>
           <div>Pickup Location</div>
@@ -171,14 +180,6 @@ const Travelinput = () => {
 
         
       </div>
-    
-      {jwt.getjwt()
-        ? message && <div className="mt-3 text-center">{message}</div>
-        : message && (
-            <div className="mt-3  alert alert-danger text-center">
-              {message}
-            </div>
-          )}
     </form>
   );
 };

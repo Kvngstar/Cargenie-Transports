@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
+import 'react-toastify/dist/ReactToastify.css';
 import "./homepage.css";
 
 const CarBooking = () => {
-  const [user, setUser] = useState(jwt.getDetails());
-  const [error, setError] = useState("");
   const [newArray, setArray] = useState([]);
   const [count, setCount] = useState("");
 
@@ -46,14 +46,14 @@ const CarBooking = () => {
           setCount(response.data[1]);
           setSlicedArray(() => {
             return response.data[0].slice(0, response.data[0].length).splice(0, 10);
-          });
+          }); 
          
 
           setLength(() => {
             return [
               ...Array(Math.ceil(response.data[0].length / 10) + 1).keys(),
             ].slice(1);
-          });
+          });    
           let completed = 0
           let failed = 0
           let processing = 0
@@ -80,16 +80,22 @@ const CarBooking = () => {
               break;
           }
           }  
-          console.log(processing,completed,failed)
+          
           setOrderState(()=>{ return { processing: processing,failed:failed,completed:completed}})
 
           return;
-        } else {
-          console.log(response);
+        } 
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status < 500
+        ) {
+      
+          return toast.error(error.response.data);
         }
-      } catch (err) {
-        console.log(err); 
-        setError(err.response.data);
+       
+        return toast.error(error.message);
       }
     }
     GetUserDetail();
@@ -102,6 +108,7 @@ Paginate(event)
   return (
     <>
       <div className="px-2 mt-4">
+        <ToastContainer/>
         <h5 className="poppinsmeduim ">Admin</h5>
         <p className="pl-4 mt-3 ralewaysemibold greentext">Welcome, {jwt.getDetails().firstName}</p>
 
@@ -148,18 +155,18 @@ Paginate(event)
               </tbody>
             </table>
           </div>
-          <nav aria-label="...">
-            <ul class="pagination pagination-sm mt-3">
+          <nav aria-label="..."  >
+            <ul class="pagination pagination-sm mt-3 ">
               {length.map((v) => {
                 return (
-                  <li class="page-item"  onClick={handleOnclick}>
+                  <li class="page-item lightback"  onClick={handleOnclick}>
                     <a class="page-link">{v}</a>
                   </li>
                 );
               })}
             </ul>
           </nav>
-          <div className="text-center bg-light">{activePage}</div>
+          <div className="text-center bg-light mb-3">page - {activePage}</div>
         </div>
       </div>
     </>

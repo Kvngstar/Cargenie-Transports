@@ -1,7 +1,7 @@
 import Subscribe from "../../../component/subscribe";
 import Whychoose from "../../../component/whychoose";
 import Travelinput from "../../../component/travelinput";
-import topdesign from "../../assets/topcar1.png";
+import topdesign from "../../assets/carimage.png";
 
 const HomeComponent = () => {
     return ( 
@@ -35,7 +35,7 @@ const HomeComponent = () => {
 
   <div className="tohideclass">
 
-  <img className="a" src={topdesign} alt="" />
+  <img className="carimage" style={{width:"300px"}} src={topdesign} alt="" />
   </div>
 </div>
 </div>
