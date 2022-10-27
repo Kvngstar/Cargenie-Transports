@@ -216,7 +216,7 @@ a:hover{
   padding: 5px;
   border-radius: 40%;
   height: 20px;
-  background-color: rgb(73, 32, 32);
+  background-color: rgba(146, 37, 37, 0.877), 0.877);
   font-size: 9px;
   color: #f2f2f2;
 }
@@ -501,12 +501,12 @@ font-weight: 600;
   
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 400px) {
   .l {
     min-width: 300px;
   }
   .table-control-1 {
-    width: 300px !important;
+    width: 290px !important;
     overflow-x: scroll;
     margin: auto;
   }
