@@ -63,7 +63,7 @@ const CarOwnerRoute = () => {
               <div className="my-5 ralewaymeduim">
                 <h6 className="pl-3"></h6>
 
-                <div className="table-control mt-3 ">
+                <div className="table-control-1 mt-3 ">
                   <table className="table table-sm ">
                     <thead>
                       <tr className="">
