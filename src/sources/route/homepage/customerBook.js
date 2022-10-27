@@ -71,7 +71,7 @@ const CustomerBook = () => {
         Welcome, {jwt.getDetails().firstName}
       </p>
       <div className="h mx-auto mt-5">
-        <h6 className="text-center mb-3">Book your Ticket Here</h6>
+        <h6 className="text-center mb-3 poppinsmeduim">Book your Ticket Here</h6>
         <Travelinput checkShadow="lightback" textcolor="text-dark" />
       </div>
 
