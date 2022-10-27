@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
+import config from '../../../config.json'
 import 'react-toastify/dist/ReactToastify.css';
 import "./homepage.css";
 
@@ -35,7 +36,7 @@ const CarBooking = () => {
     async function GetUserDetail() {
       try {
         const response = await auth.get(
-          "http://localhost:3001/admin/travelview",
+          config.apiUrl +"/admin/travelview",
           {
             "Content-type": "application/json; charset=UTF-8",
           }

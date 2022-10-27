@@ -2,6 +2,7 @@ import calendar from '../sources/assets/Calendar_Days.png';
 import link from '../sources/assets/linkage.png';
 import seenpic  from '../sources/assets/seen2.png';
 
+
 const NotifyBox = ({title,date,desc,seen}) => {
     return ( 
         <div className="container mt-5 mb-2 p-3 notifybox rounded">

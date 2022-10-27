@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import config from '../../../config.json'
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import calendar from "../../assets/Calendar_Days.png";
@@ -22,7 +23,7 @@ const CarListing = () => {
     async function getCarData() {
       try {
         const response = await auth.get(
-          "http://localhost:3001/gen/availablecars",
+          config.apiUrl + "/gen/availablecars",
           {
             "Content-type": "application/json; charset=UTF-8",
           }
@@ -61,7 +62,7 @@ const CarListing = () => {
     event.preventDefault();
     try {
       const response = await auth.post(
-        "http://localhost:3001/admin/availablecar",
+        config.apiUrl + "/admin/availablecar",
         {
           "Content-type": "application/json; charset=UTF-8",
         }
@@ -86,7 +87,7 @@ const CarListing = () => {
     event.preventDefault();
     try {
       const response = await auth.post(
-        "http://localhost:3001/admin/updatecar",
+       config.apiUrl +   "/admin/updatecar",
         formData,
         {
           "Content-type": "application/json; charset=UTF-8",

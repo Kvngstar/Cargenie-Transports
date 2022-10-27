@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import config from '../../../config.json'
 import Travelinput from "../../../component/travelinput";
 import jwt from "../../../services/userService";
 import auth from "../../../services/authService";
@@ -28,7 +29,7 @@ const CustomerBook = () => {
     async function GetUserDetail() {
       try {
         const response = await auth.get(
-          "http://localhost:3001/customer/alltravels",
+          config.apiUrl + "/customer/alltravels",
           {
             "Content-type": "application/json; charset=UTF-8",
           }
@@ -71,7 +72,7 @@ const CustomerBook = () => {
       </p>
       <div className="h mx-auto mt-5">
         <h6 className="text-center mb-3">Book your Ticket Here</h6>
-        <Travelinput />
+        <Travelinput checkShadow="lightback" textcolor="text-dark" />
       </div>
 
       <div className="my-5 ralewaymeduim">
@@ -110,7 +111,7 @@ const CustomerBook = () => {
             {length.map((v) => {
               return (
                 <li class="page-item" onClick={Paginate}>
-                  <a class="page-link">{v}</a>
+                  <a href="" class="page-link">{v}</a>
                 </li>
               );
             })}

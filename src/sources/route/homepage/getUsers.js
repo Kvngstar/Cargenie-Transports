@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import config from '../../../config.json'
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +21,7 @@ const GetUsers = () => {
     async function GetUserDetail() {
       try {
         const response = await auth.get(
-          "http://localhost:3001/admin/allusers",
+          config.apiUrl +  "/admin/allusers",
           {
             "Content-type": "application/json; charset=UTF-8",
           }

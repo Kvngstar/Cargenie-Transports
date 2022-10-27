@@ -1,7 +1,11 @@
 :root {
-  --primary-color: #112114;
-  --secondary-color: ;
+  --primary-color: #000000;
+  --secondary-color:#213f26  ;
+  --secondary-colorblur:#121713b1  ;
+  --tertiary-colorblur:#0000004a  ;
   --tertiary-color: ;
+  --secondarry-text: #070807;
+  --color-yellow: #e3b448;
 }
 
 * {
@@ -9,16 +13,23 @@
   margin: 0;
 }
 
-/* .carimage{
-  width:300px;
-  height: auto;
-} */
+a{
+  color: black !important;
+}
 a:hover{
   text-decoration: none !important;
 }
 .first-section {
-  background-color: var(--primary-color);
+  background-image: url(../../assets/supercar3.jfif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 600px;
+  background-attachment: fixed;
   height: auto;
+}
+.yellow-color{
+  background-color: var(--color-yellow) !important;
 }
 .aaa {
   height: 50px;
@@ -26,11 +37,10 @@ a:hover{
   display: flex !important;
   justify-content: end;
   align-items: center;
-  background-color: #213f26;
+  background-color:var(--secondary-color);
   border: none;
 }
 .wrapper {
-  background-color: var(--primary-color);
   position: relative;
 }
 .logo {
@@ -41,7 +51,9 @@ a:hover{
   height: 500px;
 }
 .b {
-  border: 1px solid #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.49);
+  box-shadow: 0px 0px 8px 3px #232323;
+  
 }
 .b h2 {
   font-size: px;
@@ -80,15 +92,20 @@ a:hover{
 .second-section{
   max-width: 900px;
 }
-.second-section-child {
-  background-color: #ffffff;
-  box-shadow: 0px 0px 8px 3px #e0e0e0;
+
+.second-section-child{
+  background-color: rgba(0, 0, 0, 0.49);
+  box-shadow: 0px 0px 8px 3px #232323;
 
   
 }
 .lightback{
   background-color: #ffffff;
   box-shadow: 0px 0px 8px 3px #e0e0e0;
+}
+.box-shadow{
+  box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.441);
+
 }
 .second-section-child > div {
   margin: 0px 3px;
@@ -101,10 +118,10 @@ a:hover{
   color: #f2f2f2 !important;
 }
 .greenerbackground {
-  background-color: #213f26 !important;
+  background-color: var(--secondary-color) !important;
 }
 .greentext{
-  color:  #213f26 !important;
+  color:var(--secondarry-text) !important;
 }
 .lightGreen {
   background-color: #89c293 !important;
@@ -116,7 +133,7 @@ a:hover{
   gap:20px;
 }
 .e > div {
-  background-color: #132516;
+  background-color:var(--secondary-colorblur);
   width: 200px;
   height: 250px;
   margin: 10px;
@@ -131,13 +148,20 @@ a:hover{
   margin-bottom: 15px;
 }
 .third-section {
-  background-image: url(../../assets/unsplash_ciN8mnrlvFY.png);
+  background-image: url(../../assets/car5.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 600px;
-  background-repeat: fixed;
+  background-attachment: fixed;
 }
+/* .fourth-section {
+  background-image: url(../../assets/car3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+} */
 .fourth-section > div:first-of-type {
   height: 130px;
 }
@@ -273,26 +297,47 @@ background-color: rgb(214, 214, 214);
   } */
 
   .form{
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 20px;
  width: 100%;
    margin: auto !important;
-    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(../../assets/supercar3.jfif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+   
+
+}
+.carbg{
+  background-image: url(../../assets/supercar.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
 
 }
  .form__{
   width: 400px;
     height: auto;
-    background-color:#f2f2f2;
+  
     border-radius: 10px;
     padding: 0px 15px;
 } 
+.login-h{
+  height: 100vh !important;
+}
 .form h3{
     text-align: center;
 }
-
+::placeholder{
+  color: white;
+}
 .form input[type="text"],input[type="password"],input[type="email"]{
     margin-top: 30px;
     height: 40px;
@@ -302,7 +347,7 @@ background-color: rgb(214, 214, 214);
     border-bottom: 1px solid #aaaaaa;
     text-indent: 10px;
     outline: none;
-    /* color: white; */
+    color: white;
     border-radius: 5px;
 }
 
@@ -351,11 +396,7 @@ font-weight: 600;
   }
   @media screen and (max-width: 1300px) {
 
-  
-    .tohideclass {
-      display: none !important;
-    }
-  
+
     .second-section{
       max-width: 900px;
     }
@@ -374,7 +415,7 @@ font-weight: 600;
   .hidd {
     display: block !important;
   }
-  .kk {
+  .kk { 
     display: inline-block !important;
   }
   .g {

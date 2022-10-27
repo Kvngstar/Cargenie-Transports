@@ -4,10 +4,9 @@ import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import "./homepage.css";
 import "react-toastify/dist/ReactToastify.css";
-
+import config from '../../../config.json'
 
 const BookingProccessing = () => {
-  const [info, setInfo] = useState("");
   const [newArray, setArray] = useState([]);
   const [length, setLength] = useState([]);
   const [count, setCount] = useState(0);
@@ -31,7 +30,7 @@ function Paginate(event){
     async function getNotification() {
       try {
         const response = await auth.get( 
-          "http://localhost:3001/admin/processingunit",
+         config.apiUrl + "/admin/processingunit",
           {
             "Content-type": "application/json; charset=UTF-8",
           }
@@ -74,7 +73,7 @@ function Paginate(event){
 
     try {
       const response = await auth.post(
-        "http://localhost:3001/admin/process",
+       config.apiUrl + "/admin/process",
         data,
         {
           "Content-type": "application/json; charset=UTF-8",
@@ -107,7 +106,7 @@ function Paginate(event){
 
     try {
       const response = await auth.post(
-        "http://localhost:3001/admin/fail",
+       config.apiUrl + "/admin/fail",
         data,
         {
           "Content-type": "application/json; charset=UTF-8",

@@ -1,11 +1,11 @@
 import React, { useState} from "react";
-
 import { ToastContainer, toast } from "react-toastify";
-import location from "../sources/assets/location.png";
+import config from '../config.json'
 import auth from "../services/authService";
 import jwt from "../services/userService";
 import "react-toastify/dist/ReactToastify.css";
-const Travelinput = () => {
+import location from "../sources/assets/location.png";
+const Travelinput = (props) => {
   const [data, setData] = useState({
     pickupLocation: "",
     to: "",
@@ -14,7 +14,6 @@ const Travelinput = () => {
     price: "4000",
     cartype: "",
   });
-  const [message, setMessage] = useState("");
 
   async function handleButton(event) {
     event.preventDefault();
@@ -25,7 +24,7 @@ const Travelinput = () => {
 
     try {
       const response = await auth.post(
-        "http://localhost:3001/customer/travels",
+        config.apiUrl + "/customer/travels",
         data,
         {
           "Content-type": "application/json; charset=UTF-8",
@@ -56,7 +55,7 @@ const Travelinput = () => {
   return ( 
     <form className="mt-5  form-guide ">
       <ToastContainer/>
-      <div className="py-1 mx-1 text-center px-2 second-section-child d-flex flex-wrap  rounded mb-5 g ralewaysemibold"> 
+      <div className={`py-1 mx-1 ${props.textcolor} text-center px-2 ${props.checkShadow} d-flex flex-wrap  rounded mb-5 g ralewaysemibold `}> 
         <div>
           <div>Pickup Location</div>
           <div>
@@ -66,7 +65,7 @@ const Travelinput = () => {
                   className="input-group-text bg-light"
                   id="addon-wrapping"
                 >
-                  <img src={location} />
+                  <img alt="location icon" src={location} />
                 </span>
               </div>
               <input
@@ -91,7 +90,7 @@ const Travelinput = () => {
                   className="input-group-text bg-light "
                   id="addon-wrapping"
                 >
-                  <img src={location} />{" "}
+                  <img src={location} alt="location icon" />{" "}
                 </span>
               </div>
               <input
@@ -169,8 +168,8 @@ const Travelinput = () => {
         <div className="">
           <input
             type="submit"
-            onClick={handleButton}
-            className="btn btn-success mt-2 form-control"
+            onClick={handleButton} 
+            className="btn bg-warning mt-2 font-weight-700"
             value="Book"
            
           />

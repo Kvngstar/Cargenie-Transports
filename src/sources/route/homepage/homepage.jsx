@@ -1,11 +1,13 @@
 import React from "react";
 import $ from "jquery";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { Link, Outlet } from "react-router-dom";
 
-import "./homepage.css";
 import Footer from "../../../component/footer";
 import Nav__ from "../../../component/nav";
-import { Link, Outlet } from "react-router-dom";
+import "./homepage.css";
+import login from "../../assets/login.png"
+import signup from "../../assets/signup.png"
 
 
 export default function Hompage() {
@@ -29,14 +31,14 @@ export default function Hompage() {
       <div className="wrapper">
       
       <div className="hideclick">
-        <div className="aaa">
+        <div className="aaa bg-warning">
 
      <div className="mx-2">
-      <Link to="login"> <button className="btn btn-sm btn-primary">Login</button></Link>
+      <Link to="login"><button className="btn btn-sm bg-warning"> <img src={login} className="mr-1" alt="login" />Login</button></Link>
 
-     </div>
+     </div> 
      <div className="mx-2">
-     <Link to="signup"><button className="btn btn-sm btn-light mx-auto">Sign Up</button></Link>
+     <Link to="signup"><button className="btn btn-sm btn-warning mx-auto"><img src={signup} className="mr-1" alt="login" />Sign Up</button></Link>
 
      </div> 
         </div>

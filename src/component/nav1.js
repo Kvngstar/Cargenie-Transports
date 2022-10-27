@@ -1,24 +1,21 @@
-import Logo from './logo';
-import bell from '../sources/assets/notificationbell.png';
-import message from '../sources/assets/messageicon.png';
-import list from '../sources/assets/Vector-1.png';
-import auth from '../services/authService'
 import React, { useState, useEffect } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import config from "../config.json"
+import Logo from './logo';
+import auth from '../services/authService'
+import 'react-toastify/dist/ReactToastify.css';
+import list from '../sources/assets/Vector-1.png';
+import message from '../sources/assets/messageicon.png';
+import bell from '../sources/assets/notificationbell.png';
 const Nav_ = () => {
 
-
-
-
-    const [error,setError] = useState('')
-    const [info,setInfo] = useState([])
     var [length,setLength] = useState("")
     useEffect(()=>{
     
     async function getNotification(){
         try{
     
-            const   response = await auth.get("http://localhost:3001/notification", {
+            const   response = await auth.get( config.apiUrl + "/notification", {
                   "Content-type": "application/json; charset=UTF-8"
                 })  
                
@@ -28,17 +25,20 @@ const Nav_ = () => {
                 return
       
                }
-               else{
-                   console.log(response)
-               }
              
               
           }
           
-          catch(err){
-              console.log(err)
-              setError(err.response.data)
-            
+          catch (error) {
+            if (
+              error.response &&
+              error.response.status >= 400 &&
+              error.response.status < 500
+            ) {
+          
+              return toast.error(error.response.data);
+            }
+            return toast.error(error.message);
           }
     }
     getNotification()
@@ -49,20 +49,20 @@ const Nav_ = () => {
         <Logo/>   
            <div className="notification mr-4">
             <span className='noticon-wrap'>
-             <img src={bell} />
+             <img src={bell} alt="bell" />
                 <span className='noticon'>
                     <p className='notp'>{length}</p>
                 </span>
                 
             </span>
             <span className='noticon-wrap'>
-             <img src={list} className="ml-3"/>
+             <img src={list} alt="list" className="ml-3"/>
              <span className='noticon'>
                     <p className='notp'>0</p>
                 </span>
             </span>
             <span className='noticon-wrap'>
-             <img src={message} className=" ml-3"/>
+             <img src={message} alt="message" className=" ml-3"/>
              <span className='noticon'>
                     <p className='notp'>0</p>
                 </span>

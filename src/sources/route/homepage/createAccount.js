@@ -6,8 +6,9 @@ import jwt_decode from "jwt-decode";
 import 'react-toastify/dist/ReactToastify.css';
 import jwt from "../../../services/userService";
 import auth from "../../../services/authService";
+import config from '../../../config.json'
 const CreateAccount = () => {
-  var [formData, setFormData] = useState({
+  var [formData, setFormData] = useState({ 
     firstName: "",
     lastName: "",
     phoneNum: "",
@@ -27,8 +28,6 @@ const CreateAccount = () => {
     });
   }
 
-  const [info, setInfo] = useState("");
-
   async function submitButton(event) {
     event.preventDefault();
 
@@ -41,8 +40,8 @@ const CreateAccount = () => {
       return toast.error("Accept the terms and condition");
     } else 
       try {
-        const response = await auth.post(
-          "http://localhost:3001/gen/createaccount",
+        const response = await auth.post( config.apiUrl +
+          "/gen/createaccount",
           _.pick(formData, [
             "firstName",
             "lastName",
@@ -60,7 +59,7 @@ const CreateAccount = () => {
           jwt.savejwt(response.headers["x-auth"]);
           const { as } = jwt_decode(response.headers["x-auth"]);
 
-          toast.error("Successful");
+          toast.success("Successful");
 
           switch (as) {
             case "customer":
@@ -96,7 +95,7 @@ const CreateAccount = () => {
     <div className="form ralewaymeduim">
       <ToastContainer/>
       <form
-        className="form__  mx-2 pb-3"
+        className="form__  mx-2 pb-3 mb-4 second-section-child whitetext"
         action="
                 "
       >
@@ -164,20 +163,20 @@ const CreateAccount = () => {
 
         <div class="input-group mt-4">
           <div className="input-group-prepend">
-            <div className="input-group-text bg-transparent">As</div>
+            <div className="input-group-text bg-transparent whitetext">As</div>
           </div>
 
           <select
-            class="form-control"
+            className="form-control whitetext bg-transparent"
             value={formData.as}
             onChange={handleState}
             name="as"
             id=""
           >
             <option value=""></option>
-            <option value="customer">customer</option>
-            <option value="carowner" >car-owner</option>
-            <option value="admin" disabled>admin</option>
+            <option value="customer" className="text-dark">customer</option>
+            <option value="carowner"  className="text-dark" >car-owner</option>
+            <option value="admin"  className="text-dark" disabled>admin</option>
           </select>
         </div>
         <div class="form-check mt-2">

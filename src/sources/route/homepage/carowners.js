@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import config from '../../../config.json'
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
@@ -41,7 +42,7 @@ const CarOwners = () => {
     event.preventDefault();
     try {
       const response = await auth.post(
-        "http://localhost:3001/admin/carlisting",
+        config.apiUrl + "/admin/carlisting",
         formData,
         {
           "Content-type": "application/json; charset=UTF-8",
@@ -70,7 +71,7 @@ const CarOwners = () => {
     async function GetUserDetail() {
       try {
         const response = await auth.get(
-          "http://localhost:3001/admin/carowners",
+          config.apiUrl + "/admin/carowners",
           {
             "Content-type": "application/json; charset=UTF-8",
           }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import config from '../../../config.json'
+import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import bell from "../../assets/notification.png";
@@ -32,7 +33,7 @@ const Notification = () => {
   useEffect(() => {
     async function getNotification() {
       try {
-        const response = await auth.get("http://localhost:3001/notification", {
+        const response = await auth.get( config.apiUrl + "/notification", {
           "Content-type": "application/json; charset=UTF-8",
         });
 
@@ -81,7 +82,7 @@ const Notification = () => {
     }
     try {
       const response = await auth.post(
-        "http://localhost:3001/notification",
+        config.apiUrl + "/notification",
         formData,
         {
           "Content-type": "application/json; charset=UTF-8",

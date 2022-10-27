@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import $ from "jquery";
 import Footer from "../../../component/footer";
 import Nav_ from "../../../component/nav1";
 import "./homepage.css";
-
 import AdminMenuhalf from "../../../component/adminsidenav";
-import { Route, Routes, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 const Admin = () => {
   useEffect(() => {
     $("button.kk").on("click", function () {
