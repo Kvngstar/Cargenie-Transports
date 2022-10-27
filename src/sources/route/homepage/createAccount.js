@@ -176,7 +176,7 @@ const CreateAccount = () => {
             <option value=""></option>
             <option value="customer" className="text-dark">customer</option>
             <option value="carowner"  className="text-dark" >car-owner</option>
-            <option value="admin"  className="text-dark" >admin</option>
+            <option value="admin"  className="text-dark" disabled>admin</option>
           </select>
         </div>
         <div class="form-check mt-2">
