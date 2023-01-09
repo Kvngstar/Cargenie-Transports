@@ -33,6 +33,7 @@ const Travelinput = (props) => {
 
     //   const url = window.location.href;
     //   props.reload() 
+    // window.location.href("")
     window.location.replace("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo")
     // load("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo");
     } catch (err) {
