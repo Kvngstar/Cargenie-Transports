@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import config from '../../../config.json'
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
@@ -16,38 +16,40 @@ const CarListing = () => {
     name: "",
     newitem: "",
   });
-
+  const [loading, setLoading] = useState(true);
   const [car, setCar] = useState({});
   var [calcateTotal, setCalculateTotal] = useState("");
-  useEffect(() => {
-    async function getCarData() {
-      try {
-        const response = await auth.get(
-          config.apiUrl + "/gen/availablecars",
-          {
-            "Content-type": "application/json; charset=UTF-8",
-          }
+  async function getCarData() {
+    try {
+      const response = await auth.get(
+        config.apiUrl + "/gen/availablecars",
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        setCar(response.data);
+
+        setCalculateTotal(
+          parseInt(response.data.bus) +
+            parseInt(response.data.sienna) +
+            parseInt(response.data.truck) +
+            parseInt(response.data.exquisite)
         );
-
-        if (response.status >= 200 && response.status < 400) {
-          setCar(response.data);
-
-          setCalculateTotal(
-            parseInt(response.data.bus) +
-              parseInt(response.data.sienna) +
-              parseInt(response.data.truck) +
-              parseInt(response.data.exquisite)
-          );
-          return;
-        }
-      } catch (err) {
-        if (err.response.status >= 400 && err.response.status < 500) {
-          return toast.error(err.response.data);
-        }
-
-        return toast.error(err.message);
+        setLoading(false);
+        return;
       }
+    } catch (err) {
+      if (err.response.status >= 400 && err.response.status < 500) {
+        return toast.error(err.response.data);
+      }
+
+      return toast.error(err.message);
     }
+  }
+  useEffect(() => {
+    
     getCarData();
   }, []);
 
@@ -62,7 +64,7 @@ const CarListing = () => {
     event.preventDefault();
     try {
       const response = await auth.post(
-        config.apiUrl + "/admin/availablecar",
+        config.apiUrl + "/admin/availablecar", 
         {
           "Content-type": "application/json; charset=UTF-8",
         }
@@ -70,6 +72,8 @@ const CarListing = () => {
 
       if (response.status >= 200 && response.status < 400) {
         toast.success("Successful");
+        getCarData();
+        
       }
     } catch (error) {
       if (
@@ -96,7 +100,9 @@ const CarListing = () => {
 
       if (response.status >= 200 && response.status < 400) {
         toast.success(response.data);
-        window.location.reload();
+        getCarData();
+        formData.name = "";
+        formData.newitem = "";
       }
     } catch (error) {
       if (
@@ -131,20 +137,33 @@ const CarListing = () => {
 
   return (
     <div className="px-2 mt-4">
-      <h5 className="poppinsmeduim">Admin</h5>
-      <h6 className="pl-4 mt-3 ralewaysemibold">
+      <h5 className="poppinsmeduim">{(jwt.getDetails().as==="admin")?<span class="material-symbols-outlined">admin_panel_settings {jwt.getDetails().as}</span>: jwt.getDetails().as}</h5>
+      <h6 className="pl-4 mt-3 ralewaysemibold ">
         Welcome, {jwt.getDetails().firstName}
       </h6>
-
-      <div className="mt-5 ralewaymeduim">
+     
         <h6 className="pl-3 poppinsmeduim">Cars Available ({calcateTotal})</h6>
+       
+<div className="p" style={{minHeight: "300px"}}  >
+
+        {loading ? (
+              <div className="preloadcont" >
+                <div></div>
+                <div className="middleelement"></div>
+                <div></div>
+              </div>
+            ) :
+      <div className="mt-5 ralewaymeduim">
+
         <div style={{ width: "100%" }} className="d-flexx fit-size">
+     
           <div style={{ width: "100%" }} className="d-flexxx py-2 ">
+          
             <div
               style={{ width: "300px" }}
               className=" m d-flex mx-2 flex-column mt-5 rounded  lightback"
             >
-              <ToastContainer />
+              
 
               {jwt.getDetails().as === "admin" && (
                 <div className="my-3 py-2 ">
@@ -204,12 +223,23 @@ const CarListing = () => {
             <div
               style={{ width: "300px", borderRadius: "20%" }}
               className="d-flexx mx-2 mt-5 lightback"
-            >
+              >
               <CanvasJSChart options={options} />
-            </div>
           </div>
+                </div>
+            
         </div>
+
+
+
+
+
+
+
+              </div>
+              }
       </div>
+    
       {jwt.getDetails().as === "admin" && (
         <div className="pl-3 mt-5 mb-2">
           No Car Management Database?{" "}
@@ -220,6 +250,7 @@ const CarListing = () => {
             Create{" "}
           </button>
         </div>
+        
       )}
     </div>
   );

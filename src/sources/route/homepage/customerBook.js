@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import config from '../../../config.json'
+import { toast } from "react-toastify";
+import config from "../../../config.json";
 import Travelinput from "../../../component/travelinput";
 import jwt from "../../../services/userService";
 import auth from "../../../services/authService";
@@ -14,6 +14,8 @@ const CustomerBook = () => {
   const [activePage, setActivePage] = useState(1);
 
   function Paginate(event) {
+    event.preventDefault();
+
     const pageNum = event.target.innerHTML;
 
     length.forEach((v) => {
@@ -25,58 +27,71 @@ const CustomerBook = () => {
 
     setSlicedArray(newArray.slice(startNum, newArray.length).splice(0, 6));
   }
-  useEffect(() => {
-    async function GetUserDetail() {
-      try {
-        const response = await auth.get(
-          config.apiUrl + "/customer/alltravels",
-          {
-            "Content-type": "application/json; charset=UTF-8",
-          }
-        );
 
-        if (response.status == 200) {
-          setArray(response.data.Travel);
+  async function GetUserDetail() {
+    try {
+      const response = await auth.get(config.apiUrl + "/customer/alltravels", {
+        "Content-type": "application/json; charset=UTF-8",
+      });
 
-          setCount(response.data.Travel.length);
-          setSlicedArray(() => {
-            return response.data.Travel.slice(
-              0,
-              response.data.Travel.length
-            ).splice(0, 6);
-          });
-          setLength(() => {
-            return [
-              ...Array(Math.ceil(response.data.Travel.length / 6) + 1).keys(),
-            ].slice(1);
-          });
-          return;
-        }
-      } catch (err) {
-        if (err.response.status >= 400 && err.response.status < 500) {
-          return toast.error(err.response.data);
-        }
+      if (response.status == 200) {
+        setArray(response.data.Travel);
 
-        return toast.error(err.message);
+        setCount(response.data.Travel.length);
+        setSlicedArray(() => {
+          return response.data.Travel.slice(
+            0,
+            response.data.Travel.length
+          ).splice(0, 6);
+        });
+        setLength(() => {
+          return [
+            ...Array(Math.ceil(response.data.Travel.length / 6) + 1).keys(),
+          ].slice(1);
+        });
+        return;
       }
+    } catch (err) {
+      if (err.response.status >= 400 && err.response.status < 500) {
+        return toast.error(err.response.data);
+      }
+
+      return toast.error(err.message);
     }
+  }
+
+  useEffect(() => {
     GetUserDetail();
   }, []);
 
   return (
     <div className="px-2 mt-4">
-      <ToastContainer />
       <h5 className="poppinsmeduim">Customer</h5>
-      <p className="pl-4 mt-3 ralewaysemibold">
+      <p className="pl-4 mt-3 ralewaysemibold btn btn-success">
         Welcome, {jwt.getDetails().firstName}
       </p>
       <div className="h mx-auto mt-5">
-        <h6 className="text-center mb-3 poppinsmeduim">Book your Ticket Here</h6>
-        <Travelinput checkShadow="lightback" textcolor="text-dark" />
+        <h6 className="text-center mb-3 poppinsmeduim">
+          Book your Ticket Here
+        </h6>
+        <Travelinput
+          checkShadow="lightback"
+          textcolor="text-dark"
+          reload={GetUserDetail}
+        />
       </div>
 
       <div className="my-5 ralewaymeduim">
-        <h6 className="pl-3 poppinsmeduim">Car Bookings ( {count} )</h6>
+        <div className="d-flex justify-content-between align-items-center">
+          <header className="m-2 poppinsmeduim">
+            Car Bookings ( {count} )
+          </header>{" "}
+          <div className="btn-sm btn-info m-2 d-flex align-items-center" onClick={GetUserDetail}>
+            <span class="material-symbols-outlined mr-1">refresh</span>
+            <span>Refresh</span>
+          </div>
+        </div>
+
         <div className="table-control-1 ">
           <table className="table table-hover table-bordered">
             <thead>
@@ -99,19 +114,29 @@ const CustomerBook = () => {
                     <td> {v.carType}</td>
                     <td>{v.pickupDate}</td>
                     <td>{v.to}</td>
-                    <td>{v.status}</td>
+                    <td className="text-light">
+                      {v.status == "processing" ? (
+                        <span className="bg-warning btn-sm text-light">{v.status}</span>
+                      ) : v.status == "completed" ? (
+                        <span className="bg-success btn-sm text-light">{v.status}</span>
+                      ) : (
+                        <span className="bg-danger btn-sm text-light">{v.status}</span>
+                      )}
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-        <nav aria-label="...">
-          <ul class="pagination pagination-sm mt-3">
+        <nav aria-label="d-flex ">
+          <ul class="pagination pagination-sm mt-3 d-flex flex-wrap  justify-content-center ">
             {length.map((v) => {
               return (
-                <li class="page-item" onClick={Paginate}>
-                  <a href="" class="page-link">{v}</a>
+                <li className="page-item shadow-sm" onClick={Paginate}>
+                  <a href="" class="page-link ">
+                    {v}
+                  </a>
                 </li>
               );
             })}

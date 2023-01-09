@@ -1,4 +1,4 @@
-// import Box from "./box";
+
 import speed from "../sources/assets/icon_speed.png"
 import manylocation from "../sources/assets/a.png"
 import protection from "../sources/assets/Vector.png"

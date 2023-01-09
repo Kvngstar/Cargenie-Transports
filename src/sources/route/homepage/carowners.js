@@ -13,6 +13,7 @@ const CarOwners = () => {
   const [newArray, setNewArray] = useState([]);
   const [slicedArray, setSlicedArray] = useState([]);
   const [activePage, setActivePage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     type: "",
@@ -88,6 +89,7 @@ const CarOwners = () => {
             ].slice(1);
           });
           setCount(response.data.length);
+          setLoading(false)
 
           return;
         }
@@ -104,58 +106,67 @@ const CarOwners = () => {
 
   return (
     <div className="px-2 mt-4">
-      <ToastContainer />
-      <h5 className="poppinsmeduim">Admin</h5>
+      <h5 className="poppinsmeduim"> <span class="material-symbols-outlined">admin_panel_settings</span>
+          {jwt.getDetails().as}</h5>
       <h6 className="pl-4 mt-3 ralewaysemibold">
         Welcome, {jwt.getDetails().firstName}
       </h6>
 
       <div className="my-5 ralewaymeduim">
         <h6 className="pl-3 mb-5 poppinsmeduim">Car owner`s List</h6>
-
-        <div className="table-control-1 mt-3 ">
-          <table className="table table-sm ">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Fullname</th>
-                <th>email</th>
-                <th>phone no.</th>
-
-                <th>Specification</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {slicedArray.map((v) => {
-                return (
-                  <tr>
-                    <td>{v._id} </td>
-                    <td>{v.date} </td>
-                    <td>
-                      {v.firstName} {v.lastName}
-                    </td>
-                    <td>{v.email}</td>
-                    <td className="">{v.phoneNum}</td>
-                    <td>
-                      {v.car.map((w) => {
-                        return (
-                          <ul>
-                            {" "}
-                            <li>{w.name}</li> <li>{w.type}</li>{" "}
-                            <li>{w.model}</li>
-                            <li>{w.date}</li>
-                          </ul>
-                        );
-                      })}{" "}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <div className="p" style={{ minHeight: "300px" }}>
+        {loading ? (
+          <div className="preloadcont">
+            <div></div>
+            <div className="middleelement"></div>
+            <div></div>
+          </div>
+        ) :  (newArray.length < 1)? <div className="text-center bg-danger text-light poppinsemibold ">No record found</div>: (
+          <div className="table-control-1 mt-3 ">
+            <table className="table table-sm ">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Fullname</th>
+                  <th>email</th>
+                  <th>phone no.</th>
+  
+                  <th>Specification</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                {slicedArray.map((v) => {
+                  return (
+                    <tr>
+                      <td>{v._id} </td>
+                      <td>{v.date} </td>
+                      <td>
+                        {v.firstName} {v.lastName}
+                      </td>
+                      <td>{v.email}</td>
+                      <td className="">{v.phoneNum}</td>
+                      <td>
+                        {v.car.map((w) => {
+                          return (
+                            <ul>
+                              {" "}
+                              <li>{w.name}</li> <li>{w.type}</li>{" "}
+                              <li>{w.model}</li>
+                              <li>{w.date}</li>
+                            </ul>
+                          );
+                        })}{" "}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+             ) }
+           </div>
         <nav aria-label="..." className="mt-3">
           <ul class="pagination pagination-sm">
             {length.map((v) => {

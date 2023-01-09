@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import config from '../../../config.json'
+import {  toast } from "react-toastify";
+import config from "../../../config.json";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
-import bell from "../../assets/notification.png";
 import NotifyBox from "../../../component/notifybox";
 import "./homepage.css";
 
@@ -18,6 +17,7 @@ const Notification = () => {
   const [count, setCount] = useState(0);
   const [slicedArray, setSlicedArray] = useState([]);
   const [activePage, setActivePage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   function Paginate(event) {
     const pageNum = event.target.innerHTML;
@@ -26,44 +26,45 @@ const Notification = () => {
         setActivePage(v);
       }
     });
-    let startNum = (pageNum - 1) * 2;
+    let startNum = (pageNum - 1) * 3;
 
-    setSlicedArray(newArray.slice(startNum, count).splice(0, 2));
+    setSlicedArray(newArray.slice(startNum, count).splice(0, 3));
   }
-  useEffect(() => {
-    async function getNotification() {
-      try {
-        const response = await auth.get( config.apiUrl + "/notification", {
-          "Content-type": "application/json; charset=UTF-8",
+  async function getNotification() {
+    try {
+      const response = await auth.get(config.apiUrl + "/notification", {
+        "Content-type": "application/json; charset=UTF-8",
+      });
+
+      if (response.status >= 200 && response.status < 400) {
+        setNewArray(response.data);
+        setCount(response.data.length);
+        setSlicedArray(() => {
+          return response.data.slice(0, response.data.length).splice(0, 3);
         });
 
-        if (response.status >= 200 && response.status < 400) {
-          setNewArray(response.data);
-          setCount(response.data.length);
-          setSlicedArray(() => {
-            return response.data.slice(0, response.data.length).splice(0, 2);
-          });
+        setLength(() => {
+          return [
+            ...Array(Math.ceil(response.data.length / 3) + 1).keys(),
+          ].slice(1);
+        });
+        setLoading(false);
 
-          setLength(() => {
-            return [
-              ...Array(Math.ceil(response.data.length / 2) + 1).keys(),
-            ].slice(1);
-          });
-
-          return;
-        }
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status < 500
-        ) {
-          return toast.error(error.response.data);
-        }
-
-        return toast.error(error.message);
+        return;
       }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
     }
+  }
+  useEffect(() => {
     getNotification();
   }, []);
   function handleState(event) {
@@ -74,11 +75,10 @@ const Notification = () => {
     });
   }
   async function SendData(event) {
-
     event.preventDefault();
 
-    if(formData.title.trim() == "" ||  formData.description.trim() == ""){
-      return toast.error('No input should be empty')
+    if (formData.title.trim() == "" || formData.description.trim() == "") {
+      return toast.error("No input should be empty");
     }
     try {
       const response = await auth.post(
@@ -91,7 +91,9 @@ const Notification = () => {
 
       if (response.status >= 200 && response.status < 400) {
         toast.success(response.data);
-        window.location.reload();
+        getNotification();
+        formData.title = "";
+        formData.description = "";
       }
     } catch (error) {
       if (
@@ -108,19 +110,16 @@ const Notification = () => {
 
   return (
     <div className="px-2 mt-4">
-      <ToastContainer />
-      <h4 className="poppinsmeduim fontsize14">
-        Notification Center ({count})
-      </h4>
-      <h6 className="pl-4 mt-3 ralewaysemibold">
-        Welcome, {jwt.getDetails().firstName}
-      </h6>
+      <h4 className="poppinsmeduim fontsize14"> Notification Center ({count}) </h4>
+      <h6 className="pl-4 mt-3 ralewaysemibold">Welcome, {jwt.getDetails().firstName}</h6>
       <div className="container mt-5 pb-2 ralewaymeduim">
         {jwt.getDetails().as == "admin" && (
           <div class="input-group lightback">
             <div class="input-group-prepend">
               <span class="input-group-text bg-transparent" id="">
-                <img src={bell} alt="" />
+                <span class="material-symbols-outlined">
+                  notifications_active
+                </span>
               </span>
             </div>
 
@@ -145,13 +144,20 @@ const Notification = () => {
             <button
               type="submit d-inline"
               onClick={SendData}
-              className="btn btn-success"
+              className="btn btn-success input-group-append"
             >
-              Send
+              <span class="material-symbols-outlined">send</span>
             </button>
           </div>
         )}
-        {slicedArray.map((v) => {
+          <div className="p" style={{minHeight: "300px"}}  >
+          {loading ? (
+              <div className="preloadcont" >
+                <div></div>
+                <div className="middleelement"></div>
+                <div></div>
+              </div>
+            ) : slicedArray.map((v) => {
           return (
             <NotifyBox
               title={v.title}
@@ -161,6 +167,7 @@ const Notification = () => {
             />
           );
         })}
+      </div>
       </div>
 
       <nav aria-label="..." className="mt-3 mb-3">

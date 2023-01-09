@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import _ from "lodash";
 import jwt_decode from "jwt-decode";
 import 'react-toastify/dist/ReactToastify.css';
@@ -93,7 +93,6 @@ const CreateAccount = () => {
   
   return (
     <div className="form ralewaymeduim">
-      <ToastContainer/>
       <form
         className="form__  mx-2 pb-3 mb-4 second-section-child whitetext"
         action="
@@ -197,7 +196,7 @@ const CreateAccount = () => {
             type="submit"
             id=""
             onClick={submitButton}
-            className="btn btn-success mx-auto w-100"
+            className="btn btn-outline-light mx-auto w-100"
             value="Create Account"
             onclick="calculate(event)"
           />

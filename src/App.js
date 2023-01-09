@@ -1,26 +1,33 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import CarBooking from "./sources/route/homepage/carBooking";
-import CarListing from "./sources/route/homepage/carlist";
-import CarOwners from "./sources/route/homepage/carowners";
-import Customers from "./sources/route/homepage/customer";
-import Hompage from "./sources/route/homepage/homepage";
-import BookingProccessing from "./sources/route/homepage/BookingProcessing";
-import Notification from "./sources/route/homepage/Notification";
-import GetUsers from "./sources/route/homepage/getUsers";
-import Admin from "./sources/route/homepage/Adminsection";
-import CustomerBook from "./sources/route/homepage/customerBook";
-import Loginform from "./sources/route/homepage/login";
-import HomeComponent from "./sources/route/homepage/HomeComp";
-import CarOwnerRoute from "./sources/route/homepage/ownersRoute";
-import CreateAccount from "./sources/route/homepage/createAccount";
+import { Suspense,lazy } from "react";
+import $ from "jquery";
 import jwt from "./services/userService"; 
 import "./App.css";
+import Loading from "./sources/route/homepage/loading"
+import { ToastContainer} from 'react-toastify';
+import NotFound from "./sources/route/homepage/notfound";
+const CarBooking = lazy(()=>  import("./sources/route/homepage/carBooking"))
+const CarListing = lazy(()=>  import("./sources/route/homepage/carlist"))
+const CarOwners = lazy(()=>  import("./sources/route/homepage/carowners"))
+const Customers = lazy(()=>  import("./sources/route/homepage/customer"))
+const Hompage = lazy(()=>  import("./sources/route/homepage/homepage"))
+const BookingProccessing = lazy(()=>  import("./sources/route/homepage/BookingProcessing"))
+const Notification = lazy(()=>  import("./sources/route/homepage/Notification"))
+const GetUsers = lazy(()=>  import("./sources/route/homepage/getUsers"))
+const Admin = lazy(()=>  import("./sources/route/homepage/Adminsection"))
+const CustomerBook = lazy(()=>  import("./sources/route/homepage/customerBook"))
+const Loginform = lazy(()=>  import("./sources/route/homepage/login"))
+const HomeComponent = lazy(()=>  import("./sources/route/homepage/HomeComp"))
+const CarOwnerRoute = lazy(()=>  import("./sources/route/homepage/ownersRoute"))
+const CreateAccount = lazy(()=>  import("./sources/route/homepage/createAccount"))
 
 function App() {
-   
+ 
 
   return (
-    <div className="App">
+    <Suspense className="App" fallback={<Loading/>} >
+      <ToastContainer/>
+      
       <Routes>
         <Route
           path="/customer"
@@ -100,9 +107,12 @@ function App() {
               )
             }
           />
+          
+        <Route path="*" element={<NotFound />} />
         </Route>
+
       </Routes>
-    </div>
+    </Suspense>
   );
 }
 

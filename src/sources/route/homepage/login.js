@@ -1,17 +1,17 @@
-import React, { useState} from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
-import 'react-toastify/dist/ReactToastify.css';
-import config from '../../../config.json'
+import "react-toastify/dist/ReactToastify.css";
+import config from "../../../config.json";
 const Loginform = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     as: "",
   });
-  
+
   function handleState(event) {
     const { name, value } = event.target;
 
@@ -22,13 +22,9 @@ const Loginform = () => {
   async function submitButton(event) {
     event.preventDefault();
     try {
-      const response = await auth.post(
-       config.apiUrl + "/gen/login",
-        user,
-        {
-          "Content-type": "application/json; charset=UTF-8",
-        }
-      );
+      const response = await auth.post(config.apiUrl + "/gen/login", user, {
+        "Content-type": "application/json; charset=UTF-8",
+      });
 
       if (response.status == 200) {
         if (!jwt.getjwt()) {
@@ -62,16 +58,14 @@ const Loginform = () => {
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
-       
         return toast.error(error.response.data);
       }
-      
+
       return toast.error(error.message);
     }
   }
   return (
     <div class="form ralewaymeduim login-h">
-      <ToastContainer/>
       <form
         className="form__  mx-2  second-section-child whitetext"
         action="
@@ -87,7 +81,7 @@ const Loginform = () => {
             onChange={handleState}
             placeholder="Enter your email"
           />
-        </div> 
+        </div>
         <div>
           <input
             type="password"
@@ -112,9 +106,15 @@ const Loginform = () => {
             autoComplete
           >
             <option value=""></option>
-            <option value="customer"  className="text-dark">customer</option>
-            <option value="carowner"  className="text-dark">car-owner</option>
-            <option value="admin"  className="text-dark">admin</option>
+            <option value="customer" className="text-dark">
+              customer
+            </option>
+            <option value="carowner" className="text-dark">
+              car-owner
+            </option>
+            <option value="admin" className="text-dark">
+              admin
+            </option>
           </select>
         </div>
         {/* <div class="form-check mt-2">
@@ -125,7 +125,7 @@ const Loginform = () => {
         <div className="mx-auto w-100 mt-4 mb-4 rounded">
           <input
             type="submit"
-            className="btn btn-warning mx-auto w-100"
+            className="btn btn-outline-light mx-auto w-100"
             value="sign in"
             onClick={submitButton}
             autoComplete

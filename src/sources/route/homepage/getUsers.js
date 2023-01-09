@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import config from '../../../config.json'
+import { toast } from "react-toastify";
+import config from "../../../config.json";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,7 @@ const GetUsers = () => {
   const [newArray, setArray] = useState([]);
   const [length, setLength] = useState([]);
   const [slicedArray, setSlicedArray] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   function Paginate(event) {
     const pageNum = event.target.innerHTML;
@@ -20,12 +21,9 @@ const GetUsers = () => {
   useEffect(() => {
     async function GetUserDetail() {
       try {
-        const response = await auth.get(
-          config.apiUrl +  "/admin/allusers",
-          {
-            "Content-type": "application/json; charset=UTF-8",
-          }
-        );
+        const response = await auth.get(config.apiUrl + "/admin/allusers", {
+          "Content-type": "application/json; charset=UTF-8",
+        });
 
         if (response.status >= 200 && response.status < 400) {
           setArray(response.data);
@@ -38,6 +36,7 @@ const GetUsers = () => {
               ...Array(Math.ceil(response.data.length / 10) + 1).keys(),
             ].slice(1);
           });
+          setLoading(false);
           return;
         }
       } catch (err) {
@@ -48,14 +47,17 @@ const GetUsers = () => {
         return toast.error(err.message);
       }
     }
- 
+
     GetUserDetail();
   }, []);
 
   return (
     <div className="px-2 mt-4">
-      <ToastContainer />
-      <h4 className="poppinsmeduim">Admin</h4>
+      <h4 className="poppinsmeduim">
+        {" "}
+        <span class="material-symbols-outlined">admin_panel_settings</span>
+        {jwt.getDetails().as}
+      </h4>
       <p className="pl-4 mt-3  ralewaysemibold">
         Welcome, {jwt.getDetails().firstName}
       </p>
@@ -63,6 +65,15 @@ const GetUsers = () => {
         <h6 className="pl-3 poppinsmeduim">
           Users in DataBase ({newArray.length})
         </h6>
+            <div className="p" style={{minHeight: "300px"}}  >
+
+        {loading ? (
+              <div className="preloadcont" >
+                <div></div>
+                <div className="middleelement"></div>
+                <div></div>
+              </div>
+            ) :
         <div className="table-control-1 mt-5 ">
           <table className="table table-hover table-bordered ">
             <thead>
@@ -84,9 +95,14 @@ const GetUsers = () => {
                   </tr>
                 );
               })}
-            </tbody>
+            </tbody> 
+
+
           </table>
         </div>
+              
+                 }
+      </div> 
         <nav aria-label="...">
           <ul class="pagination pagination-sm mt-3 mt-2">
             {length.map((v) => {

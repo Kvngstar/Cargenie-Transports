@@ -1,10 +1,9 @@
 import React, { useState} from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import config from '../config.json'
 import auth from "../services/authService";
 import jwt from "../services/userService";
 import "react-toastify/dist/ReactToastify.css";
-import location from "../sources/assets/location.png";
 const Travelinput = (props) => {
   const [data, setData] = useState({
     pickupLocation: "",
@@ -22,18 +21,20 @@ const Travelinput = (props) => {
       return toast.error("User must be logged in");
     }
 
-    try {
-      const response = await auth.post(
-        config.apiUrl + "/customer/travels",
-        data,
-        {
-          "Content-type": "application/json; charset=UTF-8",
-        }
-      );
-      toast.success(response.data);
+     try {
+    //   const response = await auth.post(
+    //     config.apiUrl + "/customer/travels",
+    //     data,
+    //     {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     }
+    //   );
+    //   toast.success(response.data);
 
-      const url = window.location.href;
-      window.location.reload(url);
+    //   const url = window.location.href;
+    //   props.reload() 
+    window.location.replace("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo")
+    // load("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo");
     } catch (err) {
       if (err.response.status >= 400 && err.response.status < 500) {
         return toast.error(err.response.data);
@@ -53,9 +54,9 @@ const Travelinput = (props) => {
   }
 
   return ( 
-    <form className="mt-5  form-guide ">
-      <ToastContainer/>
-      <div className={`py-1 mx-1 ${props.textcolor} text-center px-2 ${props.checkShadow} d-flex flex-wrap  rounded mb-5 g ralewaysemibold `}> 
+    <form className="mt-5 form-guide">
+      
+      <div className={`py-1 mx-1 ${props.textcolor} text-center px-2 ${props.checkShadow} d-flex flex-wrap  rounded mb-5 g ralewaysemibold`}> 
         <div>
           <div>Pickup Location</div>
           <div>
@@ -65,7 +66,7 @@ const Travelinput = (props) => {
                   className="input-group-text bg-light"
                   id="addon-wrapping"
                 >
-                  <img alt="location icon" src={location} />
+                   <span class="material-symbols-outlined mr-1">location_on</span>
                 </span>
               </div>
               <input
@@ -90,7 +91,7 @@ const Travelinput = (props) => {
                   className="input-group-text bg-light "
                   id="addon-wrapping"
                 >
-                  <img src={location} alt="location icon" />{" "}
+                  <span class="material-symbols-outlined mr-1">location_on</span>
                 </span>
               </div>
               <input
@@ -169,9 +170,9 @@ const Travelinput = (props) => {
           <input
             type="submit"
             onClick={handleButton} 
-            className="btn bg-warning mt-2 font-weight-700"
+            className="btn mt-2 bg-info text-light"
+            style={{fontWeight: "600"}}
             value="Book"
-           
           />
         </div>
       
