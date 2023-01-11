@@ -1,5 +1,6 @@
-import React, { useState} from "react";
+import React, { useState,useEffect} from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos"
 import $ from "jquery";
 import Whychoose from "../../../component/whychoose";
 import Super from "../../assets/carbi2.jpg";
@@ -7,6 +8,9 @@ import cities from "../../assets/cities.jpg";
 
 const HomeComponent = () => {
   const [textReload, setTextReload] = useState(true);
+  // useEffect((
+    
+  // )=>{AOS.init()},[])
 
   function OnloadContent() {
     if (textReload !== true) {
@@ -30,14 +34,14 @@ const HomeComponent = () => {
             className="p-4 text-light rounded shadow-lg"
             style={{ maxWidth: "500px", backgroundColor: "#213f26dc" }}
           >
-            <div className="d-flex ralewaysemibold h-25 justify-content-between align-items-center flex-direction-column">
-              <div onClick={OnloadContent} className="hoverEffect">
+            <div  className="d-flex ralewaysemibold h-25 justify-content-between align-items-center flex-direction-column">
+              <div onClick={OnloadContent}  data-aos="slide-right" className="hoverEffect">
                 <div className="d-flex align-items-center flex-column">
                   <span class="material-symbols-outlined mr-2">paid</span>Invest
                 </div>
               </div>
 
-              <div onClick={OffloadContent} className="hoverEffect">
+              <div onClick={OffloadContent} data-aos="slide-left" className="hoverEffect">
                 <div className="d-flex align-items-center flex-column">
                   <span class="material-symbols-outlined">directions_car</span>
                   Ride
@@ -45,7 +49,7 @@ const HomeComponent = () => {
               </div>
             </div>
             <hr />
-            <div className="poppinsmeduim  mt-5">
+            <div  data-aos="slide-up" className="poppinsmeduim  mt-5">
               {textReload ? (
                 <h1 >
                   Invest in the Company <br /> and get paid
@@ -79,9 +83,9 @@ const HomeComponent = () => {
           </div>
         </div>
         <div className="mt-5 poppinsemibold body1 py-5 px-5 background-image">
-          <div className="h-50  container ">
+          <div className="h-50  container" data-aos="fade-down">
             <h2>Cargenie For Business</h2>
-            <p className="my-4">
+            <p className="my-4" >
               Transform the way your company moves and feeds its people
             </p>
             <button className="btn rounded btn-outline-light py-2 px-4">
@@ -91,7 +95,7 @@ const HomeComponent = () => {
         </div>
       </div>
       <div className="d-flex justify-content-around align-items-center flex-wrap-reverse mx-auto py-5 greenerbackground text-light image-hover poppinsmeduim ">
-        <div>
+        <div data-aos="zoom-in-left">
           <img
             src={Super}
             alt=""
@@ -107,7 +111,7 @@ const HomeComponent = () => {
             for our users.
           </p>
         </div> 
-        <div>
+        <div data-aos="zoom-in-right">
           <img
             src={cities}
             alt=""

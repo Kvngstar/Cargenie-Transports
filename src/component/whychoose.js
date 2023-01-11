@@ -12,16 +12,15 @@ const Whychoose = () => {
         <div>
         <h2 className="text-center whitetext poppinsmeduim mb-5">Our Services</h2>
            <div className="e whitetext ralewaymeduim">
-            {/* <Box Image=""  text="" /> */}
-               <div className="box-shadow">
+               <div data-aos="zoom-in" className="box-shadow">
                    <img src={taxi} alt="" />
                    <div>Taxi Services</div>
                </div>
-               <div className="box-shadow">
+               <div data-aos="zoom-in" className="box-shadow">
                    <img src={rental} alt="" />
                    <div>Car Hire Agency</div>
                </div>
-               <div className="box-shadow">
+               <div data-aos="zoom-in" className="box-shadow">
                    <img src={partner} alt="" />
                    <div>Partner With Us</div>
                </div>
@@ -30,16 +29,16 @@ const Whychoose = () => {
            <div className="mt-5">
         <h2 className="text-center whitetext poppinsmeduim mb-4">Why Choose Cargenie?</h2>
            <div className="e whitetext ralewaymeduim">
-            {/* <Box Image=""  text="" /> */}
-               <div className="box-shadow">
+       
+               <div data-aos="zoom-in" className="box-shadow">
                    <img src={speed} alt="" />
                    <div>Fast and Easy to Book</div>
                </div>
-               <div className="box-shadow">
+               <div data-aos="zoom-in" className="box-shadow">
                    <img src={manylocation} alt="" />
                    <div>Many Pickup location</div>
                </div>
-               <div className="box-shadow">
+               <div data-aos="zoom-in" className="box-shadow">
                    <img src={protection} alt="" />
                    <div> Satisfied Customer</div>
                </div>

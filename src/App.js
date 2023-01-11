@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense,lazy } from "react";
-import $ from "jquery";
+import 'aos/dist/aos.css'; 
+import AOS from "aos";
 import jwt from "./services/userService"; 
 import "./App.css";
 import Loading from "./sources/route/homepage/loading"
@@ -23,7 +24,7 @@ const CreateAccount = lazy(()=>  import("./sources/route/homepage/createAccount"
 
 function App() {
  
-
+AOS.init({mirror: true})
   return (
     <Suspense className="App" fallback={<Loading/>} >
       <ToastContainer/>

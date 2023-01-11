@@ -25,14 +25,14 @@ export default function Hompage() {
   return (
     <>
       <div className="wrapper" id="wrapper">
-      <div className="" onClick={ChatPlatform}>
+      {/* <div className="" onClick={ChatPlatform}>
         <span class="material-symbols-outlined messageUs">contact_support</span>
         <div className="toggleChatBox">
           <h2>Hello</h2>
           <p>How can i help You?</p>
           <div className=""><input type="text" className="form-control"/></div>
         </div>
-      </div>
+      </div> */}
       
         <div className="hideclick">
           <div className="aaa lightGreen">
