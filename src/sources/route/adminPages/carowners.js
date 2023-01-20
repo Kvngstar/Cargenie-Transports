@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import link from "../../../sources/assets/linkage.png";
-import "./homepage.css";
+// import "./homepage.css";
 
 const CarOwners = () => {
   var [length, setLength] = useState([]);

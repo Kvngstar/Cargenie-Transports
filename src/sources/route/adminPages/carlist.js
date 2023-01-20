@@ -6,7 +6,6 @@ import jwt from "../../../services/userService";
 import calendar from "../../assets/Calendar_Days.png";
 import CanvasJSReact from "../../../component/canvasjs.react";
 import "react-toastify/dist/ReactToastify.css";
-import "./homepage.css";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;

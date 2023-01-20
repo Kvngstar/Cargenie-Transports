@@ -8,9 +8,6 @@ import cities from "../../assets/cities.jpg";
 
 const HomeComponent = () => {
   const [textReload, setTextReload] = useState(true);
-  // useEffect((
-    
-  // )=>{AOS.init()},[])
 
   function OnloadContent() {
     if (textReload !== true) {
@@ -119,7 +116,7 @@ const HomeComponent = () => {
           <h6 className="mt-3 lightGreen-text">Setting 10+ cities in motion</h6>
           <p className="my-2">
             Our transportation company is available in 10 cities in Nigeria, so
-            you can request a ride even when you're far from home.
+            you can request a ride even when you're f                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ar from home.
           </p>
         </div>
       </div>

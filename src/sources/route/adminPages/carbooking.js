@@ -4,7 +4,7 @@ import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import config from "../../../config.json";
 import "react-toastify/dist/ReactToastify.css";
-import "./homepage.css";
+
 
 const CarBooking = () => {
   const [newArray, setArray] = useState([]);

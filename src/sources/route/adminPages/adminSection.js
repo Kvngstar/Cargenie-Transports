@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
-import { Outlet } from "react-router-dom";
 import Footer from "../../../component/footer";
 import Nav_ from "../../../component/nav1";
-import Menuhalf from "../../../component/menuhalf";
-import "./homepage.css";
 
-const Customers = () => {
+import AdminMenuhalf from "../../../component/adminsidenav";
+import { Outlet } from "react-router-dom";
+const Admin = () => {
   useEffect(() => {
     $("button.kk").on("click", function () {
       $("div.j").fadeToggle(500);
@@ -19,17 +18,17 @@ const Customers = () => {
     <>
       <div>
         <Nav_ />
-        <div className="d-flex w-100 secondp h-auto">
-          <Menuhalf />
+        <div className="d-flex w-100 secondp">
+          <AdminMenuhalf />
           <div>
             <Outlet />
           </div>
         </div>
 
-        <Footer />
       </div>
+        <Footer />
     </>
   );
 };
 
-export default Customers;
+export default Admin;

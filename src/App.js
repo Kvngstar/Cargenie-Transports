@@ -3,24 +3,24 @@ import { Suspense,lazy } from "react";
 import 'aos/dist/aos.css'; 
 import AOS from "aos";
 import jwt from "./services/userService"; 
-import "./App.css";
-import Loading from "./sources/route/homepage/loading"
+import Loading from "./loading/loading";
+import "../src/style.css"
 import { ToastContainer} from 'react-toastify';
-import NotFound from "./sources/route/homepage/notfound";
-const CarBooking = lazy(()=>  import("./sources/route/homepage/carBooking"))
-const CarListing = lazy(()=>  import("./sources/route/homepage/carlist"))
-const CarOwners = lazy(()=>  import("./sources/route/homepage/carowners"))
-const Customers = lazy(()=>  import("./sources/route/homepage/customer"))
-const Hompage = lazy(()=>  import("./sources/route/homepage/homepage"))
-const BookingProccessing = lazy(()=>  import("./sources/route/homepage/BookingProcessing"))
-const Notification = lazy(()=>  import("./sources/route/homepage/Notification"))
-const GetUsers = lazy(()=>  import("./sources/route/homepage/getUsers"))
-const Admin = lazy(()=>  import("./sources/route/homepage/Adminsection"))
-const CustomerBook = lazy(()=>  import("./sources/route/homepage/customerBook"))
-const Loginform = lazy(()=>  import("./sources/route/homepage/login"))
-const HomeComponent = lazy(()=>  import("./sources/route/homepage/HomeComp"))
-const CarOwnerRoute = lazy(()=>  import("./sources/route/homepage/ownersRoute"))
-const CreateAccount = lazy(()=>  import("./sources/route/homepage/createAccount"))
+import NotFound from "./sources/route/adminPages/notfound";
+const CarBooking = lazy(()=>  import("./sources/route/adminPages/carbooking"))
+const CarListing = lazy(()=>  import("./sources/route/adminPages/carlist"))
+const CarOwners = lazy(()=>  import("./sources/route/adminPages/carowners"))
+const Customers = lazy(()=>  import("./sources/route/adminPages/customer"))
+const Hompage = lazy(()=>  import("./sources/route/adminPages/homePage"))
+const BookingProccessing = lazy(()=>  import("./sources/route/adminPages/bookingProcessing"))
+const Notification = lazy(()=>  import("./sources/route/adminPages/Notification"))
+const GetUsers = lazy(()=>  import("./sources/route/adminPages/getUsers"))
+const Admin = lazy(()=>  import("./sources/route/adminPages/adminSection"))
+const CustomerBook = lazy(()=>  import("./sources/route/customerPages/customerBook"))
+const Loginform = lazy(()=>  import("./sources/route/authPages/login"))
+const HomeComponent = lazy(()=>  import("./sources/route/adminPages/homeComponent"))
+const CarOwnerRoute = lazy(()=>  import("./sources/route/customerPages/ownersRoute"))
+const CreateAccount = lazy(()=>  import("./sources/route/authPages/createAccount"))
 
 function App() {
  

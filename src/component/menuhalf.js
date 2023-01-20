@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import Logout from "../sources/route/homepage/logout"
+import Logout from "../sources/route/authPages/logout"
 import jwt from '../services/userService'
 import cloudicon from '../sources/assets/Cloud_Download.png';
 import calendar from '../sources/assets/Calendar_Days.png';

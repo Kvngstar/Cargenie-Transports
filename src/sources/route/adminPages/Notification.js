@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../services/authService";
 import jwt from "../../../services/userService";
 import NotifyBox from "../../../component/notifybox";
-import "./homepage.css";
 
 const Notification = () => {
   const [formData, setFormData] = useState({

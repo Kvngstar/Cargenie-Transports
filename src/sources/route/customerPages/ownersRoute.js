@@ -4,7 +4,6 @@ import jwt from "../../../services/userService";
 import auth from "../../../services/authService";
 import config from "../../../config.json";
 import "react-toastify/dist/ReactToastify.css";
-import "./homepage.css";
 
 const CarOwnerRoute = () => {
   const [userObject, setUserObject] = useState({});
@@ -21,7 +20,7 @@ const CarOwnerRoute = () => {
           setUserObject(response.data);
           setUserArray(response.data.car);
           return;
-        }
+        } 
       } catch (err) {
         if (err.response.status >= 400 && err.response.status < 500) {
           return toast.error(err.response.data);
