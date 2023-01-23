@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import config from '../../../config.json'
-import "react-toastify/dist/ReactToastify.css";
-import auth from "../../../services/authService";
-import jwt from "../../../services/userService";
-import link from "../../../sources/assets/linkage.png";
-// import "./homepage.css";
+import config from '../../config.json'
+import auth from "../../services/authService";
+import jwt from "../../services/userService";
+import link from "../../sources/assets/linkage.png";
+
 
 const CarOwners = () => {
   var [length, setLength] = useState([]);

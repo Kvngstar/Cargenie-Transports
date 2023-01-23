@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
-import Footer from "../../../component/footer";
-import Nav_ from "../../../component/nav1";
+import Footer from "../../component/footer";
+import Nav_ from "../../component/nav1";
 
-import AdminMenuhalf from "../../../component/adminsidenav";
+import AdminMenuhalf from "../../component/adminsidenav";
 import { Outlet } from "react-router-dom";
 const Admin = () => {
-  useEffect(() => {
+  useEffect(() => { 
     $("button.kk").on("click", function () {
       $("div.j").fadeToggle(500);
     });

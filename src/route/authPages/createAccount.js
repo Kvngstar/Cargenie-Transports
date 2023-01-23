@@ -3,10 +3,9 @@ import { useState } from "react";
 import { toast } from 'react-toastify';
 import _ from "lodash";
 import jwt_decode from "jwt-decode";
-import 'react-toastify/dist/ReactToastify.css';
-import jwt from "../../../services/userService";
-import auth from "../../../services/authService";
-import config from '../../../config.json'
+import jwt from "../../services/userService";
+import auth from "../../services/authService";
+import config from '../../config.json'
 const CreateAccount = () => {
   var [formData, setFormData] = useState({ 
     firstName: "",

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
-import auth from "../../../services/authService";
-import jwt from "../../../services/userService";
-import "react-toastify/dist/ReactToastify.css";
-import config from "../../../config.json";
+import auth from "../../services/authService";
+import jwt from "../../services/userService";
+import config from "../../config.json";
 const Loginform = () => {
   const [user, setUser] = useState({
     email: "",

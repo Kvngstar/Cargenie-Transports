@@ -4,7 +4,7 @@ const Nav__ = () => {
   return (
     <div className="l d-flex carbg justify-content-between align-items-center flex-direction-row py-3 pb-3 px-2 box-shadow">
       <Logo />
-      <div className="tohideclass d-flex">
+      <div className="tohideclass d-none">
         <Link to="login">
           {" "}
           <span className="ml-3 whitetext  robotomeduim btn-sm rounded d-flex justify-content-center align-items-center">

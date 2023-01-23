@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import config from '../../../config.json'
-import auth from "../../../services/authService";
-import jwt from "../../../services/userService";
-import calendar from "../../assets/Calendar_Days.png";
-import CanvasJSReact from "../../../component/canvasjs.react";
+import config from '../../config.json'
+import auth from "../../services/authService";
+import jwt from "../../services/userService";
+import calendar from "../../sources/assets/Calendar_Days.png";
+import CanvasJSReact from "../../component/canvasjs.react";
 import "react-toastify/dist/ReactToastify.css";
 
 var CanvasJS = CanvasJSReact.CanvasJS;

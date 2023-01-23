@@ -228,6 +228,7 @@ align-items: center;
   width: 70%;
   /* height: 100px; */
   position: relative;
+  margin-left: auto;
 
   
 }

@@ -6,7 +6,7 @@ import user from '../sources/assets/User1.png';
 import logout from '../sources/assets/logout.png';
 import settings from '../sources/assets/settings_icon.png';
 import help from '../sources/assets/help_icon.png';
-import Logout from "../sources/route/authPages/logout"
+import Logout from "../route/authPages/logout"
 
 const AdminMenuhalf = () => {
     return ( 

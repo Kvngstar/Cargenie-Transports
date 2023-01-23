@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import config from "../../../config.json";
-import Travelinput from "../../../component/travelinput";
-import jwt from "../../../services/userService";
-import auth from "../../../services/authService";
-import "react-toastify/dist/ReactToastify.css";
+import config from "../../config.json";
+import Travelinput from "../../component/travelinput";
+import jwt from "../../services/userService";
+import auth from "../../services/authService";
 
 const CustomerBook = () => { 
   const [newArray, setArray] = useState([]);

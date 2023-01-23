@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import jwt from "../../../services/userService";
-import auth from "../../../services/authService";
-import config from "../../../config.json";
+import jwt from "../../services/userService";
+import auth from "../../services/authService";
+import config from "../../config.json";
 import "react-toastify/dist/ReactToastify.css";
 
 const CarOwnerRoute = () => {

@@ -1,10 +1,9 @@
 import React, { useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos"
-import $ from "jquery";
-import Whychoose from "../../../component/whychoose";
-import Super from "../../assets/carbi2.jpg";
-import cities from "../../assets/cities.jpg";
+import Whychoose from "../../component/whychoose";
+import Super from "../../sources/assets/carbi2.jpg";
+import cities from "../../sources/assets/cities.jpg";
 
 const HomeComponent = () => {
   const [textReload, setTextReload] = useState(true);

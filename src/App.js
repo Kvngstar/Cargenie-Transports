@@ -5,22 +5,24 @@ import AOS from "aos";
 import jwt from "./services/userService"; 
 import Loading from "./loading/loading";
 import "../src/style.css"
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer} from 'react-toastify';
-import NotFound from "./sources/route/adminPages/notfound";
-const CarBooking = lazy(()=>  import("./sources/route/adminPages/carbooking"))
-const CarListing = lazy(()=>  import("./sources/route/adminPages/carlist"))
-const CarOwners = lazy(()=>  import("./sources/route/adminPages/carowners"))
-const Customers = lazy(()=>  import("./sources/route/adminPages/customer"))
-const Hompage = lazy(()=>  import("./sources/route/adminPages/homePage"))
-const BookingProccessing = lazy(()=>  import("./sources/route/adminPages/bookingProcessing"))
-const Notification = lazy(()=>  import("./sources/route/adminPages/Notification"))
-const GetUsers = lazy(()=>  import("./sources/route/adminPages/getUsers"))
-const Admin = lazy(()=>  import("./sources/route/adminPages/adminSection"))
-const CustomerBook = lazy(()=>  import("./sources/route/customerPages/customerBook"))
-const Loginform = lazy(()=>  import("./sources/route/authPages/login"))
-const HomeComponent = lazy(()=>  import("./sources/route/adminPages/homeComponent"))
-const CarOwnerRoute = lazy(()=>  import("./sources/route/customerPages/ownersRoute"))
-const CreateAccount = lazy(()=>  import("./sources/route/authPages/createAccount"))
+import NotFound from "../src/route/adminPages/notfound";
+const CarBooking = lazy(()=>  import("../src/route/adminPages/carbooking"))
+const CarListing = lazy(()=>  import("../src/route/adminPages/carlist"))
+const CarOwners = lazy(()=>  import("../src/route/adminPages/carowners"))
+const Customers = lazy(()=>  import("../src/route/adminPages/customer"))
+const Hompage = lazy(()=>  import("../src/route/adminPages/homePage"))
+const BookingProccessing = lazy(()=>  import("../src/route/adminPages/bookingProcessing"))
+const Notification = lazy(()=>  import("../src/route/adminPages/Notification"))
+const GetUsers = lazy(()=>  import("../src/route/adminPages/getUsers"))
+const Admin = lazy(()=>  import("../src/route/adminPages/adminSection"))
+const CustomerBook = lazy(()=>  import("../src/route/customerPages/customerBook"))
+const Loginform = lazy(()=>  import("../src/route/authPages/login"))
+const HomeComponent = lazy(()=>  import("../src/route/adminPages/homeComponent"))
+const CarOwnerRoute = lazy(()=>  import("../src/route/customerPages/ownersRoute"))
+const CreateAccount = lazy(()=>  import("../src/route/authPages/createAccount"))
+const AdminChatPage = lazy(()=> import("./chatBox/adminChatBox"))
 
 function App() {
  
@@ -30,6 +32,7 @@ AOS.init({mirror: true})
       <ToastContainer/>
       
       <Routes>
+        <Route path="Chats" element={<AdminChatPage />} /> 
         <Route
           path="/customer"
           element={

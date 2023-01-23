@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {toast } from "react-toastify";
-import auth from "../../../services/authService";
-import jwt from "../../../services/userService";
+import auth from "../../services/authService";
+import jwt from "../../services/userService";
 import "react-toastify/dist/ReactToastify.css";
-import config from '../../../config.json'
+import config from '../../config.json'
 
 const BookingProccessing = () => {
   const [newArray, setArray] = useState([]);

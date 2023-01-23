@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import auth from "../../../services/authService";
-import jwt from "../../../services/userService";
-import config from "../../../config.json";
-import "react-toastify/dist/ReactToastify.css";
+import auth from "../../services/authService";
+import jwt from "../../services/userService";
+import config from "../../config.json";
 
 
 const CarBooking = () => {

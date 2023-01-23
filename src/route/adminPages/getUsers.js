@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import config from "../../../config.json";
-import auth from "../../../services/authService";
-import jwt from "../../../services/userService";
-import "react-toastify/dist/ReactToastify.css";
+import config from "../../config.json";
+import auth from "../../services/authService";
+import jwt from "../../services/userService";
+
 
 const GetUsers = () => {
   const [newArray, setArray] = useState([]);

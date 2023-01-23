@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
 import { Outlet } from "react-router-dom";
-import Footer from "../../../component/footer";
-import Nav_ from "../../../component/nav1";
-import Menuhalf from "../../../component/menuhalf";
+import Footer from "../../component/footer";
+import Nav_ from "../../component/nav1";
+import Menuhalf from "../../component/menuhalf";
 
 const Customers = () => {
   useEffect(() => {
