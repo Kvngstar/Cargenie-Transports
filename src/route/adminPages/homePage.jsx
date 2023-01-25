@@ -75,7 +75,7 @@ export default function Hompage() {
     <>
       <div className="wrapper" id="wrapper">
         <div className="messageUs rounded">
-          <div className="chatBox bg-light">
+          <div className="chatBox  bg-light">
             <div className="chatBox_header">
               <div>
                 <span class="material-symbols-outlined chatIcon">
@@ -91,13 +91,13 @@ export default function Hompage() {
                 </div>{" "}
               </div>
             </div>
-            <div className="scrollable">
+            <div className="scrollable ">
               {textdata.map((v) => {
                 return (
                   <div className="textContainer">
                     {v.status === "customer" ? (
                       <div className="customer_textbox"> 
-                        <div className="d-flex">
+                        <div className="d-flex mb-3">
                         <img src={Image} className="mr-2" style={{ height: "20px" }} />
                         <div> {v.message}</div>
                           
@@ -110,11 +110,11 @@ export default function Hompage() {
                       </div>
                     ) : (
                       <div className="admin_textbox ">
-                        <div className="d-flex">
+                        <div className="d-flex mb-3">
                         <img src={Image} className="mr-2" style={{ height: "20px" }} />
                         <div> {v.message}</div>
                           
-                        </div>
+                        </div> 
                         <span className="chat_date">
                           {" "}
                           <span className="admin_label mr-1">admin</span>

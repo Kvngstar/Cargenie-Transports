@@ -196,13 +196,15 @@
   flex-direction: column;
   align-items: baseline;
   justify-content: right;
-  background-color: #f2f2f2;
+  background-color: #f2f2f2; 
+  width: 100%;
+
 }
 
 
 .messageUs:hover{
   background-color: #a3a3a3;
-}
+}    
 .chatBox_header{
 display: flex;
 padding: 15px ;
@@ -213,6 +215,7 @@ align-items: center;
   overflow-y: scroll ;
   scroll-behavior: smooth;
   height: 282px;
+  width: 100%;
   padding-bottom: 35px;
   padding-top: 15px;
   /* background-color: red; */
@@ -223,37 +226,36 @@ align-items: center;
 }
 .customer_textbox {
   padding: 15px;
-  background-color: #b6ffbe;
+  background-color: #ededed;
   border-radius: 10px;
   width: 70%;
-  /* height: 100px; */
   position: relative;
   margin-left: auto;
-
   
 }
 .customer_label{
-  background-color: rgba(170, 181, 181, 0.415);
+  background-color: rgba(218, 228, 228, 0.211);
   font-size: 12px;
   border-radius: 5px;
   padding: 0px 5px;
+  padding-top: 10px
 }
 .admin_textbox{
 text-align: left; 
 padding: 15px;
-background-color: var(--color-yellow);
+background-color:#ededed;
 border-radius: 10px;
 width: 70%;
-/* height: 100px; */
 position: relative;
 
 
 }
 .admin_label{
-  background-color: rgb(235, 226, 215);
+  background-color: rgba(207, 202, 196, 0.739);
   font-size: 12px;
   border-radius: 10px;
   padding: 0px 4px;
+  
   
 
 }
@@ -272,8 +274,9 @@ position: relative;
 }
 .chatBox {
   height: 400px;
-  width: 100%;
-  /* width: 400px; */
+  width: 800px;
+  max-width: 800px;
+  margin: auto;
   display: none;
   position: relative;
   overflow-y: scroll;
@@ -768,12 +771,18 @@ li {
     top: 0;
     z-index: 1001;
   }
+  .chatBox{
+    /* width: 700px; */
+  }
 }
 
 .fit-size {
   height: 500px;
 }
 @media screen and (max-width: 800px) {
+  .customer_textbox,.admin_textbox{
+    width: 90%;
+  }
   h2,
   h3 {
     font-size: 28px !important;
@@ -814,6 +823,10 @@ li {
   .overlay1 {
     background-image: var(--secondary-color);
   }
+  /* .chatBox{
+    max-width:99%;
+    margin:  auto;
+  } */
 }
 .fit-size {
   height: auto;
@@ -826,7 +839,7 @@ li {
   h5,
   h6 {
     font-size: 19px !important;
-  }
+  } 
   .h {
     max-width: 300px;
   }
@@ -862,5 +875,8 @@ li {
   }
   .table-control-1 table {
     width: 700px !important;
+  }
+  .customer_textbox,.admin_textbox{
+    width: 95%;
   }
 }
