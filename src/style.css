@@ -191,7 +191,7 @@
   position: absolute;
   padding: 2px;
   bottom: 40px;
-  right: 10pxadd;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: baseline;
