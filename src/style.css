@@ -191,7 +191,7 @@
   position: absolute;
   padding: 2px;
   bottom: 40px;
-  right: 0;
+  right: 10pxadd;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -880,7 +880,7 @@ li {
   .table-control-1 table {
     width: 700px !important;
   }
-  .customer_textbox,.admin_textbox{
+  /* .customer_textbox,.admin_textbox{
     width: 95%;
-  }
+  } */
 }
