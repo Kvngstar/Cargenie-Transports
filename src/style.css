@@ -226,7 +226,7 @@ align-items: center;
   float: right;
 }
 .customer_textbox {
-  padding: 15px;
+  padding: 10px;
   background-color: #ededed;
   border-radius: 10px;
   width: 70%;
@@ -243,11 +243,12 @@ align-items: center;
 }
 .admin_textbox{
 text-align: left; 
-padding: 15px;
+padding: 10px;
 background-color:#ededed;
 border-radius: 10px;
 width: 70%;
 position: relative;
+font-size: small;
 
 
 }
