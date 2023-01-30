@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { toast } from 'react-toastify';
-import _ from "lodash";
+import { Player } from "@lottiefiles/react-lottie-player";
+import _, { set } from "lodash";
 import jwt_decode from "jwt-decode";
 import jwt from "../../services/userService";
 import auth from "../../services/authService";
@@ -17,6 +18,7 @@ const CreateAccount = () => {
     as: "",
     terms: "",
   });
+  const [click,setClick] =useState(false)
 
   function handleState(event) {
     const { name, value, checked, type } = event.target;
@@ -29,13 +31,16 @@ const CreateAccount = () => {
 
   async function submitButton(event) {
     event.preventDefault();
+    setClick(true)
 
     if (!formData.password || !formData.confirmPassword) {
+      setClick(false)
       return toast.error("password does not match with confirm password");
     } else if (formData.password !== formData.confirmPassword) {
+      setClick(false)
       return toast.error("password does not match with confirm password");
     } else if (!formData.terms) {
-   
+      setClick(false)
       return toast.error("Accept the terms and condition");
     } else 
       try {
@@ -83,9 +88,10 @@ const CreateAccount = () => {
           error.response.status >= 400 &&
           error.response.status < 500
         ) {
-      
+          setClick(false)
           return toast.error(error.response.data);
         }
+        setClick(false)
         return toast.error(error.message);
       }
     }
@@ -191,14 +197,29 @@ const CreateAccount = () => {
           </label>
         </div>
         <div className="mx-auto w-100 mt-4">
-          <input
+        {(click === false)?  <button
             type="submit"
             id=""
             onClick={submitButton}
             className="btn btn-outline-light mx-auto w-100"
             value="Create Account"
             onclick="calculate(event)"
-          />
+          >create</button>: <button
+          className="btn btn-outline-light mx-auto w-100"
+           
+        >
+        <Player
+                autoplay
+                loop
+                src="https://lottie.host/42dc5709-db75-43e2-89b9-7e7d87d256fa/O5R1VPRMsb.json"
+                style={{ height: '100px', width: '100px' }}
+             
+              >
+              </Player></button>
+        }
+         
+         
+         
         </div>
       </form>
     </div>

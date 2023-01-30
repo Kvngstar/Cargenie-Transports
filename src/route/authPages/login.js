@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { Player } from "@lottiefiles/react-lottie-player";
 import jwt_decode from "jwt-decode";
 import auth from "../../services/authService";
 import jwt from "../../services/userService";
 import config from "../../config.json";
+
 const Loginform = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     as: "",
   });
+  const [click,setClick] = useState(false)
 
   function handleState(event) {
     const { name, value } = event.target;
@@ -19,6 +22,8 @@ const Loginform = () => {
     });
   }
   async function submitButton(event) {
+     
+    setClick(true)
     event.preventDefault();
     try {
       const response = await auth.post(config.apiUrl + "/gen/login", user, {
@@ -57,9 +62,11 @@ const Loginform = () => {
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
+        setClick(false)
         return toast.error(error.response.data);
       }
-
+      
+      setClick(false)
       return toast.error(error.message);
     }
   }
@@ -116,19 +123,31 @@ const Loginform = () => {
             </option>
           </select>
         </div>
-        {/* <div class="form-check mt-2">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked/>
-                    keep me signed-in</label>
-                </div> */}
+       
         <div className="mx-auto w-100 mt-4 mb-4 rounded">
-          <input
+        {(click === false)?  <button
             type="submit"
             className="btn btn-outline-light mx-auto w-100"
             value="sign in"
             onClick={submitButton}
             autoComplete
-          />
+            id='submit'
+          >sign-in</button>:  <button
+          type="submit"
+          className="btn  mx-auto w-100"
+          disabled
+        >
+        
+        <Player
+                autoplay
+                loop
+                src="https://lottie.host/42dc5709-db75-43e2-89b9-7e7d87d256fa/O5R1VPRMsb.json"
+                style={{ height: '100px', width: '100px' }}
+             
+              >
+              </Player></button>}
+         
+         
         </div>
       </form>
     </div>
