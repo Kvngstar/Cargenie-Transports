@@ -3,6 +3,7 @@ import $ from "jquery";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
+import {Player} from "@lottiefiles/react-lottie-player"
 import Footer from "../../component/footer";
 import Nav__ from "../../component/nav";
 import TextBox from "../../chatBox/textBox";
@@ -73,9 +74,16 @@ export default function Hompage() {
           <div className="chatBox  bg-light">
             <div className="chatBox_header">
               <div>
-                <span class="material-symbols-outlined chatIcon">
-                  contact_support
-                </span>
+                
+              <Player
+                autoplay
+                loop
+                src="https://assets2.lottiefiles.com/packages/lf20_au4zdsr8.json"
+                style={{ height: '60px', width: '60px' }}
+             
+              >
+              </Player>
+
               </div>{" "}
               <div className="ml-2">
                 <div>
@@ -142,15 +150,21 @@ export default function Hompage() {
           </div>
           <div className="flex-left">
             {showIcon ? (
-              <span
-                class="material-symbols-outlined chatIcon"
-                onClick={toggleChatBox}
+              <span onClick={toggleChatBox}>
+
+                <Player
+                autoplay
+                loop
+                src="https://lottie.host/3c4bb819-7826-426e-be2f-a66f4f117c21/YmP0fLbMmk.json"
+                style={{ height: '70px', width: '70px' }}
+             
               >
-                contact_support
+              </Player>
               </span>
+             
             ) : (
-              <span className="closebox btn-sm btn-danger" onClick={toggleIcon}>
-                X
+              <span className="closebox mr-2 mt-2" onClick={toggleIcon}>
+             <i class="uil uil-times-circle"></i>
               </span>
             )}
           </div>

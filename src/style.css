@@ -1,9 +1,9 @@
 :root {
-  --primary-color: rgb(56, 96, 64);
+  --primary-color: #386040;
   --secondary-color: #213f26;
   --secondary-colorblur: #121713b1;
   --tertiary-colorblur: #0000004a;
-  --tertiary-color: rgb(123, 182, 109);
+  --tertiary-color: #7bb66d;
   --secondarry-text: #213f26;
   --color-yellow: #e3b448;
 }
@@ -190,8 +190,8 @@
 .messageUs {
   position: absolute;
   padding: 2px;
-  bottom: 40px;
-  right: 0;
+  bottom: 115px;
+  right: 10px;
   display: flex;
   flex-direction: column;
   align-items: baseline;
