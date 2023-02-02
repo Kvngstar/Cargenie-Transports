@@ -1,4 +1,4 @@
 {
   
-    "apiUrl":"https://cargenie.herokuapp.com"
+    "apiUrl":"http://localhost:3001"
 } 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import $ from "jquery"
 import {  toast } from "react-toastify";
 import config from "../../config.json";
 import auth from "../../services/authService";
@@ -62,11 +63,47 @@ const Notification = () => {
       return toast.error(error.message);
     }
   }
+  async function personalisedNotification() {
+    try {
+      const response = await auth.get(config.apiUrl + "/notification/feedback", {
+        "Content-type": "application/json; charset=UTF-8",
+      });
+
+      if (response.status >= 200 && response.status < 400) {
+        setNewArray(response.data);
+        setCount(response.data.length);
+        setSlicedArray(() => {
+          return response.data.slice(0, response.data.length).splice(0, 3);
+        });
+
+        setLength(() => {
+          return [
+            ...Array(Math.ceil(response.data.length / 3) + 1).keys(),
+          ].slice(1);
+        });
+        setLoading(false);
+
+        return;
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
+    }
+  }
   useEffect(() => {
     getNotification();
+    console.log("from jquery",$("#extendUser input").checked)
+    console.log(document.getElementById("extendUser").checked)
   }, []);
   function handleState(event) {
-    const { name, value } = event.target;
+    const { name, value } = event.target; 
 
     setFormData((v) => {
       return { ...v, [name]: value };
@@ -74,13 +111,13 @@ const Notification = () => {
   }
   async function SendData(event) {
     event.preventDefault();
-
+ 
     if (formData.title.trim() == "" || formData.description.trim() == "") {
       return toast.error("No input should be empty");
     }
     try {
       const response = await auth.post(
-        config.apiUrl + "/notification",
+        config.apiUrl + ((document.getElementById("extendUser").checked)? "/notification/feedback":"/notification"), 
         formData,
         {
           "Content-type": "application/json; charset=UTF-8",
@@ -101,7 +138,7 @@ const Notification = () => {
       ) {
         return toast.error(error.response.data);
       }
-
+ 
       return toast.error(error.message);
     }
   }
@@ -129,6 +166,8 @@ const Notification = () => {
               class="form-control"
               placeholder="Title"
             />
+             <div className="form-check my-auto mx-3"><input type="checkbox" id="extendUser" className="form-check-input"/><label className="form-check-label text-danger">Persist</label></div>
+            
             <textarea
               className="form-control w-50"
               value={formData.description}
@@ -145,8 +184,11 @@ const Notification = () => {
               className="btn btn-success input-group-append"
             >
               <span class="material-symbols-outlined">send</span>
-            </button>
+            </button> 
+           
           </div>
+          
+          
         )}
           <div className="p" style={{minHeight: "300px"}}  >
           {loading ? (

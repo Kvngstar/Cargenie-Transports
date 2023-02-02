@@ -40,12 +40,12 @@ const Subscribe = () => {
           services
         </p> */}
       </div>
-      <div className="d-flex">
-        <div className="p-3  d-flex align-items-center ">
+      <div className="d-sm-block d-md-flex ">
+        <div className="p-3  ">
           <span class="material-symbols-outlined  mr-1">language</span>
           <span>English</span>
         </div>
-        <div className="p-3  d-flex align-items-center ">
+        <div className="p-3 ">
           <span class="material-symbols-outlined mr-1">location_on</span>
           <span>Nigeria</span>
         </div>

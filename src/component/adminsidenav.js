@@ -41,7 +41,7 @@ const AdminMenuhalf = () => {
         
        
         <div className='mt-5 d-flex align-items-center align-items-center'>
-                <img src={settings} alt="" /> <span>Settings</span>
+                <img src={settings} alt="" /> <span>Delete Action</span>
             </div>
         <div className=' d-flex align-items-center align-items-center'>
                 <img src={help} alt="" /> <span>Help</span>
