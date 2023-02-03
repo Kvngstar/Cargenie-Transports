@@ -17,6 +17,7 @@ const Notification = () => {
   const [slicedArray, setSlicedArray] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
+const [customerNotification,setCustomerNotification] = useState({})
 
   function Paginate(event) {
     const pageNum = event.target.innerHTML;
@@ -70,19 +71,10 @@ const Notification = () => {
       });
 
       if (response.status >= 200 && response.status < 400) {
-        setNewArray(response.data);
-        setCount(response.data.length);
-        setSlicedArray(() => {
-          return response.data.slice(0, response.data.length).splice(0, 3);
-        });
-
-        setLength(() => {
-          return [
-            ...Array(Math.ceil(response.data.length / 3) + 1).keys(),
-          ].slice(1);
-        });
-        setLoading(false);
-
+      //  customerNotification(response.data);
+      setCustomerNotification(response.data)
+       toast.success(response.data)
+       
         return;
       }
     } catch (error) {
@@ -109,39 +101,39 @@ const Notification = () => {
       return { ...v, [name]: value };
     });
   }
-  async function SendData(event) {
-    event.preventDefault();
+  // async function SendData(event) {
+  //   event.preventDefault();
  
-    if (formData.title.trim() == "" || formData.description.trim() == "") {
-      return toast.error("No input should be empty");
-    }
-    try {
-      const response = await auth.post(
-        config.apiUrl + ((document.getElementById("extendUser").checked)? "/notification/feedback":"/notification"), 
-        formData,
-        {
-          "Content-type": "application/json; charset=UTF-8",
-        }
-      );
+  //   if (formData.title.trim() == "" || formData.description.trim() == "") {
+  //     return toast.error("No input should be empty");
+  //   }
+  //   try {
+  //     const response = await auth.post(
+  //       config.apiUrl + ((document.getElementById("extendUser").checked)? "/notification/feedback":"/notification"), 
+  //       formData,
+  //       {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       }
+  //     );
 
-      if (response.status >= 200 && response.status < 400) {
-        toast.success(response.data);
-        getNotification();
-        formData.title = "";
-        formData.description = "";
-      }
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status < 500
-      ) {
-        return toast.error(error.response.data);
-      }
+  //     if (response.status >= 200 && response.status < 400) {
+  //       toast.success(response.data);
+  //       getNotification();
+  //       formData.title = "";
+  //       formData.description = "";
+  //     }
+  //   } catch (error) {
+  //     if (
+  //       error.response &&
+  //       error.response.status >= 400 &&
+  //       error.response.status < 500
+  //     ) {
+  //       return toast.error(error.response.data);                                                                                                                               
+  //     }
  
-      return toast.error(error.message);
-    }
-  }
+  //     return toast.error(error.message);
+  //   }
+  // }
 
   return (
     <div className="px-2 mt-4">
@@ -180,7 +172,7 @@ const Notification = () => {
             />
             <button
               type="submit d-inline"
-              onClick={SendData}
+              onClick={personalisedNotification}
               className="btn btn-success input-group-append"
             >
               <span class="material-symbols-outlined">send</span>
@@ -205,7 +197,9 @@ const Notification = () => {
               date={v.Date}
               desc={v.description}
             />
+            
           );
+          // customerNotification.
         })}
       </div>
       </div>
