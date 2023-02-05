@@ -14,10 +14,10 @@ const Notification = () => {
   const [newArray, setNewArray] = useState([]);
   var [length, setLength] = useState([]);
   const [count, setCount] = useState(0);
-  const [slicedArray, setSlicedArray] = useState([]);
+  const [slicedArray, setSlicedArray] = useState([]); 
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
-const [customerNotification,setCustomerNotification] = useState({})
+const [customerNotification,setCustomerNotification] = useState([])
 
   function Paginate(event) {
     const pageNum = event.target.innerHTML;
@@ -71,9 +71,9 @@ const [customerNotification,setCustomerNotification] = useState({})
       });
 
       if (response.status >= 200 && response.status < 400) {
-      //  customerNotification(response.data);
-      setCustomerNotification(response.data)
-       toast.success(response.data)
+         console.log(response.data)
+      setCustomerNotification(response.data.newNotification)
+       toast.success("loaded")
        
         return;
       }
@@ -91,8 +91,7 @@ const [customerNotification,setCustomerNotification] = useState({})
   }
   useEffect(() => {
     getNotification();
-    console.log("from jquery",$("#extendUser input").checked)
-    console.log(document.getElementById("extendUser").checked)
+    personalisedNotification();
   }, []);
   function handleState(event) {
     const { name, value } = event.target; 
@@ -101,39 +100,39 @@ const [customerNotification,setCustomerNotification] = useState({})
       return { ...v, [name]: value };
     });
   }
-  // async function SendData(event) {
-  //   event.preventDefault();
+  async function SendData(event) {
+    event.preventDefault();
  
-  //   if (formData.title.trim() == "" || formData.description.trim() == "") {
-  //     return toast.error("No input should be empty");
-  //   }
-  //   try {
-  //     const response = await auth.post(
-  //       config.apiUrl + ((document.getElementById("extendUser").checked)? "/notification/feedback":"/notification"), 
-  //       formData,
-  //       {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //       }
-  //     );
+    if (formData.title.trim() == "" || formData.description.trim() == "") {
+      return toast.error("No input should be empty");
+    }
+    try {
+      const response = await auth.post(
+        config.apiUrl + ((document.getElementById("extendUser").checked)? "/notification/feedback":"/notification"), 
+        formData,
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
 
-  //     if (response.status >= 200 && response.status < 400) {
-  //       toast.success(response.data);
-  //       getNotification();
-  //       formData.title = "";
-  //       formData.description = "";
-  //     }
-  //   } catch (error) {
-  //     if (
-  //       error.response &&
-  //       error.response.status >= 400 &&
-  //       error.response.status < 500
-  //     ) {
-  //       return toast.error(error.response.data);                                                                                                                               
-  //     }
+      if (response.status >= 200 && response.status < 400) {
+        toast.success(response.data);
+        getNotification();
+        formData.title = "";
+        formData.description = "";
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);                                                                                                                               
+      }
  
-  //     return toast.error(error.message);
-  //   }
-  // }
+      return toast.error(error.message);
+    }
+  }
 
   return (
     <div className="px-2 mt-4">
@@ -172,7 +171,7 @@ const [customerNotification,setCustomerNotification] = useState({})
             />
             <button
               type="submit d-inline"
-              onClick={personalisedNotification}
+              onClick={SendData}
               className="btn btn-success input-group-append"
             >
               <span class="material-symbols-outlined">send</span>
@@ -198,9 +197,12 @@ const [customerNotification,setCustomerNotification] = useState({})
               desc={v.description}
             />
             
-          );
-          // customerNotification.
+          ); 
+          
         })}
+         
+       
+      
       </div>
       </div>
 
@@ -216,6 +218,15 @@ const [customerNotification,setCustomerNotification] = useState({})
         </ul>
       </nav>
       <div className="text-center bg-light mb-3">page - {activePage}</div>
+      { customerNotification.map((v)=>{
+            <NotifyBox
+            title={v.title}
+            seen={v.read}
+            
+            desc={v.description}
+          />
+
+          })}
     </div>
   );
 };
