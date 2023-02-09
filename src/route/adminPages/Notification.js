@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import $ from "jquery"
-import {  toast } from "react-toastify";
+import $ from "jquery";
+import { toast } from "react-toastify";
 import config from "../../config.json";
 import auth from "../../services/authService";
 import jwt from "../../services/userService";
@@ -14,10 +14,10 @@ const Notification = () => {
   const [newArray, setNewArray] = useState([]);
   var [length, setLength] = useState([]);
   const [count, setCount] = useState(0);
-  const [slicedArray, setSlicedArray] = useState([]); 
+  const [slicedArray, setSlicedArray] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
-const [customerNotification,setCustomerNotification] = useState([])
+  const [customerNotification, setCustomerNotification] = useState([]);
 
   function Paginate(event) {
     const pageNum = event.target.innerHTML;
@@ -37,18 +37,8 @@ const [customerNotification,setCustomerNotification] = useState([])
       });
 
       if (response.status >= 200 && response.status < 400) {
-        setNewArray(response.data);
-        setCount(response.data.length);
-        setSlicedArray(() => {
-          return response.data.slice(0, response.data.length).splice(0, 3);
-        });
-
-        setLength(() => {
-          return [
-            ...Array(Math.ceil(response.data.length / 3) + 1).keys(),
-          ].slice(1);
-        });
-        setLoading(false);
+        console.log(response.data);
+        setCustomerNotification(response.data);
 
         return;
       }
@@ -66,15 +56,40 @@ const [customerNotification,setCustomerNotification] = useState([])
   }
   async function personalisedNotification() {
     try {
-      const response = await auth.get(config.apiUrl + "/notification/feedback", {
-        "Content-type": "application/json; charset=UTF-8",
-      });
+      const response = await auth.get(
+        config.apiUrl + "/notification/feedback",
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
 
       if (response.status >= 200 && response.status < 400) {
-         console.log(response.data)
-      setCustomerNotification(response.data.newNotification)
-       toast.success("loaded")
-       
+        console.log(response.data)
+        
+        if(response.data.newNotification.length < 1 || response.data.newNotificatio == []){
+          console.log(response.data.newNotification)
+          setCount(0);
+          setLoading(false);
+          return toast.success("No notification")
+
+        }
+        setNewArray(response.data.newNotification.reverse());
+        setCount(response.data.newNotification.length);
+        setSlicedArray(() => {
+          return response.data.newNotification
+            .slice(0, response.data.newNotification.length)
+            .splice(0, 3);
+        });
+
+        setLength(() => {
+          return [
+            ...Array(
+              Math.ceil(response.data.newNotification.length / 3) + 1
+            ).keys(),
+          ].slice(1);
+        });
+        setLoading(false);
+
         return;
       }
     } catch (error) {
@@ -94,21 +109,76 @@ const [customerNotification,setCustomerNotification] = useState([])
     personalisedNotification();
   }, []);
   function handleState(event) {
-    const { name, value } = event.target; 
+    const { name, value } = event.target;
 
     setFormData((v) => {
       return { ...v, [name]: value };
     });
   }
+  async function MarkAsRead(id) {
+    try {
+      const response = await auth.post(
+        config.apiUrl + "/notification/markasread",
+        { sent_id: id },
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        personalisedNotification()
+        return;
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
+    }
+  }
+  async function Delete(id) {
+    try {
+      const response = await auth.post(
+        config.apiUrl + "/notification/delete",
+        { sent_id: id },
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+        personalisedNotification();
+        return;
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
+    }
+  }
   async function SendData(event) {
     event.preventDefault();
- 
+
     if (formData.title.trim() == "" || formData.description.trim() == "") {
       return toast.error("No input should be empty");
     }
     try {
       const response = await auth.post(
-        config.apiUrl + ((document.getElementById("extendUser").checked)? "/notification/feedback":"/notification"), 
+        config.apiUrl +
+          (document.getElementById("extendUser").checked
+            ? "/notification/feedback"
+            : "/notification"),
         formData,
         {
           "Content-type": "application/json; charset=UTF-8",
@@ -118,6 +188,7 @@ const [customerNotification,setCustomerNotification] = useState([])
       if (response.status >= 200 && response.status < 400) {
         toast.success(response.data);
         getNotification();
+        personalisedNotification();
         formData.title = "";
         formData.description = "";
       }
@@ -127,17 +198,22 @@ const [customerNotification,setCustomerNotification] = useState([])
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
-        return toast.error(error.response.data);                                                                                                                               
+        return toast.error(error.response.data);
       }
- 
+
       return toast.error(error.message);
     }
   }
 
   return (
     <div className="px-2 mt-4">
-      <h4 className="poppinsmeduim fontsize14"> Notification Center ({count}) </h4>
-      <h6 className="pl-4 mt-3 ralewaysemibold">Welcome, {jwt.getDetails().firstName}</h6>
+      <h4 className="poppinsmeduim fontsize14">
+        {" "}
+        Notification Center ({count}){" "}
+      </h4>
+      <h6 className="pl-4 mt-3 ralewaysemibold">
+        Welcome, {jwt.getDetails().firstName}
+      </h6>
       <div className="container mt-5 pb-2 ralewaymeduim">
         {jwt.getDetails().as == "admin" && (
           <div class="input-group lightback">
@@ -157,8 +233,15 @@ const [customerNotification,setCustomerNotification] = useState([])
               class="form-control"
               placeholder="Title"
             />
-             <div className="form-check my-auto mx-3"><input type="checkbox" id="extendUser" className="form-check-input"/><label className="form-check-label text-danger">Persist</label></div>
-            
+            <div className="form-check my-auto mx-3">
+              <input
+                type="checkbox"
+                id="extendUser"
+                className="form-check-input"
+              />
+              <label className="form-check-label"><small className=" text-danger font-weight-bold">persist</small></label>
+            </div>
+
             <textarea
               className="form-control w-50"
               value={formData.description}
@@ -175,35 +258,33 @@ const [customerNotification,setCustomerNotification] = useState([])
               className="btn btn-success input-group-append"
             >
               <span class="material-symbols-outlined">send</span>
-            </button> 
-           
+            </button>
           </div>
-          
-          
         )}
-          <div className="p" style={{minHeight: "300px"}}  >
+        <div className="p" style={{ minHeight: "300px" }}>
           {loading ? (
-              <div className="preloadcont" >
-                <div></div>
-                <div className="middleelement"></div>
-                <div></div>
-              </div>
-            ) : slicedArray.map((v) => {
-          return (
-            <NotifyBox
-              title={v.title}
-              seen={v.seen}
-              date={v.Date}
-              desc={v.description}
-            />
-            
-          ); 
-          
-        })}
-         
-       
-      
-      </div>
+            <div className="preloadcont">
+              <div></div>
+              <div className="middleelement"></div>
+              <div></div>
+            </div>
+          ) : (
+            slicedArray.map((v) => {
+              return (
+                <NotifyBox
+                  title={v.title}
+                  seen={v.seen}
+                  read={v.read.toString()}
+                  date={v.date}
+                  id={v._id}
+                  MarkAsRead={MarkAsRead}
+                  DeleteNote={Delete}
+                  desc={v.description}
+                />
+              );
+            })
+          )}
+        </div>
       </div>
 
       <nav aria-label="..." className="mt-3 mb-3">
@@ -217,16 +298,20 @@ const [customerNotification,setCustomerNotification] = useState([])
           })}
         </ul>
       </nav>
-      <div className="text-center bg-light mb-3">page - {activePage}</div>
-      { customerNotification.map((v)=>{
+      <div className="text-center bg-light mb-1">page - {activePage}</div>
+      <div className="pb-4 mt-4">
+        <div className="text-center pt-2">Welcome Message</div>
+        {customerNotification.map((v) => {
+          return (
             <NotifyBox
-            title={v.title}
-            seen={v.read}
-            
-            desc={v.description}
-          />
-
-          })}
+              title={v.title}
+              seen={v.seen}
+              date={v.Date}
+              desc={v.description}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

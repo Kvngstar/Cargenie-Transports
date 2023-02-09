@@ -6,32 +6,57 @@ import auth from "../services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import bell from "../sources/assets/notificationbell.png";
 import { Link } from "react-router-dom";
+// import useContext from "./useContext";
 const Nav_ = () => {
   var [length, setLength] = useState("");
-  useEffect(() => {
-    async function getNotification() {
-      try {
-        const response = await auth.get(config.apiUrl + "/notification", {
+  async function personalisedNotification() {
+    try {
+      const response = await auth.get(
+        config.apiUrl + "/notification/feedback",
+        {
           "Content-type": "application/json; charset=UTF-8",
-        });
-
-        if (response.status == 200) {
-          setLength(response.data.length);
-
-          return;
         }
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status < 500
-        ) {
-          return toast.error(error.response.data);
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+       console.log("the response",response.data)
+        
+        if(response.data.newNotification.length < 1 || response.data.newNotification == []){
+        setLength("")
+
+          return toast.success("No notification")
+
         }
-        return toast.error(error.message);
+       let unread = 0
+
+       response.data.newNotification.forEach((v)=>{
+      
+        if(v.read.toString() == "false"){
+         unread++
+          console.log("unread", unread)
+  }
+       })
+       setLength(unread)
+
+       
+
+        return;
       }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
     }
-    getNotification();
+  } 
+  useEffect(() => {
+    
+    personalisedNotification();
   }, []);
   return (
     <div className="l  greenerbackground d-flex justify-content-between align-items-center flex-direction-row py-2 mb-3 px-2">

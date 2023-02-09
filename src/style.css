@@ -374,6 +374,15 @@ a:hover {
 .green-color {
   background-color: var(--primary-color) !important;
   color: #f2f2f2;
+}.delete{
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+.mark-as-read{
+  position: absolute;
+  bottom: 30px;
+  right: 70px;
 }
 .aaa {
   height: 50px;
