@@ -1,5 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Suspense,lazy } from "react";
+import { toast } from "react-toastify";
+import config from "./config.json"
+import auth from "./services/authService"
+import { Suspense,lazy, useState } from "react";
+import UserContext from "./component/useContext"
+
 import 'aos/dist/aos.css'; 
 import AOS from "aos";
 import jwt from "./services/userService"; 
@@ -8,6 +13,7 @@ import "../src/style.css"
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer} from 'react-toastify';
 import NotFound from "../src/route/adminPages/notfound";
+import Profile from "./route/adminPages/profile";
 const CarBooking = lazy(()=>  import("../src/route/adminPages/carbooking"))
 const CarListing = lazy(()=>  import("../src/route/adminPages/carlist"))
 const CarOwners = lazy(()=>  import("../src/route/adminPages/carowners"))
@@ -23,14 +29,66 @@ const HomeComponent = lazy(()=>  import("../src/route/adminPages/homeComponent")
 const CarOwnerRoute = lazy(()=>  import("../src/route/customerPages/ownersRoute"))
 const CreateAccount = lazy(()=>  import("../src/route/authPages/createAccount"))
 const AdminChatPage = lazy(()=> import("./chatBox/adminChatBox"))
-
 function App() {
+  
+  const [neww,setNeww] = useState({
+    count: 0,
+    call: function(){ return personalisedNotification()},
+  })
+  const [loading, setLoading] = useState(true);
  
+ 
+
+  async function personalisedNotification() {
+    try {
+      const response = await auth.get(
+        config.apiUrl + "/notification/feedback",
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+
+      if (response.status >= 200 && response.status < 400) {
+       
+        if(response.data.newNotification.length < 1 || response.data.newNotificatio == []){          
+          setLoading(false);
+          return toast.success("No notification")
+
+        }
+        let length = 0;
+
+        response.data.newNotification.forEach((v)=>{ 
+          if(v.read.toString()==="false"){
+            length++
+          }
+         
+        })
+       
+        setNeww((values)=>{ return {...values, count: length}});
+      
+      
+
+        return;
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+      ) {
+        return toast.error(error.response.data);
+      }
+
+      return toast.error(error.message);
+    }
+  }
+
 AOS.init({mirror: true})
   return (
-    <Suspense className="App" fallback={<Loading/>} >
+    <UserContext.Provider value={neww}>
+       <Suspense className="App" fallback={<Loading/>} >
       <ToastContainer/>
-      
+       
       <Routes>
         <Route path="Chats" element={<AdminChatPage />} /> 
         <Route
@@ -46,8 +104,10 @@ AOS.init({mirror: true})
           <Route path="customerbook" element={<CustomerBook />} />
           <Route path="notification" element={<Notification />} />
           <Route path="carlisting" element={<CarListing />} />
-          <Route index element={<CustomerBook />} />
+          <Route path="carlisting" element={<CarListing />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="*" element={<Navigate replace to="customerbook" />} />
+
         </Route>
         <Route
           path="/carowners"
@@ -60,7 +120,7 @@ AOS.init({mirror: true})
           }
         >
           <Route index element={<CarOwnerRoute />} />
-          <Route path="notification" element={<Notification />} />
+          <Route path="notification" element={ <Notification /> } />
           <Route path="carlisting" element={<CarListing />} />
           <Route path="owner" element={<CarOwnerRoute />} />
           <Route path="*" element={<Navigate replace to="owner" />} />
@@ -117,7 +177,9 @@ AOS.init({mirror: true})
 
       </Routes>
     </Suspense>
-  );
+
+    </UserContext.Provider>
+     );
 }
 
 export default App;

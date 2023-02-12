@@ -133,10 +133,10 @@ const CarListing = () => {
       },
     ],
   };
-
+ 
   return ( 
     <div className="px-2 mt-4">
-      <h5 className="poppinsmeduim">{(jwt.getDetails().as==="admin")?<span class="material-symbols-outlined">admin_panel_settings <h5>{jwt.getDetails().as}</h5></span>:  jwt.getDetails().as}</h5>
+      <div className="poppinsmeduim">{(jwt.getDetails().as==="admin")? <span> <span class="material-symbols-outlined">admin_panel_settings</span><span>{jwt.getDetails().as}</span></span>:  jwt.getDetails().as}</div>
       <h6 className="pl-4 mt-3 ralewaysemibold ">
         Welcome, {jwt.getDetails().firstName}
       </h6>

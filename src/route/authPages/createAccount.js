@@ -24,7 +24,7 @@ const CreateAccount = () => {
     const { name, value, checked, type } = event.target;
     setFormData((values) => {
       return type !== "checkbox"
-        ? { ...values, [name]: value }
+        ? { ...values, [name]: value.trim() }
         : { ...values, [name]: checked };
     });
   }
@@ -199,13 +199,13 @@ const CreateAccount = () => {
         <div className="mx-auto w-100 mt-4">
         {(click === false)?  <button
             type="submit"
-            id=""
+            id=""  
             onClick={submitButton}
             className="btn btn-outline-light mx-auto w-100"
             value="Create Account"
             onclick="calculate(event)"
           >create</button>: <button
-          className="btn btn-outline-light mx-auto w-100"
+          className="mx-auto w-100"
            
         >
         <Player

@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import $ from "jquery";
 import { toast } from "react-toastify";
 import config from "../../config.json";
 import auth from "../../services/authService";
 import jwt from "../../services/userService";
 import NotifyBox from "../../component/notifybox";
-
+import UserContext from "../../component/useContext";
+import { Player } from "@lottiefiles/react-lottie-player";
 const Notification = () => {
-  const [formData, setFormData] = useState({
-    title: "",
+  const size = useContext(UserContext)
+const [formData, setFormData] = useState({
+  title: "",
     description: "",
   });
   const [newArray, setNewArray] = useState([]);
@@ -37,7 +39,7 @@ const Notification = () => {
       });
 
       if (response.status >= 200 && response.status < 400) {
-        console.log(response.data);
+        
         setCustomerNotification(response.data);
 
         return;
@@ -64,25 +66,28 @@ const Notification = () => {
       );
 
       if (response.status >= 200 && response.status < 400) {
-        console.log(response.data)
+       
         
         if(response.data.newNotification.length < 1 || response.data.newNotificatio == []){
-          console.log(response.data.newNotification)
+        
           setCount(0);
           setLoading(false);
-          return toast.success("No notification")
-
+          
+ 
+          setSlicedArray([]);
+          return
+ 
         }
-        setNewArray(response.data.newNotification.reverse());
+        size.call();
         setCount(response.data.newNotification.length);
         setSlicedArray(() => {
-          return response.data.newNotification
+          return response.data.newNotification.reverse()
             .slice(0, response.data.newNotification.length)
             .splice(0, 3);
         });
 
         setLength(() => {
-          return [
+          return [  
             ...Array(
               Math.ceil(response.data.newNotification.length / 3) + 1
             ).keys(),
@@ -90,7 +95,7 @@ const Notification = () => {
         });
         setLoading(false);
 
-        return;
+        return; 
       }
     } catch (error) {
       if (
@@ -107,6 +112,7 @@ const Notification = () => {
   useEffect(() => {
     getNotification();
     personalisedNotification();
+
   }, []);
   function handleState(event) {
     const { name, value } = event.target;
@@ -141,6 +147,7 @@ const Notification = () => {
       return toast.error(error.message);
     }
   }
+      
   async function Delete(id) {
     try {
       const response = await auth.post(
@@ -153,6 +160,7 @@ const Notification = () => {
 
       if (response.status >= 200 && response.status < 400) {
         personalisedNotification();
+      
         return;
       }
     } catch (error) {
@@ -177,8 +185,8 @@ const Notification = () => {
       const response = await auth.post(
         config.apiUrl +
           (document.getElementById("extendUser").checked
-            ? "/notification/feedback"
-            : "/notification"),
+            ? "/notification"
+            : "/notification/feedback"),
         formData,
         {
           "Content-type": "application/json; charset=UTF-8",
@@ -186,11 +194,12 @@ const Notification = () => {
       );
 
       if (response.status >= 200 && response.status < 400) {
-        toast.success(response.data);
+       
         getNotification();
         personalisedNotification();
         formData.title = "";
         formData.description = "";
+        return
       }
     } catch (error) {
       if (
@@ -239,7 +248,7 @@ const Notification = () => {
                 id="extendUser"
                 className="form-check-input"
               />
-              <label className="form-check-label"><small className=" text-danger font-weight-bold">persist</small></label>
+              <label className="form-check-label"><small className=" text-danger font-weight-bold">all users</small></label>
             </div>
 
             <textarea
@@ -261,7 +270,7 @@ const Notification = () => {
             </button>
           </div>
         )}
-        <div className="p" style={{ minHeight: "300px" }}>
+  { (slicedArray.length >= 1) ?   <div className="p" style={{ minHeight: "300px" }}>
           {loading ? (
             <div className="preloadcont">
               <div></div>
@@ -284,7 +293,14 @@ const Notification = () => {
               );
             })
           )}
-        </div>
+        </div> : <h2 className="text-center text-warning mt-5 bold-100 py-3"><Player
+                autoplay
+                loop
+                src="https://lottie.host/03da0ab5-1737-417c-b15d-f500adcec6dc/SNqWlpVajM.json"
+                style={{ height: '300px', width: '300px' }}
+             
+              >
+              </Player> </h2>}
       </div>
 
       <nav aria-label="..." className="mt-3 mb-3">
@@ -300,7 +316,7 @@ const Notification = () => {
       </nav>
       <div className="text-center bg-light mb-1">page - {activePage}</div>
       <div className="pb-4 mt-4">
-        <div className="text-center pt-2">Welcome Message</div>
+        <div className="text-left text-warning py-2 px-3 shadow-box2 ralewaysemibold border">Welcome Message</div>
         {customerNotification.map((v) => {
           return (
             <NotifyBox

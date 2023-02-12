@@ -56,12 +56,12 @@ const Menuhalf = () => {
         <div className="d-flex align-items-center">
           <img src={users} alt="" />{" "}
           <span>
-            <NavLink to="notification">Notification </NavLink>{" "}
+            <NavLink to="notification">Notification </NavLink>
           </span>
         </div>
 
         <div className="mt-5 d-flex align-items-center align-items-center">
-          <img src={settings} alt="" /> <span>Edit Profile</span>
+          <img src={settings} alt="" /> <span><NavLink to="profile">Settings</NavLink></span>
         </div>
         <div className=" d-flex align-items-center align-items-center">
           <img src={help} alt="" /> <span>Help</span>
