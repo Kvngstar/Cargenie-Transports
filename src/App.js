@@ -122,6 +122,7 @@ AOS.init({mirror: true})
           <Route index element={<CarOwnerRoute />} />
           <Route path="notification" element={ <Notification /> } />
           <Route path="carlisting" element={<CarListing />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="owner" element={<CarOwnerRoute />} />
           <Route path="*" element={<Navigate replace to="owner" />} />
         </Route>
@@ -136,6 +137,7 @@ AOS.init({mirror: true})
           <Route path="carlisting" element={<CarListing />} />
           <Route path="processing" element={<BookingProccessing />} />
           <Route path="carowner" element={<CarOwners />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="notification" element={<Notification />} />
           <Route path="users" element={<GetUsers />} />
           <Route path="carbooking" element={<CarBooking />} />

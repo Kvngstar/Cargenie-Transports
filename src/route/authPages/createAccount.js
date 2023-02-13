@@ -211,7 +211,9 @@ const CreateAccount = () => {
         <Player
                 autoplay
                 loop
+        
                 src="https://lottie.host/42dc5709-db75-43e2-89b9-7e7d87d256fa/O5R1VPRMsb.json"
+                
                 style={{ height: '100px', width: '100px' }}
              
               >
