@@ -121,7 +121,7 @@ AOS.init({mirror: true})
         >
           <Route index element={<CarOwnerRoute />} />
           <Route path="notification" element={ <Notification /> } />
-          <Route path="carlisting" element={<CarListing />} />
+          <Route path="carlisting" element={<CarListing  />} />
           <Route path="profile" element={<Profile />} />
           <Route path="owner" element={<CarOwnerRoute />} />
           <Route path="*" element={<Navigate replace to="owner" />} />
