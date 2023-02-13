@@ -164,9 +164,9 @@ const CarBooking = () => {
           <span class="material-symbols-outlined">admin_panel_settings</span>
           {jwt.getDetails().as}
         </h5>
-        <p className="pl-4 mt-3 ralewaysemibold border">
+        <span className="pl-4 mt-3 ralewaysemibold border">
           Welcome, {jwt.getDetails().firstName}
-        </p>
+        </span>
 
         <div className="my-5 ralewaymeduim">
           <h6 className="pl-3 poppinsmeduim">Booking Directory ( {count} )</h6>

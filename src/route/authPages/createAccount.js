@@ -196,7 +196,7 @@ const CreateAccount = () => {
             Agree to terms and condition
           </label>
         </div>
-        <div className="mx-auto w-100 mt-4">
+        <div className="mx-auto w-100 mt-4 rounded">
         {(click === false)?  <button
             type="submit"
             id=""  

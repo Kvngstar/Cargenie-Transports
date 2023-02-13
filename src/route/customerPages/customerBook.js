@@ -7,7 +7,7 @@ import auth from "../../services/authService";
 
 const CustomerBook = () => { 
   const [newArray, setArray] = useState([]);
-  const [count, setCount] = useState([]);
+  const [count, setCount] = useState("0");
   const [length, setLength] = useState([]);
   const [slicedArray, setSlicedArray] = useState([]);
   const [activePage, setActivePage] = useState(1);
@@ -80,17 +80,17 @@ const CustomerBook = () => {
         />
       </div>
 
+<marquee className="lightback" >Pay in to <b>Acc.Name: <span className="text-success">Cargenie-Transports</span> Acc.No: <span className="text-success">0106442369</span> Bank: <span className="text-success">AccessBank</span></b> with your <span className="text-danger poppinsmeduim">bookingId</span> as description, booking will be processed immediately</marquee>
       <div className="my-5 ralewaymeduim">
         <div className="d-flex justify-content-between align-items-center">
-          <header className="m-2 poppinsmeduim">
+          <header className="m-2 poppinsmeduim"> 
             Car Bookings ( {count} )
           </header>{" "}
           <div className="btn-sm btn-info m-2 d-flex align-items-center" onClick={GetUserDetail}>
             <span class="material-symbols-outlined mr-1">refresh</span>
             <span>Refresh</span>
-          </div>
+          </div> 
         </div>
-
         <div className="table-control-1 ">
           <table className="table table-hover table-bordered">
             <thead>

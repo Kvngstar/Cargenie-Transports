@@ -22,20 +22,20 @@ const Travelinput = (props) => {
     }
 
      try {
-    //   const response = await auth.post(
-    //     config.apiUrl + "/customer/travels",
-    //     data,
-    //     {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //     }
-    //   );
-    //   toast.success(response.data);
+      const response = await auth.post(
+        config.apiUrl + "/customer/travels",
+        data,
+        {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      );
+      toast.success(response.data);
 
-    //   const url = window.location.href;
-    //   props.reload() 
+      const url = window.location.href;
+      props.reload() 
     // window.location.href("")
-    window.location.replace("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo")
-    // load("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo");
+    // window.location.replace("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo")
+
     } catch (err) {
       if (err.response.status >= 400 && err.response.status < 500) {
         return toast.error(err.response.data);

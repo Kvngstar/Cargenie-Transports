@@ -635,7 +635,7 @@ table {
 
 }
 ::-webkit-scrollbar {
-  background-color: #b5b5b5;
+  background-color: #934242;
   width: 2px;
 }
 .notifybox::-webkit-scrollbar {
@@ -648,7 +648,7 @@ table {
 }
 .table-control-1::-webkit-scrollbar {
   width: 1px;
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 .form {
   height: auto;
