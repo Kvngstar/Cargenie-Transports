@@ -101,10 +101,10 @@ AOS.init({mirror: true})
             )
           }
         >
-          <Route path="customerbook" element={<CustomerBook />} />
+          <Route index element={<CustomerBook />} />
           <Route path="notification" element={<Notification />} />
           <Route path="carlisting" element={<CarListing />} />
-          <Route path="carlisting" element={<CarListing />} />
+          <Route path="customerbook" element={<CustomerBook />} />
           <Route path="profile" element={<Profile />} />
           <Route path="*" element={<Navigate replace to="customerbook" />} />
 
