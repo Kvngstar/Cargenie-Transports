@@ -86,7 +86,7 @@ const [formData, setFormData] = useState({
             .splice(0, 3);
         });
         
-setArray(response.data.newNotification);
+setNewArray(response.data.newNotification);
 
         setLength(() => {
           return [  
