@@ -142,7 +142,7 @@ export default function Hompage() {
               />
 
               <div className="input-group-append">
-                <button className="btn btn-info rounded" onClick={submitText}>
+                <button className="btn btn-info rounded" >
                   send
                 </button>
               </div>

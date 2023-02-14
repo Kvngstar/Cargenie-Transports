@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import { toast } from "react-toastify";
+import { Player } from "@lottiefiles/react-lottie-player";
 import config from '../config.json'
 import auth from "../services/authService";
 import jwt from "../services/userService";
@@ -13,11 +14,14 @@ const Travelinput = (props) => {
     price: "4000",
     cartype: "",
   });
+  const [click,setClick] =useState(false)
 
   async function handleButton(event) {
     event.preventDefault();
+    setClick(true)
 
     if (!jwt.getjwt()) {
+      setClick(false)
       return toast.error("User must be logged in");
     }
 
@@ -30,17 +34,21 @@ const Travelinput = (props) => {
         }
       );
       toast.success(response.data);
+      
 
       const url = window.location.href;
       props.reload() 
+      setClick(false)
     // window.location.href("")
     // window.location.replace("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo")
 
     } catch (err) {
       if (err.response.status >= 400 && err.response.status < 500) {
+        setClick(false)
         return toast.error(err.response.data);
       }
-
+      
+      setClick(false)
       return toast.error(err.message);
     }
     
@@ -168,13 +176,26 @@ const Travelinput = (props) => {
         </div>
        
         <div className="">
-          <input
+        { (click =="false")? <input
             type="submit"
             onClick={handleButton} 
             className="btn mt-2 bg-info text-light"
             style={{fontWeight: "600"}}
             value="Book"
-          />
+          />: <button
+          type="submit"
+          className="btn  mx-auto w-100"
+          disabled
+        >
+        
+        <Player
+                autoplay
+                loop
+                src="https://lottie.host/42dc5709-db75-43e2-89b9-7e7d87d256fa/O5R1VPRMsb.json"
+                style={{ height: '100px', width: '100px' }}
+             
+              >
+              </Player></button>}
         </div>
       
        

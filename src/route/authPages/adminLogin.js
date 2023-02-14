@@ -6,11 +6,11 @@ import auth from "../../services/authService";
 import jwt from "../../services/userService";
 import config from "../../config.json";
 
-const Loginform = () => {
+const AdminLoginForm = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    as: "customer",
+    as: "admin",
   });
   const [click,setClick] = useState(false)
 
@@ -98,31 +98,6 @@ const Loginform = () => {
             placeholder="Enter Your password"
           />
         </div>
-
-        <div class="input-group mt-4">
-          <div className="input-group-prepend">
-            <div className="input-group-text bg-transparent whitetext">As</div>
-          </div>
-
-          {/* <select
-            class="form-control whitetext bg-transparent"
-            name="as"
-            value={user.as}
-            onChange={handleState}
-            autoComplete
-          >
-            <option value=""></option>
-            <option value="customer" className="text-dark">
-              customer
-            </option>
-            <option value="carowner" className="text-dark">
-              car-owner
-            </option>
-            <option value="admin" className="text-dark">
-              admin
-            </option>
-          </select> */}
-        </div>
        
         <div className="mx-auto w-100 mt-4 mb-4 rounded">
         {(click === false)?  <button
@@ -154,4 +129,5 @@ const Loginform = () => {
   );
 };
 
-export default Loginform;
+export default AdminLoginForm; 
+   

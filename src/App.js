@@ -12,14 +12,15 @@ import Loading from "./loading/loading";
 import "../src/style.css"
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer} from 'react-toastify';
-import NotFound from "../src/route/adminPages/notfound";
-import Profile from "./route/adminPages/profile";
+import NotFound from "../src/route/adminPages/notfound"; 
+const Profile = lazy(()=>  import("./route/adminPages/profile"));
+const AdminLoginForm = lazy(()=>  import("./route/authPages/adminLogin"));
 const CarBooking = lazy(()=>  import("../src/route/adminPages/carbooking"))
-const CarListing = lazy(()=>  import("../src/route/adminPages/carlist"))
+const CarListing = lazy(()=>  import("../src/route/adminPages/carlist")) 
 const CarOwners = lazy(()=>  import("../src/route/adminPages/carowners"))
 const Customers = lazy(()=>  import("../src/route/adminPages/customer"))
 const Hompage = lazy(()=>  import("../src/route/adminPages/homePage"))
-const BookingProccessing = lazy(()=>  import("../src/route/adminPages/bookingProcessing"))
+const BookingProccessing = lazy(()=>  import("../src/route/adminPages/bookingProcessing")) 
 const Notification = lazy(()=>  import("../src/route/adminPages/Notification"))
 const GetUsers = lazy(()=>  import("../src/route/adminPages/getUsers"))
 const Admin = lazy(()=>  import("../src/route/adminPages/adminSection"))
@@ -91,6 +92,8 @@ AOS.init({mirror: true})
        
       <Routes>
         <Route path="Chats" element={<AdminChatPage />} /> 
+        <Route path="adminpanel" element={<AdminLoginForm />} /> 
+        
         <Route
           path="/customer"
           element={
