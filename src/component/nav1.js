@@ -19,7 +19,7 @@ const Nav_ = () => {
       <div className="notification mr-4">
         <Link to="notification">
         { (jwt.getDetails().as != "admin") && <span className="noticon-wrap">
-            <img src={bell} alt="bell" />
+            <img src="https://icons8.com/icon/dYUtUIIW3YAj/notification" alt="bell" />
           {   ((size.count == 0)? "": <span className="noticon">
               <p className="notp">{size.count}</p> 
             </span>)}

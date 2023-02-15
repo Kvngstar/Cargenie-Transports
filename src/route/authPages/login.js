@@ -99,12 +99,12 @@ const Loginform = () => {
           />
         </div>
 
-        <div class="input-group mt-4">
+        {/* <div class="input-group mt-4">
           <div className="input-group-prepend">
             <div className="input-group-text bg-transparent whitetext">As</div>
           </div>
 
-          {/* <select
+          <select
             class="form-control whitetext bg-transparent"
             name="as"
             value={user.as}
@@ -121,9 +121,9 @@ const Loginform = () => {
             <option value="admin" className="text-dark">
               admin
             </option>
-          </select> */}
+          </select>
         </div>
-       
+        */}
         <div className="mx-auto w-100 mt-4 mb-4 rounded">
         {(click === false)?  <button
             type="submit"
@@ -133,7 +133,6 @@ const Loginform = () => {
             autoComplete
             id='submit'
           >sign-in</button>:  <button
-          type="submit"
           className="btn  mx-auto w-100"
           disabled
         >

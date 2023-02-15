@@ -635,20 +635,28 @@ table {
 
 }
 ::-webkit-scrollbar {
-  background-color: #934242;
-  width: 2px;
+  background-color: transparent;
+  width: 1px;
 }
+/* ::-webkit-scrollbar-thumb {
+  background-color: var(--secondarry-text);
+  height: 1px;
+} */
 .notifybox::-webkit-scrollbar {
   background-color: #89c293;
   width: 4px;
 }
 .notifybox::-webkit-scrollbar-thumb {
-  background-color: #ffffff;
+  background-color: #06420f;
   height: 4px;
 }
 .table-control-1::-webkit-scrollbar {
-  width: 1px;
-  /* background-color: transparent; */
+  width: 2px;
+  background-color: rgba(191, 208, 231, 0.772);
+}
+.table-control-1::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 128, 0, 0.481);
+  height: 3px;
 }
 .form {
   height: auto;

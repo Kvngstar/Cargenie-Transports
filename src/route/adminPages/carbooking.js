@@ -164,7 +164,7 @@ const CarBooking = () => {
           <span class="material-symbols-outlined">admin_panel_settings</span>
           {jwt.getDetails().as}
         </h5>
-        <span className="pl-4 mt-3 ralewaysemibold border">
+        <span className="ml-4 mt-3 text-center rounded px-2 ralewaysemibold border">
           Welcome, {jwt.getDetails().firstName}
         </span>
 
@@ -172,11 +172,11 @@ const CarBooking = () => {
           <h6 className="pl-3 poppinsmeduim">Booking Directory ( {count} )</h6>
           <div className="pl-3">
             <br />
-            <div>Completed - {OrderState.completed}</div>
+            <div><span className="p-1 bg-success rounded">Completed - {OrderState.completed}</span></div>
             <br />
-            <div>failed - {OrderState.failed}</div>
+            <div><span className="p-1 bg-warning rounded">Processing - {OrderState.processing}</span></div>
             <br />
-            <div>Processing - {OrderState.processing}</div>
+            <div><span className="p-1 bg-danger rounded">Failed - {OrderState.failed}</span></div>
           </div>
           <br />
           <br />

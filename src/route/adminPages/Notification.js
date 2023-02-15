@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import $ from "jquery";
 import { toast } from "react-toastify";
 import config from "../../config.json";
@@ -8,9 +8,9 @@ import NotifyBox from "../../component/notifybox";
 import UserContext from "../../component/useContext";
 import { Player } from "@lottiefiles/react-lottie-player";
 const Notification = () => {
-  const size = useContext(UserContext)
-const [formData, setFormData] = useState({
-  title: "",
+  const size = useContext(UserContext);
+  const [formData, setFormData] = useState({
+    title: "",
     description: "",
   });
   const [newArray, setNewArray] = useState([]);
@@ -20,6 +20,7 @@ const [formData, setFormData] = useState({
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [customerNotification, setCustomerNotification] = useState([]);
+  const [click, setClick] = useState(false);
 
   function Paginate(event) {
     const pageNum = event.target.innerHTML;
@@ -39,7 +40,6 @@ const [formData, setFormData] = useState({
       });
 
       if (response.status >= 200 && response.status < 400) {
-        
         setCustomerNotification(response.data);
 
         return;
@@ -66,30 +66,29 @@ const [formData, setFormData] = useState({
       );
 
       if (response.status >= 200 && response.status < 400) {
-       
-        
-        if(response.data.newNotification.length < 1 || response.data.newNotificatio == []){
-        
+        if (
+          response.data.newNotification.length < 1 ||
+          response.data.newNotificatio == []
+        ) {
           setCount(0);
           setLoading(false);
-          
- 
+
           setSlicedArray([]);
-          return
- 
+          return;
         }
         size.call();
         setCount(response.data.newNotification.length);
         setSlicedArray(() => {
-          return response.data.newNotification.reverse()
+          return response.data.newNotification
+            .reverse()
             .slice(0, response.data.newNotification.length)
             .splice(0, 3);
         });
-        
-setNewArray(response.data.newNotification);
+
+        setNewArray(response.data.newNotification);
 
         setLength(() => {
-          return [  
+          return [
             ...Array(
               Math.ceil(response.data.newNotification.length / 3) + 1
             ).keys(),
@@ -97,7 +96,7 @@ setNewArray(response.data.newNotification);
         });
         setLoading(false);
 
-        return; 
+        return;
       }
     } catch (error) {
       if (
@@ -114,7 +113,6 @@ setNewArray(response.data.newNotification);
   useEffect(() => {
     getNotification();
     personalisedNotification();
-
   }, []);
   function handleState(event) {
     const { name, value } = event.target;
@@ -125,6 +123,7 @@ setNewArray(response.data.newNotification);
   }
   async function MarkAsRead(id) {
     try {
+      setClick(true);
       const response = await auth.post(
         config.apiUrl + "/notification/markasread",
         { sent_id: id },
@@ -134,7 +133,7 @@ setNewArray(response.data.newNotification);
       );
 
       if (response.status >= 200 && response.status < 400) {
-        personalisedNotification()
+        personalisedNotification();
         return;
       }
     } catch (error) {
@@ -143,15 +142,17 @@ setNewArray(response.data.newNotification);
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
+        setClick(false);
         return toast.error(error.response.data);
       }
-
+      setClick(false);
       return toast.error(error.message);
     }
   }
-      
+
   async function Delete(id) {
     try {
+      setClick(true);
       const response = await auth.post(
         config.apiUrl + "/notification/delete",
         { sent_id: id },
@@ -162,7 +163,8 @@ setNewArray(response.data.newNotification);
 
       if (response.status >= 200 && response.status < 400) {
         personalisedNotification();
-      
+        setClick(false);
+
         return;
       }
     } catch (error) {
@@ -171,9 +173,10 @@ setNewArray(response.data.newNotification);
         error.response.status >= 400 &&
         error.response.status < 500
       ) {
+        setClick(false);
         return toast.error(error.response.data);
       }
-
+      setClick(false);
       return toast.error(error.message);
     }
   }
@@ -196,12 +199,11 @@ setNewArray(response.data.newNotification);
       );
 
       if (response.status >= 200 && response.status < 400) {
-       
         getNotification();
         personalisedNotification();
         formData.title = "";
         formData.description = "";
-        return
+        return;
       }
     } catch (error) {
       if (
@@ -250,7 +252,11 @@ setNewArray(response.data.newNotification);
                 id="extendUser"
                 className="form-check-input"
               />
-              <label className="form-check-label"><small className=" text-danger font-weight-bold">all users</small></label>
+              <label className="form-check-label">
+                <small className=" text-danger font-weight-bold">
+                  all users
+                </small>
+              </label>
             </div>
 
             <textarea
@@ -272,37 +278,43 @@ setNewArray(response.data.newNotification);
             </button>
           </div>
         )}
-  { (slicedArray.length >= 1) ?   <div className="p" style={{ minHeight: "300px" }}>
-          {loading ? (
-            <div className="preloadcont">
-              <div></div>
-              <div className="middleelement"></div>
-              <div></div>
-            </div>
-          ) : (
-            slicedArray.map((v) => {
-              return (
-                <NotifyBox
-                  title={v.title}
-                  seen={v.seen}
-                  read={v.read.toString()}
-                  date={v.date}
-                  id={v._id}
-                  MarkAsRead={MarkAsRead}
-                  DeleteNote={Delete}
-                  desc={v.description}
-                />
-              );
-            })
-          )}
-        </div> : <h2 className="text-center text-warning mt-5 bold-100 py-3"><Player
-                autoplay
-                loop
-                src="https://lottie.host/03da0ab5-1737-417c-b15d-f500adcec6dc/SNqWlpVajM.json"
-                style={{ height: '300px', width: '300px' }}
-             
-              >
-              </Player> </h2>}
+        {slicedArray.length >= 1 ? (
+          <div className="p" style={{ minHeight: "300px" }}>
+            {loading ? (
+              <div className="preloadcont">
+                <div></div>
+                <div className="middleelement"></div>
+                <div></div>
+              </div>
+            ) : (
+              slicedArray.map((v) => {
+                return (
+                  <NotifyBox
+                    title={v.title}
+                    seen={v.seen}
+                    read={v.read.toString()}
+                    date={v.date}
+                    id={v._id}
+                    MarkAsRead={MarkAsRead}
+                    DeleteNote={Delete}
+                    desc={v.description}
+                    click={click}
+                    setClick={setClick}
+                  />
+                );
+              })
+            )}
+          </div>
+        ) : (
+          <h2 className="text-center text-warning mt-5 bold-100 py-3">
+            <Player
+              autoplay
+              loop
+              src="https://lottie.host/03da0ab5-1737-417c-b15d-f500adcec6dc/SNqWlpVajM.json"
+              style={{ height: "300px", width: "300px" }}
+            ></Player>{" "}
+          </h2>
+        )}
       </div>
 
       <nav aria-label="..." className="mt-3 mb-3">
@@ -318,7 +330,9 @@ setNewArray(response.data.newNotification);
       </nav>
       <div className="text-center bg-light mb-1">page - {activePage}</div>
       <div className="pb-4 mt-4">
-        <div className="text-left text-warning py-2 px-3 shadow-box2 ralewaysemibold border">Welcome Message</div>
+        <div className="text-left text-warning py-2 px-3 shadow-box2 ralewaysemibold border">
+          Welcome Message
+        </div>
         {customerNotification.map((v) => {
           return (
             <NotifyBox

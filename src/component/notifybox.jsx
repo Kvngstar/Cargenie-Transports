@@ -1,3 +1,4 @@
+import AsyncLoading from "../loading/asyncLoading";
 import jwt from "../services/userService";
 
 const NotifyBox = ({
@@ -9,6 +10,8 @@ const NotifyBox = ({
   MarkAsRead,
   DeleteNote,
   read,
+  click,
+  setClick,
 }) => {
   const info_id = id;
   return (
@@ -28,10 +31,13 @@ const NotifyBox = ({
             </span>
           )}
           <span className="mr-3 align-items-center d-none d-md-flex">
-            <span class="material-symbols-outlined d-none d-md-block">calendar_month</span>
+            <span class="material-symbols-outlined d-none d-md-block">
+              calendar_month
+            </span>
             <span class="">{date}</span>
           </span>
-          { ((jwt.getDetails().as != "admin")) && (read &&
+          {jwt.getDetails().as != "admin" &&
+            read &&
             (read == "false" ? (
               <span
                 className="ml-1 py-1 px-2 rounded"
@@ -46,33 +52,42 @@ const NotifyBox = ({
               >
                 read
               </span>
-            )))}
+            ))}
         </div>
       </div>
       <div className="fontsize14">{desc}</div>
-{ (jwt.getDetails().as != "admin") &&   (read && read.toString() == "false" && (
-        <div
-          className="mark-as-read py-1 px-2 rounded bg-danger text-light"
-          onClick={() => {
-            MarkAsRead(info_id); 
-          }}
-        >
-          mark as read
-        </div>
-      )) }
+      { read && ((  (click == false)) ? (
+        
+          jwt.getDetails().as != "admin" &&
+          read &&
+          read.toString() == "false" && (
+            <div
+              className="mark-as-read py-1 px-2 rounded bg-danger text-light"
+              onClick={() => {
+                MarkAsRead(info_id);
+              }}
+            >
+              mark as read
+            </div>
+          )
 
-
-
-
-    { ( jwt.getDetails().as != "admin") &&  (read && read.toString() === "true" && (
-        <div
-          className="delete"
-          onClick={() => {
-            DeleteNote(info_id);
-          }}
-        >
-          <span class="material-symbols-outlined">delete</span>
-        </div>
+          ( jwt.getDetails().as != "admin") &&
+          (    read &&
+              read.toString() === "true" && (
+                <div
+                  className="delete"
+                  onClick={() => {
+                    DeleteNote(info_id);
+                  }}
+                >
+                  <span class="material-symbols-outlined">delete</span>
+                </div>
+              ))
+      
+       
+        
+      ) : (
+        <AsyncLoading />
       ))}
     </div>
   );

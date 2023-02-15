@@ -5,6 +5,7 @@ import auth from "../../services/authService";
 import jwt from "../../services/userService";
 import _ from "lodash";
 import jwt_decode from "jwt-decode";
+import AsyncLoading from "../../loading/asyncLoading";
 
 export default function Profile() {
   var [formData, setFormData] = useState({
@@ -18,17 +19,20 @@ const [password,setPassword]= useState({
     confirmpswd: ""
 })
   const [click, setClick] = useState(false);
+  const [click2, setClick2] = useState(false);
 
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [phoneNumError, setPhoneNumError] = useState("");
   const [passwordError,setPasswordError] = useState("")
   const [passwordNote,setPasswordNote]= useState("")
+  const [successPasswordNote,setSuccessPasswordNote]= useState("")
+  const [noteError,setNoteError]= useState("")
     const [note, setNote] = useState("");
   function handleState(event) {
     const { name, value } = event.target;
     setFormData((values) => {
-      return { ...values, [name]: value.trim() };
+      return { ...values, [name]: value.trim() }; 
     });
   }
   function passwordHandleState(event){
@@ -60,6 +64,7 @@ const [password,setPassword]= useState({
       setLastNameError("");
 
       setPhoneNumError("Phone  number should be 8");
+      setClick(false)
     } else {
       setPhoneNumError("");
       try {
@@ -72,10 +77,12 @@ const [password,setPassword]= useState({
         );
 
         if (response.status == 200) {
-          setNote("Success!, Changes are effected on next login");
+          setNote("Success! Changes are effected on next login");
           setTimeout(() => {
             setNote("");
           }, 3000);
+          setFormData(()=>{return {firstName:"",lastName:"",phoneNum:""}})
+          setClick(false)
         }
       } catch (error) {
         if (
@@ -83,29 +90,36 @@ const [password,setPassword]= useState({
           error.response.status >= 400 &&
           error.response.status < 500
         ) {
+          setNoteError(error.response.data)
           setClick(false);
-          return toast.error(error.response.data);
+
+          return ;
         }
+        setNoteError(error.message)
         setClick(false);
-        return toast.error(error.message);
+        return ;
       }
     }
   }
  async function PswdSubmit(event){
-    event.preventDefault()
-    setPasswordNote("")
-  try{  if(!password.currentpswd || !password.newpswd || !password.confirmpswd){
+   setClick2(true)
+   event.preventDefault()
+   setPasswordNote("")
+   try{  if(!password.currentpswd || !password.newpswd || !password.confirmpswd){
+    setClick2(false)
+    
         setPasswordNote("all column is required")
         return
 
     }
-   else if(password.currentpswd.length != 8 || password.newpswd.length != 8 || password.confirmpswd.length != 8){
-        setPasswordNote("value must be 8")
-        return
-
-    }
-    else if (password.newpswd !== password.confirmpswd) {
-        setClick(false)
+    else if(
+      password.currentpswd.length != 8 || password.newpswd.length != 8 || password.confirmpswd.length != 8){
+      setClick2(false)
+      setPasswordNote("value must be 8")
+      return}
+      else if (password.newpswd !== password.confirmpswd) {
+      setClick2(false)
+      
     setPasswordNote("password does not match with confirm password")
 
         return ;
@@ -124,10 +138,13 @@ const [password,setPassword]= useState({
           );
   
           if (response.status == 200) {
-            setPasswordNote("Success!, Changes are effected on next login");
+            setSuccessPasswordNote("Success! Changes are effected on next login");
             setTimeout(() => {
-              setPasswordNote("");
+              setSuccessPasswordNote("");
             }, 3000);
+            setPassword(()=>{return {currentpswd:"",newpswd:"",confirmpswd:""}})
+            setClick2(false)
+            return
           }  
 }
       }
@@ -137,11 +154,14 @@ const [password,setPassword]= useState({
           error.response.status >= 400 &&
           error.response.status < 500
         ) {
-          setClick(false)
-          return toast.error(error.response.data);
+          setPasswordNote(error.response.data)
+          setClick2(false)
+          return
         }
-        setClick(false)
-        return toast.error(error.message);
+        setPasswordNote(error.message)
+        setClick2(false)
+        
+        return
       }
   }
   return (
@@ -203,15 +223,20 @@ const [password,setPassword]= useState({
               )}
             </div>
             <div className="input-group-sm mt-4">
-              <input
+              {(click == false) ? <input
                 type="submit"
                 value="Update"
                 className="form-control"
                 onClick={submitButton}
-              />
+              />: <AsyncLoading/>}
               {(note != "") && (
                 <div className="fontsize12 text-center text-success poppinsmeduim p-1 mt-3">
                   {note}
+                </div>
+              )}
+              {(noteError != "") && (
+                <div className="fontsize12 text-center text-danger poppinsmeduim p-1 mt-3">
+                  {noteError}
                 </div>
               )}
             </div>
@@ -240,18 +265,19 @@ const [password,setPassword]= useState({
               <input type="text"name="confirmpswd" value={password.confirmpswd} onChange={passwordHandleState} className="form-control" />
             </div>
             <div className="input-group-sm mt-4">
-              <input type="submit" value="Change" onClick={PswdSubmit} className="form-control" />
-            </div>
-            {(passwordNote != "") && <div className="fontsize12 text-dark text-center poppinsmeduim p-1 my-1">{passwordNote}</div>}
+             {(click2 == false)? <input type="submit" value="Change" onClick={PswdSubmit} className="form-control" />: <AsyncLoading/>
+}            </div>
+            {(passwordNote != "") && <div className="fontsize12 text-danger text-center poppinsmeduim p-1 my-1">{passwordNote}</div>}
+            {(successPasswordNote != "") && <div className="fontsize12 text-success text-center poppinsmeduim p-1 my-1">{successPasswordNote}</div>}
           </div>
         </div>
-        <div className="mt-5">
+       {/* <div className="mt-5">
           <div>Make a user an Admin</div>
           <div className="input-group p-3">
             <div className="input-group-prepend input-group-text">Search</div>
             <input type="text" className="form-control" />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

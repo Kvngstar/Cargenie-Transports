@@ -8,7 +8,7 @@ import Menuhalf from "../../component/menuhalf";
 const Customers = () => {
   useEffect(() => {
     $("button.kk").on("click", function () {
-      $("div.j").fadeToggle(500);
+      $("div.j").fadeToggle(500); 
     });
 
     return () => {};

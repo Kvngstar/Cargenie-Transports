@@ -53,7 +53,7 @@ function App() {
        
         if(response.data.newNotification.length < 1 || response.data.newNotificatio == []){          
           setLoading(false);
-          return toast.success("No notification")
+          return 
 
         }
         let length = 0;
@@ -83,6 +83,7 @@ function App() {
       return toast.error(error.message);
     }
   }
+  personalisedNotification()
 
 AOS.init({mirror: true})
   return (

@@ -205,7 +205,8 @@ const CreateAccount = () => {
             value="Create Account"
             onclick="calculate(event)"
           >create</button>: <button
-          className="mx-auto w-100"
+          className="mx-auto w-100  btn bg-transparent"
+          disabled
            
         >
         <Player

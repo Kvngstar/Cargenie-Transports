@@ -66,7 +66,7 @@ const CustomerBook = () => {
   return (
     <div className="px-2 mt-4">
       <h5 className="poppinsmeduim">Customer</h5>
-      <p className="pl-4 mt-3 ralewaysemibold btn border">
+      <p className="ml-4 mt-3 ralewaysemibold btn border">
         Welcome, {jwt.getDetails().firstName}
       </p>
       <div className="h mx-auto mt-5">
