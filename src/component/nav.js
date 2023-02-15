@@ -12,7 +12,7 @@ const Nav__ = () => {
         </Link>
         <Link to="signup">
           <span className="ml-3 whitetext robotomeduim btn-sm rounded d-flex justify-content-center align-items-center">
-            <span class="material-symbols-outlined mr-1">app_registration</span>
+            <span className="material-symbols-outlined mr-1">app_registration</span>
            <span>Sign-up</span>
           </span>
         </Link>

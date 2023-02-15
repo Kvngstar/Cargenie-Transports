@@ -229,10 +229,10 @@ const Notification = () => {
       </h6>
       <div className="container mt-5 pb-2 ralewaymeduim">
         {jwt.getDetails().as == "admin" && (
-          <div class="input-group lightback">
-            <div class="input-group-prepend">
-              <span class="input-group-text bg-transparent" id="">
-                <span class="material-symbols-outlined">
+          <div className="input-group lightback">
+            <div className="input-group-prepend">
+              <span className="input-group-text bg-transparent" id="">
+                <span className="material-symbols-outlined">
                   notifications_active
                 </span>
               </span>
@@ -243,7 +243,7 @@ const Notification = () => {
               name="title"
               value={formData.title}
               onChange={handleState}
-              class="form-control"
+              className="form-control"
               placeholder="Title"
             />
             <div className="form-check my-auto mx-3">
@@ -295,6 +295,7 @@ const Notification = () => {
                     read={v.read.toString()}
                     date={v.date}
                     id={v._id}
+                    key={v._id}
                     MarkAsRead={MarkAsRead}
                     DeleteNote={Delete}
                     desc={v.description}
@@ -318,11 +319,11 @@ const Notification = () => {
       </div>
 
       <nav aria-label="..." className="mt-3 mb-3">
-        <ul class="pagination pagination-sm">
+        <ul className="pagination pagination-sm">
           {length.map((v) => {
             return (
-              <li class="page-item lightback" onClick={Paginate}>
-                <a class="page-link">{v}</a>
+              <li key={v} className="page-item lightback" onClick={Paginate}>
+                <a className="page-link">{v}</a>
               </li>
             );
           })}
@@ -340,6 +341,7 @@ const Notification = () => {
               seen={v.seen}
               date={v.Date}
               desc={v.description}
+              key={v._id}
             />
           );
         })}

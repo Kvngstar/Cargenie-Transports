@@ -95,9 +95,9 @@ export default function Hompage() {
               </div>
             </div>
             <div className="scrollable ">
-              {textdata.map((v) => {
+              {textdata.map((v,index) => {
                 return (
-                  <div className="textContainer">
+                  <div className="textContainer" key={index}>
                     {v.status === "customer" ? (
                       <div className="customer_textbox">
                         <div className="d-flex mb-4">
@@ -117,7 +117,7 @@ export default function Hompage() {
                     ) : (
                       <div className="admin_textbox ">
                         <div className="d-flex mb-4">
-                          <span class="material-symbols-outlined mr-2">person</span>
+                          <span className="material-symbols-outlined mr-2">person</span>
                           <div> {v.message}</div>
                         </div>
                         <span className="chat_date">
@@ -200,7 +200,7 @@ export default function Hompage() {
 
         <Footer />
       </div>
-      {/* }     */}
+     
     </>
   );
 }

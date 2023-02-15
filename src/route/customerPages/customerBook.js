@@ -87,7 +87,7 @@ const CustomerBook = () => {
             Car Bookings ( {count} )
           </header>{" "}
           <div className="btn-sm btn-info m-2 d-flex align-items-center" onClick={GetUserDetail}>
-            <span class="material-symbols-outlined mr-1">refresh</span>
+            <span className="material-symbols-outlined mr-1">refresh</span>
             <span>Refresh</span>
           </div> 
         </div>
@@ -107,7 +107,7 @@ const CustomerBook = () => {
             <tbody>
               {slicedArray.map((v) => {
                 return (
-                  <tr>
+                  <tr key={v.bookingId}>
                     <td> {v.bookDate}</td>
                     <td>{v.bookingId}</td>
                     <td> {v.carType}</td>
@@ -129,11 +129,11 @@ const CustomerBook = () => {
           </table>
         </div>
         <nav aria-label="d-flex ">
-          <ul class="pagination pagination-sm mt-3 d-flex flex-wrap  justify-content-center ">
+          <ul className="pagination pagination-sm mt-3 d-flex flex-wrap  justify-content-center ">
             {length.map((v) => {
               return (
-                <li className="page-item shadow-sm" onClick={Paginate}>
-                  <a href="" class="page-link ">
+                <li key={v} className="page-item shadow-sm" onClick={Paginate}>
+                  <a href="" className="page-link ">
                     {v}
                   </a>
                 </li>

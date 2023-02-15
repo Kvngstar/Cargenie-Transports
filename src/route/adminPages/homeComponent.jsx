@@ -130,7 +130,7 @@ const HomeComponent = () => {
         </Link>
         <Link to="signup">
           <div className="px-3 py-2 m-3 btn  btn-outline-warning rounded d-flex align-items-center ">
-            <span class="material-symbols-outlined mr-2">open_in_new</span>{" "}
+            <span className="material-symbols-outlined mr-2">open_in_new</span>{" "}
             <span>Sign up to ride</span>{" "}
           </div>
         </Link>

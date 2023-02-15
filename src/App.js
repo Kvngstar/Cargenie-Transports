@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { toast } from "react-toastify";
 import config from "./config.json"
 import auth from "./services/authService"
+import {getDetails} from "./services/userService"
 import { Suspense,lazy, useState } from "react";
 import UserContext from "./component/useContext"
 
@@ -34,7 +35,7 @@ function App() {
   
   const [neww,setNeww] = useState({
     count: 0,
-    call: function(){ return personalisedNotification()},
+    call: function(){ return personalisedNotification},
   })
   const [loading, setLoading] = useState(true);
  
@@ -83,7 +84,10 @@ function App() {
       return toast.error(error.message);
     }
   }
+if(getDetails().as){
   personalisedNotification()
+}
+  
 
 AOS.init({mirror: true})
   return (

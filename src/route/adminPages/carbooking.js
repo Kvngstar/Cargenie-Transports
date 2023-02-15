@@ -226,7 +226,7 @@ const CarBooking = () => {
                     {recieved[0][0].Travel.map((travel) => {
                       if (travel.bookingId == searchInput) {
                         return (
-                          <div className="d-flex-box">
+                          <div key={travel.bookingIdo} className="d-flex-box">
                             {" "}
                             <div>{travel.bookingId}</div>{" "}
                             <div>{travel.status}</div>{" "}
@@ -283,8 +283,8 @@ const CarBooking = () => {
             <ul class="pagination pagination-sm mt-3 ">
               {length.map((v) => {
                 return (
-                  <li class="page-item lightback" onClick={handleOnclick}>
-                    <a class="page-link">{v}</a>
+                  <li key={v} class="page-item lightback" onClick={handleOnclick}>
+                    <a className="page-link">{v}</a>
                   </li>
                 );
               })}

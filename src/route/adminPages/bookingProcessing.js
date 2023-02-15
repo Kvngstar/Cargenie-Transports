@@ -173,7 +173,7 @@ function Paginate(event){
               {
                  slicedArray.map((w) => {
                   return ( 
-                    <tr>
+                    <tr key={w[1]}>
                       <td className="d-none">{w[0]}</td>
                       <td>{w[1]}</td> <td>{w[2]}</td>{" "}
                       <td>{w[3]}</td> <td>{w[4]}</td>
@@ -203,9 +203,9 @@ function Paginate(event){
          )}
          </div>
         <nav aria-label="..." className="mt-3">
-  <ul class="pagination pagination-sm">{
+  <ul className="pagination pagination-sm">{
     length.map((v)=>{
-    return  <li class="page-item" onClick={Paginate}><a class="page-link">{v}</a></li>
+    return  <li key={v} class="page-item" onClick={Paginate}><a class="page-link">{v}</a></li>
     })
   }
    

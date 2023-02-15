@@ -45,7 +45,7 @@ const Footer = () => {
           style={{ fontSize: "12px" }}
         >
           <div className="d-flex  align-items-center">
-            <span class="material-symbols-outlined mr-1">copyright</span>
+            <span className="material-symbols-outlined mr-1">copyright</span>
             <span>2022 Kingservices</span>
           </div>
           <div className="d-flex">

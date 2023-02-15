@@ -103,10 +103,10 @@ const GetUsers = () => {
                  }
       </div> 
         <nav aria-label="...">
-          <ul class="pagination pagination-sm mt-3 mt-2">
+          <ul className="pagination pagination-sm mt-3 mt-2">
             {length.map((v) => {
               return (
-                <li class="page-item" onClick={Paginate}>
+                <li key={v} class="page-item" onClick={Paginate}>
                   <a class="page-link">{v}</a>
                 </li>
               );

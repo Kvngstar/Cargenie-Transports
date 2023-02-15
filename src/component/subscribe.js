@@ -42,11 +42,11 @@ const Subscribe = () => {
       </div>
       <div className="d-sm-block d-md-flex ">
         <div className="p-3  ">
-          <span class="material-symbols-outlined  mr-1">language</span>
+          <span className="material-symbols-outlined  mr-1">language</span>
           <span>English</span>
         </div>
         <div className="p-3 ">
-          <span class="material-symbols-outlined mr-1">location_on</span>
+          <span className="material-symbols-outlined mr-1">location_on</span>
           <span>Nigeria</span>
         </div>
       </div>
