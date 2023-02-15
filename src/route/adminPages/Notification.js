@@ -134,6 +134,7 @@ const Notification = () => {
 
       if (response.status >= 200 && response.status < 400) {
         personalisedNotification();
+        setClick(false)
         return;
       }
     } catch (error) {

@@ -56,11 +56,11 @@ const NotifyBox = ({
         </div>
       </div>
       <div className="fontsize14">{desc}</div>
-      { read && ((  click == false) ? 
+      { read && (  click == false) ? 
       (
         
         (  jwt.getDetails().as != "admin") &&
-         ( (read.toString() === "false") && (
+          (read == "false") && (
             <div
               className="mark-as-read py-1 px-2 rounded bg-danger text-light"
               onClick={() => {
@@ -70,9 +70,9 @@ const NotifyBox = ({
               mark as read
             </div>
           )
-         &&
-          (    read &&
-              read.toString() === "true" && (
+         ||
+          (  
+              read == "true" && (
                 <div
                   className="delete"
                   onClick={() => {
@@ -82,14 +82,14 @@ const NotifyBox = ({
                   <span className="material-symbols-outlined">delete</span>
                 </div>
               ))
-)
+
         
       
        
         
       ) : (
         <AsyncLoading />
-      ))}
+      )}
     </div>
   );
 };
