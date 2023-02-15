@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { toast } from "react-toastify";
 import config from "./config.json"
 import auth from "./services/authService"
-import {getDetails} from "./services/userService"
+import jwt from "./services/userService"
 import { Suspense,lazy, useState } from "react";
 import UserContext from "./component/useContext"
 
@@ -84,7 +84,7 @@ function App() {
       return toast.error(error.message);
     }
   }
-if(getDetails().as){
+if(jwt.getDetails().as){
   personalisedNotification()
 }
   
