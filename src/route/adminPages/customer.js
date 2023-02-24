@@ -25,7 +25,8 @@ const Customers = () => {
           </div>
         </div>
 
-        <Footer />
+        <div className="py-3 text-center greenerbackground text-light ralewaymeduim">Designed by Okoronkwo kingsley
+      </div>
       </div>
     </>
   );

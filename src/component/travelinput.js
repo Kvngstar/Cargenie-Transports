@@ -134,7 +134,7 @@ const Travelinput = (props) => {
             </select>
           </div>
         </div>
-        <div>
+        <div> 
           <div>Pickup Date</div>
           <div>
             <div className="input-group input1 flex-nowrap">

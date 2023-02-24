@@ -103,7 +103,6 @@ const CustomerBook = () => {
                 <th>status</th>
               </tr>
             </thead>
-
             <tbody>
               {slicedArray.map((v) => {
                 return (

@@ -12,7 +12,10 @@
   padding: 0;
   margin: 0;
 }
-
+body{
+  height:100vh;
+  background-color: red;
+}
 #preloadcont {
   background-color: black;
   position: absolute;
@@ -594,7 +597,7 @@ a:hover {
 }
 table {
   height: 500px;
-  box-shadow: 0px 0px 8px 3px #e0e0e0;
+  box-shadow:  0px 0px 8px 3px #7b807f64;
 }
 .secondp > div:first-of-type {
   flex-grow: 1;
@@ -834,7 +837,7 @@ li {
     width: 600px !important;
     overflow-x: scroll;
     margin: auto;
-    box-shadow: 0px 0px 8px 3px #7b807f8f;
+    box-shadow: 0px 0px 8px 3px #7b807f64;
   }
   .table-control-1 table {
     width: 700px !important;

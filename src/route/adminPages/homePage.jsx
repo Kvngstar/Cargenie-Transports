@@ -198,7 +198,8 @@ export default function Hompage() {
         <Nav__ />
         <Outlet />
 
-        <Footer />
+      <div className="py-3 text-center greenerbackground text-light ralewaymeduim">Designed by Okoronkwo kingsley
+      </div>
       </div>
      
     </>
