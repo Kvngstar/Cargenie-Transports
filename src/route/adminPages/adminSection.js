@@ -26,8 +26,8 @@ const Admin = () => {
         </div>
 
       </div>
-      <div className="py-3 text-center greenerbackground text-light ralewaymeduim">Designed by Okoronkwo kingsley
-      </div>
+      <div className="py-2 text-center greenerbackground text-light ralewaymeduim mt-4">Designed by<span  className="py-1 px-3 ml-2 bg-warning rounded"><span  className=" px-2 bg-danger rounded"> Okoronkwo kingsley</span></span> 
+</div>
     </>
   );
 };

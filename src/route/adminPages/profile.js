@@ -168,7 +168,7 @@ const [password,setPassword]= useState({
     <>
       <div className="container row mx-auto my-5  p-3">
         <div className="col-lg-6 col-sm-12  p-3">
-          <span>Edit Profile</span>
+          <span className="poppinsmeduim lightGreentext">Edit Profile</span>
           <div className="mx-auto border rounded mt-3 p-3">
             <div className="input-group-sm">
               <div>
@@ -243,7 +243,7 @@ const [password,setPassword]= useState({
           </div>
         </div>
         <div className="col-lg-6 col-sm-12  p-3">
-          <span>Change Password</span>
+          <span className="poppinsmeduim greentext">Change Password</span>
           <div className="mx-auto border rounded mt-3 p-3">
             <div className="input-group-sm">
               <div>
