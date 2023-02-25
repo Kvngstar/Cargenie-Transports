@@ -16,16 +16,16 @@ const Customers = () => {
 
   return (
     <>
-      <div>
+      <div >
         <Nav_ />
-        <div className="d-flex w-100 secondp h-auto">
+        <div className="d-flex w-100 secondp">
           <Menuhalf />
           <div>
             <Outlet />
           </div>
         </div>
 
-        <div className="py-3 text-center greenerbackground text-light ralewaymeduim">Designed by Okoronkwo kingsley
+        <div className="py-2 text-center greenerbackground text-light ralewaymeduim">Designed by<span  className="py-1 px-3 ml-2 bg-danger rounded">Okoronkwo kingsley</span> 
       </div>
       </div>
     </>

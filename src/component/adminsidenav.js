@@ -40,7 +40,7 @@ const AdminMenuhalf = () => {
             </div>
         
        
-        <div className='mt-5 d-flex align-items-center align-items-center'>
+        <div className='mt-2 d-flex align-items-center align-items-center'>
                 <img src={settings} alt="" /> <span><Link to="profile">Settings</Link></span>
             </div>
         <div className=' d-flex align-items-center align-items-center'>

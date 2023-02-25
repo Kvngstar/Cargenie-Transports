@@ -88,7 +88,7 @@ const NotifyBox = ({
        
         
       ) : (
-        <AsyncLoading />
+       read && <AsyncLoading />
       )}
     </div>
   );

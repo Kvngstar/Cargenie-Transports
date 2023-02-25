@@ -8,11 +8,12 @@
   --color-yellow: #e3b448;
 }
 
+
 * {
   padding: 0;
   margin: 0;
 }
-body{
+.fulll{
   height:100vh;
   background-color: red;
 }
@@ -593,7 +594,8 @@ a:hover {
   background-color: #ffffff;
   display: flex;
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
+  overflow-y: scroll;
 }
 table {
   height: 500px;
