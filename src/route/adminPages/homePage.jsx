@@ -150,13 +150,13 @@ export default function Hompage() {
           </div>
           <div className="flex-left">
             {showIcon ? (
-              <span onClick={toggleChatBox}>
+              <span className="" onClick={toggleChatBox}>
 
                 <Player
                 autoplay
                 loop
                 src="https://lottie.host/3c4bb819-7826-426e-be2f-a66f4f117c21/YmP0fLbMmk.json"
-                style={{ height: '70px', width: '70px' }}
+                style={{ height: '50px', width: '50px' }}
              
               >
               </Player>
