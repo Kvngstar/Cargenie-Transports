@@ -210,7 +210,7 @@ const [password,setPassword]= useState({
                 <small>Phone Number</small>
               </div>
               <input
-                type="text"
+                type="number"
                 name="phoneNum"
                 onChange={handleState}
                 value={formData.phoneNum}
@@ -248,19 +248,19 @@ const [password,setPassword]= useState({
             <div className="input-group-sm">
               <div>
                 {" "}
-                <small>current password</small>
+                <small>Current password</small>
               </div>
               <input type="text" name="currentpswd" value={password.currentpswd} onChange={passwordHandleState} className="form-control" />
             </div>
             <div className="input-group-sm">
               <div>
-                <small>new password</small>
+                <small>New password</small>
               </div>
               <input type="text" name="newpswd" value={password.newpswd}onChange={passwordHandleState}  className="form-control" />
             </div>
             <div className="input-group-sm">
               <div>
-                <small>confirm new password</small>
+                <small>Confirm new password</small>
               </div>
               <input type="text"name="confirmpswd" value={password.confirmpswd} onChange={passwordHandleState} className="form-control" />
             </div>

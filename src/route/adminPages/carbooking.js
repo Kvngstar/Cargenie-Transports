@@ -172,11 +172,11 @@ const CarBooking = () => {
           <h6 className="pl-3 poppinsmeduim">Booking Directory ( {count} )</h6>
           <div className="pl-3">
             <br />
-            <div><span className="p-1 bg-success rounded">Completed - {OrderState.completed}</span></div>
+            <div><span className="p-1 bg-success text-light rounded">Completed - {OrderState.completed}</span></div>
             <br />
-            <div><span className="p-1 bg-warning rounded">Processing - {OrderState.processing}</span></div>
+            <div><span className="p-1 bg-warning text-light rounded">Processing - {OrderState.processing}</span></div>
             <br />
-            <div><span className="p-1 bg-danger rounded">Failed - {OrderState.failed}</span></div>
+            <div><span className="p-1 bg-danger text-light  rounded">Failed - {OrderState.failed}</span></div>
           </div>
           <br />
           <br />
