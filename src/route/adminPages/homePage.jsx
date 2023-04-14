@@ -18,7 +18,7 @@ export default function Hompage() {
   useEffect(() => {
     $(function () {
       $("div.hidd").on("click", function () {
-        $("div.div1").toggleClass("hamburgerdiv1");
+        $("div.div1").toggleClass("hamburgerdiv1"); 
         $("div.div2").toggleClass("hamburgerdiv2");
         $("div.div3").toggleClass("hamburgerdiv3");
         $("div.hideclick").slideToggle(500);
