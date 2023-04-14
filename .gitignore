@@ -10,6 +10,7 @@ js.js
 config.json
 authService.jsx
 userService.js
+checking
 
 # testing
 /coverage
