@@ -7,7 +7,7 @@
 js.js
 
 #config file
-/src/config.json
+*.json
 .env
 # testing
 /coverage
