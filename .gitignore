@@ -8,6 +8,9 @@ js.js
 
 #config file
 config.json
+authService.jsx
+userService.js
+
 # testing
 /coverage
 
