@@ -4,7 +4,7 @@ import config from "../config.json";
 import Logo from "./logo";
 import jwt from "../services/userService";
 import "react-toastify/dist/ReactToastify.css";
-import bell from "../sources/assets/notificationbell.png";
+import bell from "../sources/assets/notification-bell.svg";
 import { Link } from "react-router-dom";
  import UseContext from "./useContext";
 const Nav_ = () => {

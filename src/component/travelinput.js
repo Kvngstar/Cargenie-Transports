@@ -43,7 +43,7 @@ const Travelinput = (props) => {
       const url = window.location.href;
       props.reload();
       setClick(false);
-      // window.location.href("")
+     
       // window.location.replace("https://sandbox-flw-web-v3.herokuapp.com/pay/5ihhkgzv5dxo")
     } catch (err) {
       if (err.response.status >= 400 && err.response.status < 500) {

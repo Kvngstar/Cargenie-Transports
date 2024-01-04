@@ -1,6 +1,6 @@
-import twitter from "../sources/assets/twitter.png";
-import facebook from "../sources/assets/facebook.png";
-import linkedin from "../sources/assets/linkedin.png";
+import twitter from "../sources/assets/twitter.svg";
+import facebook from "../sources/assets/facebook.svg";
+import linkedin from "../sources/assets/linkedin.svg";
 
 const Subscribe = () => {
   return (

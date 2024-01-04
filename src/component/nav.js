@@ -17,7 +17,7 @@ const Nav__ = () => {
           </span>
         </Link>
       </div>
-      <div className="hamburger ml-3 hidd">
+       <div className="hamburger ml-3 hidd">
         <div className="div1"></div>
         <div className="div2"></div>
         <div className="div3"></div>
