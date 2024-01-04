@@ -31,7 +31,8 @@
     "eject": "react-scripts eject"
   },
   "engines": {
-    "node": "16.17.0"
+    "node": "18.17.0",
+    "npm": "10.2.4"
   },
   "eslintConfig": {
     "extends": [
